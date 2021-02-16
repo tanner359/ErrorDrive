@@ -7,8 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     public Player_Inputs playerInputs;
     public Rigidbody rb;
-    public Vector2 moveSpeed;
+    public float moveSpeed = 1f;
+    public Vector3 moveDirection;
+    public float moveX;
+    public float moveZ;
     public Animator animator;
+    public Vector2 mousePos;
+    public float sensitivity = 100f;
 
     private void OnEnable()
     {
@@ -20,27 +25,49 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.Enable();
     }
 
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;      
+    }
+
     private void Update()
     {
-        
+        float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
+        float y = playerInputs.Player.Mouse.ReadValue<Vector2>().y;
+
+        Debug.Log(x);
+        transform.Rotate(Vector3.up * x);
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawIcon(mousePos, "Mouse", true, Color.red);
+    //}
+
 
     void FixedUpdate()
-    {
-        rb.velocity =  rb.velocity + new Vector3(moveSpeed.x, 0 , moveSpeed.y);        
+    {        
+        moveDirection = moveX * transform.forward + moveZ * transform.right;
+        rb.velocity = moveDirection * moveSpeed;     
     }
 
+
+    
 
     public void OnMovement(InputValue value)
     {
-        moveDirection = new Vector2(value.Get<Vector2>().x, value.Get<Vector2>().y);
+        moveX = (value.Get<Vector2>().y);
+        moveZ = (value.Get<Vector2>().x);
 
-        if (moveSpeed.y != 0)
+
+        if (moveX != 0)
         {
             animator.SetBool("isWalking", true);
         }
         else
         {
+            rb.velocity = Vector3.zero;
             animator.SetBool("isWalking", false);
         }
     }

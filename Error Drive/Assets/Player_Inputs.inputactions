@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Mouse",
+                    "type": "PassThrough",
+                    "id": "7252b330-b83c-4628-9f45-764dc83074f4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -181,6 +189,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "b8880edc-b67a-4b8c-bf51-69b6ceecd912",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
