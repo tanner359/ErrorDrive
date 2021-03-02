@@ -5760,13 +5760,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1438675703}
-  moveSpeed: 1
+  moveSpeed: 12
   moveDirection: {x: 0, y: 0, z: 0}
   moveX: 0
   moveZ: 0
   animator: {fileID: 1211245210}
   mousePos: {x: 0, y: 0}
+<<<<<<< Updated upstream
   sensitivity: 10
+=======
+  sensitivity: 0.1
+>>>>>>> Stashed changes
 --- !u!65 &1438675702
 BoxCollider:
   m_ObjectHideFlags: 0
