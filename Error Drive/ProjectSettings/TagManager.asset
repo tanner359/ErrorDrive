@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Inventory Slot
+  - Chest
+  - Off Hand
+  - Special
+  - Ring
+  - Main Hand
+  - Boots
+  - Arms
+  - Head
   layers:
   - Default
   - TransparentFX
@@ -14,14 +23,14 @@ TagManager:
   - 
   - 
   - 
+  - Items
   - 
+  - Hostiles
   - 
+  - DamageText
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Equip Slot
+  - Inventory Slot
   - 
   - 
   - 
@@ -38,9 +47,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: UI
     uniqueID: 983023055
+    locked: 0
+  - name: Particles
+    uniqueID: 2166745887
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
