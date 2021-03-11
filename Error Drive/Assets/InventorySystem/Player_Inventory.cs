@@ -9,12 +9,13 @@ public class Player_Inventory : MonoBehaviour
     InventoryManager inventoryManager;
 
     public List<GameObject> inventoryList = new List<GameObject>();
-
     public Collider[] interactableItems;
 
     public SphereCollider playerZone;
     public LayerMask contactFilter;
     public GameObject mainHand, offHand, head, chest, boots, arms;
+
+    public Animator animator;
     
 
     public int inventoryMax = 20;
@@ -47,12 +48,18 @@ public class Player_Inventory : MonoBehaviour
     {
         if (interactableItems.Length > 0){ 
             pickUp();
+            #region Animation
+            animator.SetTrigger("Pickup");
+            #endregion
         }
     }
 
     public void OnDrop()
     {
         DropItem(inventoryList[0].gameObject);
+        #region Animation
+        //animator.SetBool("Drop", true);
+        #endregion
     }
 
 

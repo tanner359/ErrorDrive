@@ -5,15 +5,30 @@ using UnityEngine.InputSystem;
 
 public class Player_Controller : MonoBehaviour
 {
+    [Header("References")]
     public Player_Inputs playerInputs;
     public Rigidbody rb;
-    public float moveSpeed = 1f;
+    public Animator animator;
+    BoxCollider headCollider;
+    public LayerMask headCollisionFilter;
+
+    [Header("Movement Settings")]
+    public float movement_Speed = 1f;
     public Vector3 moveDirection;
     public float moveX;
     public float moveZ;
-    public Animator animator;
+    
+    [Header("Control Settings")]
     public Vector2 mousePos;
     public float sensitivity = 100f;
+
+    [Header("Jump Settings")]
+    public float maxVelocity;
+    public float initialVelocity = 0;
+    float jumpTime = 0;
+    public float jumpSpeed = 0;
+    public float jumpHeight = 1;
+    float jumpVelocity = 0;
 
     bool isControlling;
 
@@ -21,7 +36,6 @@ public class Player_Controller : MonoBehaviour
     {
         isControlling = state;
     }
-
 
     private void OnEnable()
     {
@@ -33,6 +47,11 @@ public class Player_Controller : MonoBehaviour
         }
         
         playerInputs.Player.Enable();
+    }
+
+    private void Awake()
+    {
+        headCollider = gameObject.GetComponent<BoxCollider>();
     }
 
     private void Start()
@@ -52,23 +71,19 @@ public class Player_Controller : MonoBehaviour
         }        
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawIcon(mousePos, "Mouse", true, Color.red);
-    //}
-
-
     void FixedUpdate()
     {
         if (isControlling)
         {
             moveDirection = moveX * transform.forward + moveZ * transform.right;
-            rb.velocity = moveDirection * moveSpeed;
-        }          
+            rb.velocity = moveDirection * movement_Speed;
+        }
+
+        if (!grounded)
+        {
+            Jump();
+        }
     }
-
-
-    
 
     public void OnMovement(InputValue value)
     {
@@ -77,20 +92,105 @@ public class Player_Controller : MonoBehaviour
             moveX = (value.Get<Vector2>().y);
             moveZ = (value.Get<Vector2>().x);
 
-
-            if (moveX != 0)
+            #region Animations
+            if (moveX > 0)
             {
                 animator.SetBool("Walk", true);
             }
             else
             {
-                rb.velocity = Vector3.zero;
                 animator.SetBool("Walk", false);
             }
-        }    
+            if(moveX < 0)
+            {
+                animator.SetBool("WalkBackwards", true);
+            }
+            else
+            {
+                animator.SetBool("WalkBackwards", false);
+            }
+            if (moveZ > 0)
+            {
+                animator.SetBool("StrafeRight", true);
+            }
+            else
+            {
+                animator.SetBool("StrafeRight", false);
+            }
+            if(moveZ < 0)
+            {
+                animator.SetBool("StrafeLeft", true);
+            }
+            else
+            {
+                //rb.velocity = Vector3.zero;
+                animator.SetBool("StrafeLeft", false);              
+            }
+            #endregion
+        }
+    }
+
+    bool run = false;
+    public void OnRun()
+    {
+        #region Animations
+        if (!run)
+        {
+            movement_Speed = movement_Speed * 1.60f;
+            animator.SetBool("Run", true);
+            run = true;
+        }
+        else if (run)
+        {
+            movement_Speed = movement_Speed / 1.60f;
+            animator.SetBool("Run", false);
+            run = false;
+        }      
+        #endregion
     }
 
 
+    bool grounded = true;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Floor"))
+        {
+            grounded = true;
+        }
+    }
+
+    public void OnJump()
+    {       
+        if (grounded)
+        {
+            grounded = false;
+            jumpTime = initialVelocity;
+            #region Animations
+            animator.SetTrigger("Jump");
+            //if (gameObject.GetComponent<Rigidbody>().velocity.y < 0)
+            //{ // fall
+            //    animator.SetBool("Falling", true);
+            //}
+            #endregion
+        }
+    }
+
+    public void Jump()
+    {
+        Debug.Log("Jump");
+        List<Collider> headCollisions = new List<Collider>();
+        jumpTime += Time.deltaTime * jumpSpeed;
+        if (jumpTime < ((3 * Mathf.PI) / 2) - maxVelocity && Physics.OverlapBox(headCollider.transform.position, headCollider.size, Quaternion.identity, headCollisionFilter).Length == 0)
+        {
+            jumpVelocity = Mathf.Sin(0.9f * jumpTime) * jumpHeight;
+        }
+        else
+        {
+            jumpTime = ((3 * Mathf.PI) / 2) - maxVelocity;
+            jumpVelocity = Mathf.Sin(0.9f * jumpTime) * jumpHeight;
+        }
+        rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
+    }
 
     private void OnDisable()
     {

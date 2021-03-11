@@ -97,6 +97,14 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""fa854768-aeeb-4203-ba5b-2d871d28ec7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -319,6 +327,17 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""616ab220-1e05-4e0b-8532-156c195fac53"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -354,6 +373,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_RightMouseButton = m_Player.FindAction("RightMouseButton", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -413,6 +433,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_RightMouseButton;
     private readonly InputAction m_Player_MousePosition;
+    private readonly InputAction m_Player_Run;
     public struct PlayerActions
     {
         private @Player_Inputs m_Wrapper;
@@ -427,6 +448,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @RightMouseButton => m_Wrapper.m_Player_RightMouseButton;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,6 +488,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
+                @Run.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -500,6 +525,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
             }
         }
     }
@@ -525,5 +553,6 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnRightMouseButton(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }
