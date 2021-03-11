@@ -19,6 +19,8 @@ public class InventoryManager : MonoBehaviour
 
     Player_Inputs playerInputs;
 
+    Vector2 mousePosition;
+
     private void OnEnable()
     {
         if (playerInputs == null)
@@ -39,30 +41,37 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-
+        mousePosition = new Vector3(playerInputs.Player.MousePosition.ReadValue<Vector2>().x, playerInputs.Player.MousePosition.ReadValue<Vector2>().y, Mathf.Abs(Camera.main.transform.position.z));
         if (isHoldingItem)
         {
-            Debug.Log(Camera.main.ScreenToWorldPoint(playerInputs.Player.MousePosition.ReadValue<Vector2>()));
+            
             slot = FindSlot();
-            itemHolding.transform.position = Camera.main.ScreenToWorldPoint(playerInputs.Player.MousePosition.ReadValue<Vector2>());           
-        }       
+            itemHolding.transform.position = mousePosition;           
+        }
     }
 
-    public void OnRightMouseButton(InputAction.CallbackContext context)
+    private void OnDrawGizmos()
     {
-        if (context.started && slot != null && slot.transform.childCount == 1)
+        Gizmos.DrawWireSphere(mousePosition, 1f);
+    }
+
+    public void OnRightMouseButton(InputValue value)
+    {
+        if (value.Get<float>() == 1 && slot != null && slot.transform.childCount == 1)
         {
+            Debug.Log("button down");
             placeObject();
         }
-        else if(context.started && slot == null)
+        else if (value.Get<float>() == 1 && slot == null)
         {
             dropObject();
         }
-        else if(Input.GetMouseButtonUp(0) && slot != null)
+        if (value.Get<float>() == 0 && slot != null)
         {
+            Debug.Log("button up");
             slot.transform.GetChild(0).GetComponent<Button>().enabled = true;
         }
-        
+
     }
     
     
@@ -70,6 +79,7 @@ public class InventoryManager : MonoBehaviour
 
     public void updateInventory(List<GameObject> inventoryItems)
     {
+        Debug.Log("update inventory");
         for (int k = 0; k < slots.Count; k++)
         {
             if (slots[k].transform.childCount == 1)
@@ -86,6 +96,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void moveObject(GameObject slot)
     {
+        Debug.Log("move object");
         if (!isHoldingItem && slot.transform.childCount > 1)
         {
             slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
@@ -106,6 +117,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void placeObject()
     {
+        Debug.Log("place item");
         if (FindSlot().gameObject.CompareTag("Inventory Slot"))
         {
             slot.transform.GetChild(0).GetComponent<Button>().enabled = false;
@@ -135,6 +147,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void dropObject()
     {
+        Debug.Log("drop item");
         playerInventory.inventoryList.Remove(itemHolding);
         itemHolding.SetActive(true);
         itemHolding.GetComponent<Rigidbody>().isKinematic = false;
@@ -150,38 +163,37 @@ public class InventoryManager : MonoBehaviour
         
         GameObject slot = null;
         List<GameObject> slots =  new List<GameObject>();
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < inventorySlots.transform.childCount; i++)
         {
             if(inventorySlots.GetChild(i).gameObject.layer == (15) || inventorySlots.GetChild(i).gameObject.layer == (16))
             {
-                slots.Add(gameObject.transform.GetChild(i).gameObject);
-            }
+                slots.Add(inventorySlots.transform.GetChild(i).gameObject);
+            }           
+        }
+        for (int i = 0; i < equipmentSlots.transform.childCount; i++)
+        {
             if (equipmentSlots.GetChild(i).gameObject.layer == (15) || equipmentSlots.GetChild(i).gameObject.layer == (16))
             {
-                slots.Add(gameObject.transform.GetChild(i).gameObject);
+                slots.Add(equipmentSlots.transform.GetChild(i).gameObject);
             }
         }
-        float minDistance = Vector2.Distance(Camera.main.ScreenToWorldPoint(playerInputs.Player.MousePosition.ReadValue<Vector2>()), Camera.main.ScreenToWorldPoint(slots[0].transform.position));
+            float minDistance = Vector2.Distance(mousePosition, slots[0].transform.position);
         
         slot = slots[0].gameObject;
         for (int i = 0; i < slots.Count; i++)
-        {
-            //Debug.Log("slot: " + Camera.main.ScreenToWorldPoint(slots[i].transform.position) + "mouse: " + Camera.main.ScreenToWorldPoint(playerInputs.Player.MousePosition.ReadValue<Vector2>()));
-
-            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(playerInputs.Player.MousePosition.ReadValue<Vector2>()), Camera.main.ScreenToWorldPoint(slots[i].transform.position)) < minDistance)
+        {           
+            if (Vector2.Distance(mousePosition, slots[i].transform.position) < minDistance)
             {
                 slot = slots[i];
-                minDistance = Vector2.Distance(Camera.main.ScreenToWorldPoint(playerInputs.Player.MousePosition.ReadValue<Vector2>()), Camera.main.ScreenToWorldPoint(slots[i].transform.position));             
+                minDistance = Vector2.Distance(mousePosition, slots[i].transform.position);             
             }
         }
-        if(minDistance > 3)
+        if(minDistance > 150)
         {
-            Debug.Log("Slot returned null");
             return null;
         }
         else
         {
-            //Debug.Log("Returned slot " + slot);
             return slot;
         }      
     }  

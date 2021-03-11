@@ -52,16 +52,18 @@ public class Player_Controller : MonoBehaviour
     private void Awake()
     {
         headCollider = gameObject.GetComponent<BoxCollider>();
+        
     }
 
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;      
+        
     }
 
     private void Update()
-    {
+    {       
         if (isControlling)
         {
             float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;

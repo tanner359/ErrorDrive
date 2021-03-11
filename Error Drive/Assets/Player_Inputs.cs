@@ -84,7 +84,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""RightMouseButton"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""308168d9-fff9-42d1-8e25-1da23b0e2981"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -309,7 +309,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""60552e8e-442b-4942-a32f-8f2dbfccbcae"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
