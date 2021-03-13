@@ -57,7 +57,7 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("button down");
             placeObject();
         }
-        else if (value.Get<float>() == 1 && slot == null)
+        else if (value.Get<float>() == 1 && slot == null && isHoldingItem)
         {
             dropObject();
         }
@@ -148,7 +148,7 @@ public class InventoryManager : MonoBehaviour
         itemHolding.GetComponent<Rigidbody>().isKinematic = false;
         itemHolding.transform.parent = null;
         //itemHolding.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        itemHolding.transform.position = new Vector3(itemHolding.transform.position.x, itemHolding.transform.position.y, -2);
+        itemHolding.transform.position = player.transform.position + player.transform.forward + new Vector3(0,3,0);
         isHoldingItem = false;
         itemHolding = null;
     }

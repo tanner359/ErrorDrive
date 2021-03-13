@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item_Equiper : MonoBehaviour
 {
     private Mesh originalMesh;
+    private Material originalMaterial;
     public List<GameObject> bodyParts;
     public bool equipped = false;
     public Player_Inventory playerInventory;
@@ -16,6 +17,7 @@ public class Item_Equiper : MonoBehaviour
         if (bodyParts[0].name != "Hand_01" && bodyParts[0].name != "Hand_02")
         {
             originalMesh = bodyParts[0].GetComponent<MeshFilter>().mesh;
+            originalMaterial = bodyParts[0].GetComponent<MeshRenderer>().material;
         }
     }
 
@@ -29,25 +31,26 @@ public class Item_Equiper : MonoBehaviour
             {
                 for(int i = 0; i < bodyParts.Count; i++)
                 {
-                    bodyParts[i].GetComponent<MeshFilter>().mesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;                    
+                    bodyParts[i].GetComponent<MeshFilter>().mesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
+                    bodyParts[i].GetComponent<MeshRenderer>().material = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material;
                 }
                 equipped = true;
                 if(itemEquipped.tag == "Head")
                 {
-                    playerInventory.head = itemEquipped;
+                    playerInventory.Head = itemEquipped;
                 }
-                else if (itemEquipped.tag == "Chest")
+                else if (itemEquipped.tag == "Body")
                 {
-                    playerInventory.chest = itemEquipped;
+                    playerInventory.Body = itemEquipped;
                 }
-                else if (itemEquipped.tag == "Arms")
+                else if (itemEquipped.tag == "Left_Leg")
                 {
-                    playerInventory.arms = itemEquipped;
+                    playerInventory.Left_Leg = itemEquipped;
                 }
-                else if(itemEquipped.tag == "Boots")
+                else if (itemEquipped.tag == "Right_Leg")
                 {
-                    playerInventory.boots = itemEquipped;
-                }
+                    playerInventory.Right_Leg = itemEquipped;
+                }              
             }
             else //if a weapon main or off hand
             {
@@ -62,21 +65,22 @@ public class Item_Equiper : MonoBehaviour
                 itemEquipped.GetComponent<MeshCollider>().isTrigger = true;
                 equipped = true;
                 itemEquipped.transform.GetChild(0).gameObject.SetActive(false);
-                if (itemEquipped.tag == "Main Hand")
+                if (itemEquipped.tag == "Main_Hand")
                 {
-                    playerInventory.mainHand = itemEquipped;
+                    playerInventory.Main_Hand = itemEquipped;
                 }
-                else if (itemEquipped.tag == "Off Hand")
+                else if (itemEquipped.tag == "Off_Hand")
                 {
-                    playerInventory.offHand = itemEquipped;
+                    playerInventory.Off_Hand = itemEquipped;
                 }
             }
         }
-        if(gameObject.transform.childCount == 1 && equipped && itemEquipped.tag != "Main Hand" && itemEquipped.tag != "Off Hand")
+        if(gameObject.transform.childCount == 1 && equipped && itemEquipped.tag != "Main_Hand" && itemEquipped.tag != "Off_Hand")
         {
             for (int i = 0; i < bodyParts.Count; i++)
             {
                 bodyParts[i].GetComponent<MeshFilter>().mesh = originalMesh;
+                bodyParts[i].GetComponent<MeshRenderer>().material = originalMaterial;
             }
             equipped = false;
         }

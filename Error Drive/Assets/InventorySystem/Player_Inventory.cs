@@ -13,7 +13,7 @@ public class Player_Inventory : MonoBehaviour
 
     public SphereCollider playerZone;
     public LayerMask contactFilter;
-    public GameObject mainHand, offHand, head, chest, boots, arms;
+    public GameObject Main_Hand, Off_Hand, Head, Body, Left_Leg, Right_Leg;
 
     public Animator animator;
     

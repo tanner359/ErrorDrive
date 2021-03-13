@@ -9,21 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07883cd13ad5e134aa16cfaa0ee79eb8, type: 3}
-  m_Name: Laser Blaster
+  m_Script: {fileID: 11500000, guid: c607b0f3389102144a0a0089b21d812b, type: 3}
+  m_Name: Red Head
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  damage: 1000
-  knockback: 10
   health: 0
-  power: 10
-  pen: 10
-  crit: 10
+  power: 0
+  pen: 0
+  crit: 0
   defense: 0
-  weaponName: Laser Blaster
-  description: It kills people, today.
-  mesh: {fileID: 5302568919011541938, guid: 78059deca919e5946a1e5c08004b6c3b, type: 3}
-  material: {fileID: 2100000, guid: 36bce9ab6cae8ce43962938466458044, type: 2}
+  armorName: Red Head
+  description: Looks cool!
+  mesh: {fileID: -8839368762345780380, guid: 57529f4fc2aa29e4ea2f7f61019e07f9, type: 3}
+  material: {fileID: 2100000, guid: 5a26de236ce89e94b963be8fa2b7ade6, type: 2}
   sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  equipSlot: 1
+  equipSlot: 3
   rarity: 2

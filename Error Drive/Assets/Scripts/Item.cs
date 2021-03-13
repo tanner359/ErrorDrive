@@ -16,7 +16,7 @@ public static class Item
         item.tag = armor.equipSlot.ToString();
         item.layer = 9;
         item.GetComponent<Transform>().position = position;
-        item.GetComponent<Transform>().localScale = item.GetComponent<Transform>().localScale / 4f;
+        item.GetComponent<Transform>().localScale = item.GetComponent<Transform>().localScale / 2f;
         item.AddComponent<Rigidbody>();
         item.AddComponent<MeshFilter>().mesh = armor.mesh;
         item.AddComponent<MeshCollider>().convex = true;

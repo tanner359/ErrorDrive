@@ -14,13 +14,14 @@ public class Player_Controller : MonoBehaviour
 
     [Header("Movement Settings")]
     public float movement_Speed = 1f;
-    public Vector3 moveDirection;
-    public float moveX;
-    public float moveZ;
+    Vector3 moveDirection;
+    float moveX;
+    float moveZ;
     
     [Header("Control Settings")]
-    public Vector2 mousePos;
     public float sensitivity = 100f;
+    Vector2 mousePos;
+    
 
     [Header("Jump Settings")]
     public float maxVelocity;
@@ -163,7 +164,7 @@ public class Player_Controller : MonoBehaviour
     }
 
 
-    public bool jump = false;  
+    bool jump = false;  
     public void OnJump()
     {
         if (CheckGrounded())
