@@ -9,8 +9,8 @@ public class Player_Controller : MonoBehaviour
     public Player_Inputs playerInputs;
     public Rigidbody rb;
     public Animator animator;
-    BoxCollider headCollider;
-    public LayerMask headCollisionFilter;
+    public Transform centerPoint;
+    public LayerMask rayMask;
 
     [Header("Movement Settings")]
     public float movement_Speed = 1f;
@@ -25,11 +25,12 @@ public class Player_Controller : MonoBehaviour
     [Header("Jump Settings")]
     public float maxVelocity;
     public float initialVelocity = 0;
-    float jumpTime = 0;
+    public float jumpTime = 0;
     public float jumpSpeed = 0;
     public float jumpHeight = 1;
     float jumpVelocity = 0;
-
+    public float jumpDelay = 0;
+    
     bool isControlling;
 
     public void SetControl(bool state)
@@ -49,17 +50,10 @@ public class Player_Controller : MonoBehaviour
         playerInputs.Player.Enable();
     }
 
-    private void Awake()
-    {
-        headCollider = gameObject.GetComponent<BoxCollider>();
-        
-    }
-
     private void Start()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;      
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -70,21 +64,32 @@ public class Player_Controller : MonoBehaviour
             float y = playerInputs.Player.Mouse.ReadValue<Vector2>().y;
 
             transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
-        }        
+        }
+        Debug.DrawRay(centerPoint.position, Vector3.up * (1.75f + 0.05f), Color.blue);
+        Debug.DrawRay(centerPoint.position, Vector3.down * (1.75f + 0.05f), Color.red);
     }
+
+    
+
 
     void FixedUpdate()
     {
         if (isControlling)
         {
             moveDirection = moveX * transform.forward + moveZ * transform.right;
-            rb.velocity = moveDirection * movement_Speed;
+            rb.velocity = new Vector3(moveDirection.x * movement_Speed, rb.velocity.y, moveDirection.z * movement_Speed);
         }
 
-        if (!grounded)
+        if (jump)
         {
-            Jump();
+            CalculateJump();         
         }
+        //else
+        //{
+        //    rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+        //}
+        
+
     }
 
     public void OnMovement(InputValue value)
@@ -152,20 +157,12 @@ public class Player_Controller : MonoBehaviour
     }
 
 
-    bool grounded = true;
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Floor"))
-        {
-            grounded = true;
-        }
-    }
-
+    public bool jump = false;  
     public void OnJump()
-    {       
-        if (grounded)
+    {
+        if (CheckGrounded())
         {
-            grounded = false;
+            StartCoroutine(Jump());
             jumpTime = initialVelocity;
             #region Animations
             animator.SetTrigger("Jump");
@@ -177,21 +174,44 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    public void Jump()
-    {
+    public IEnumerator Jump()
+    {       
+        yield return new WaitForSeconds(jumpDelay);
+        jump = true;
         Debug.Log("Jump");
-        List<Collider> headCollisions = new List<Collider>();
+        yield return new WaitWhile(CheckGrounded);
+        yield return new WaitUntil(CheckGrounded);
+        jump = false;
+        Debug.Log("Stop Jump");
+    }
+
+    public void CalculateJump()
+    {
         jumpTime += Time.deltaTime * jumpSpeed;
-        if (jumpTime < ((3 * Mathf.PI) / 2) - maxVelocity && Physics.OverlapBox(headCollider.transform.position, headCollider.size, Quaternion.identity, headCollisionFilter).Length == 0)
+        if (jumpTime < ((3 * Mathf.PI) / 2) - maxVelocity && !Physics.Raycast(centerPoint.position, Vector3.up, 1.75f + 0.05f, rayMask))
         {
             jumpVelocity = Mathf.Sin(0.9f * jumpTime) * jumpHeight;
         }
         else
         {
             jumpTime = ((3 * Mathf.PI) / 2) - maxVelocity;
-            jumpVelocity = Mathf.Sin(0.9f * jumpTime) * jumpHeight;
+            jumpVelocity = Mathf.Sin(0.9f * jumpTime) * jumpHeight;         
         }
-        rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);            
+    }
+
+    public bool CheckGrounded()
+    {
+        if (Physics.Raycast(centerPoint.position, Vector3.down, 1.75f + 0.05f, rayMask))
+        {
+            Debug.Log("Grounded");
+            return true;
+        }       
+        else
+        {
+            Debug.Log("Not Grounded");
+            return false;
+        }
     }
 
     private void OnDisable()

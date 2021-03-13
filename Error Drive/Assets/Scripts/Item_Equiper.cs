@@ -29,7 +29,7 @@ public class Item_Equiper : MonoBehaviour
             {
                 for(int i = 0; i < bodyParts.Count; i++)
                 {
-                    bodyParts[i].GetComponent<SpriteRenderer>().sprite = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;                    
+                    bodyParts[i].GetComponent<MeshFilter>().mesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;                    
                 }
                 equipped = true;
                 if(itemEquipped.tag == "Head")

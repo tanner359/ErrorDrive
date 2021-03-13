@@ -22,8 +22,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - Floor
+  - Obstacle
+  - Terrain
   - Items
   - 
   - Hostiles

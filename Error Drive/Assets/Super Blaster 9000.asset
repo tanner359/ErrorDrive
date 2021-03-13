@@ -22,7 +22,7 @@ MonoBehaviour:
   defense: 0
   weaponName: Super Blaster 9000
   description: It kills people, today.
-  tag: Main Hand
+  tag: Arms
   material: {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
   weaponSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Model: {fileID: -3124712505482722686, guid: 57529f4fc2aa29e4ea2f7f61019e07f9, type: 3}
