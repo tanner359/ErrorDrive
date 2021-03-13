@@ -8,7 +8,7 @@ public class Item_Stats : MonoBehaviour
     public Armor armor;
     
     public int levelRequirement, damage, knockback, health, power, pen, crit, defense;
-    public Color itemRarity;
+    public object rarity;
     public Sprite sprite;
     
     // Start is called before the first frame update
@@ -24,8 +24,8 @@ public class Item_Stats : MonoBehaviour
             crit = weapon.crit;
             defense = weapon.defense;
             damage = weapon.damage;
-            itemRarity = weapon.rarityColor;
-            sprite = weapon.weaponSprite;
+            rarity = weapon.rarity;
+            sprite = weapon.sprite;
         }
         else if (armor)
         {
@@ -35,8 +35,8 @@ public class Item_Stats : MonoBehaviour
             pen = armor.pen;
             crit = armor.crit;
             defense = armor.defense;
-            itemRarity = armor.rarityColor;
-            sprite = armor.armorSprite;
+            rarity = armor.rarity;
+            sprite = armor.sprite;
         }
         
     }   

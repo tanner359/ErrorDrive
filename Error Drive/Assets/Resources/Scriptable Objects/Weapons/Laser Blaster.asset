@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07883cd13ad5e134aa16cfaa0ee79eb8, type: 3}
+  m_Name: Laser Blaster
+  m_EditorClassIdentifier: 
+  levelRequirement: 1
+  damage: 1000
+  knockback: 10
+  health: 0
+  power: 10
+  pen: 10
+  crit: 10
+  defense: 0
+  weaponName: Laser Blaster
+  description: It kills people, today.
+  mesh: {fileID: -4367778154665524911, guid: 57529f4fc2aa29e4ea2f7f61019e07f9, type: 3}
+  material: {fileID: 2100000, guid: 36bce9ab6cae8ce43962938466458044, type: 2}
+  sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  equipSlot: 1
+  rarity: 2

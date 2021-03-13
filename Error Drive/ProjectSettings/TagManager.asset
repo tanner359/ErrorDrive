@@ -5,15 +5,21 @@ TagManager:
   serializedVersion: 2
   tags:
   - Inventory Slot
-  - Chest
-  - Off Hand
-  - Special
-  - Ring
-  - Main Hand
-  - Boots
-  - Arms
   - Head
   - Floor
+  - Body
+  - Chest
+  - Ring
+  - Boots
+  - Legs
+  - Special
+  - Undefined
+  - Main_Hand
+  - Off_Hand
+  - Left_Leg
+  - Right_Leg
+  - Off Hand
+  - Right Leg
   layers:
   - Default
   - TransparentFX

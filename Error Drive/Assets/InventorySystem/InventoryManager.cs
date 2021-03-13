@@ -50,11 +50,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(mousePosition, 1f);
-    }
-
     public void OnRightMouseButton(InputValue value)
     {
         if (value.Get<float>() == 1 && slot != null && slot.transform.childCount == 1)
@@ -87,7 +82,7 @@ public class InventoryManager : MonoBehaviour
                 inventoryItems[inventoryItems.Count-1].transform.parent = slots[k].transform;
                 inventoryItems[inventoryItems.Count-1].SetActive(false);
                 slots[k].transform.GetChild(0).GetComponent<Image>().sprite = inventoryItems[inventoryItems.Count-1].GetComponent<Item_Stats>().sprite;
-                slots[k].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().color = inventoryItems[inventoryItems.Count - 1].GetComponent<Item_Stats>().itemRarity;
+                slots[k].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().color = Item.GetRarityColor(inventoryItems[inventoryItems.Count - 1].GetComponent<Item_Stats>().rarity);
                 slots[k].transform.GetChild(0).GetComponentInChildren<Text>().text = inventoryItems[inventoryItems.Count-1].name;
                 slots[k].transform.GetChild(0).GetComponent<Image>().color = new Color(slots[k].transform.GetChild(0).GetComponent<Image>().color.r, slots[k].transform.GetChild(0).GetComponent<Image>().color.g, slots[k].transform.GetChild(0).GetComponent<Image>().color.b, 100);
                 k = 9999;
@@ -125,7 +120,7 @@ public class InventoryManager : MonoBehaviour
             itemHolding.SetActive(false);
             slot.transform.GetChild(0).GetComponent<Image>().sprite = itemHolding.GetComponent<Item_Stats>().sprite;
             slot.transform.GetChild(0).GetComponentInChildren<Text>().text = itemHolding.name;
-            slot.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Text>().color = itemHolding.GetComponent<Item_Stats>().itemRarity;
+            slot.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Text>().color = Item.GetRarityColor(itemHolding.GetComponent<Item_Stats>().rarity);
             slot.transform.GetChild(0).GetComponent<Image>().color = new Color(slot.transform.GetChild(0).GetComponent<Image>().color.r, slot.transform.GetChild(0).GetComponent<Image>().color.g, slot.transform.GetChild(0).GetComponent<Image>().color.b, 100);
             isHoldingItem = false;
             itemHolding = null;
@@ -137,7 +132,7 @@ public class InventoryManager : MonoBehaviour
             itemHolding.transform.parent = slot.transform;
             itemHolding.SetActive(false);
             slot.transform.GetChild(0).GetComponent<Image>().sprite = itemHolding.GetComponent<Item_Stats>().sprite;
-            slot.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Text>().color = itemHolding.GetComponent<Item_Stats>().itemRarity;
+            slot.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Text>().color = Item.GetRarityColor(itemHolding.GetComponent<Item_Stats>().rarity);
             slot.transform.GetChild(0).GetComponentInChildren<Text>().text = itemHolding.name;
             slot.transform.GetChild(0).GetComponent<Image>().color = new Color(slot.transform.GetChild(0).GetComponent<Image>().color.r, slot.transform.GetChild(0).GetComponent<Image>().color.g, slot.transform.GetChild(0).GetComponent<Image>().color.b, 100);
             isHoldingItem = false;

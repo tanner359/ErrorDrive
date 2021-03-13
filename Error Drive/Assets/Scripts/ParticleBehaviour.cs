@@ -9,12 +9,10 @@ public class ParticleBehaviour : MonoBehaviour
 
     private void Start()
     {
-        itemZ = gameObject.transform.parent.transform.position.z;
+        itemZ = gameObject.transform.parent.transform.rotation.z;
     }
-
-
     void FixedUpdate()
-    {
+    {       
         gameObject.transform.eulerAngles = new Vector3(Mathf.Abs(itemZ) + (-90), -90, 0);
     }           
 }

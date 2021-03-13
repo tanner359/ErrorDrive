@@ -12,11 +12,9 @@ public class Creature_Stats : MonoBehaviour
     bool isDead = false;
     bool itemDropped = false;
     public Animator animator;
-    public ItemSpawnHandler spawnHandler;
     // Start is called before the first frame update
     void Start()
     {
-        spawnHandler = GameObject.Find("ItemSpawnHandler").GetComponent<ItemSpawnHandler>();
         health = creature.health;
         level = creature.level;
         damage = creature.damage;
@@ -33,22 +31,22 @@ public class Creature_Stats : MonoBehaviour
             Destroy(gameObject, 8f);
             if (isDead && !itemDropped)
             {
-                calculateDrops();
+                CalculateDrops();
             }
         }
     }
-    public void calculateDrops()
+    public void CalculateDrops()
     {
         int randomNum = Random.Range(0, 100);
         if (randomNum < 5)
         {
             int n = Random.Range(0, creature.armorDrops.Count);
-            spawnHandler.spawnItem(creature.armorDrops[n], null, transform);
+            Item.Spawn(creature.armorDrops[n], transform.position);
         }
         if (randomNum < 10 && randomNum > 5)
         {
             int n = Random.Range(0, creature.weaponDrops.Count);
-            spawnHandler.spawnItem(null, creature.weaponDrops[n], transform);
+            Item.Spawn(creature.weaponDrops[n], transform.position);
         }
         itemDropped = true;
     }

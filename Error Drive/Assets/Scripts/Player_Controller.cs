@@ -92,6 +92,12 @@ public class Player_Controller : MonoBehaviour
 
     }
 
+    public void OnSpawnItem()
+    {
+        Item.SpawnRandom(transform.position + Vector3.up * 5);
+    }
+
+
     public void OnMovement(InputValue value)
     {
         if (isControlling)
@@ -184,6 +190,7 @@ public class Player_Controller : MonoBehaviour
         jump = false;
         Debug.Log("Stop Jump");
     }
+
 
     public void CalculateJump()
     {

@@ -59,7 +59,6 @@ public class Item_Equiper : MonoBehaviour
                 itemEquipped.SetActive(true);
                 itemEquipped.transform.eulerAngles = bodyParts[0].transform.eulerAngles + new Vector3(0,0,60 * getDirection());              
                 itemEquipped.GetComponent<Rigidbody>().isKinematic = true;
-                //itemEquipped.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 itemEquipped.GetComponent<MeshCollider>().isTrigger = true;
                 equipped = true;
                 itemEquipped.transform.GetChild(0).gameObject.SetActive(false);
