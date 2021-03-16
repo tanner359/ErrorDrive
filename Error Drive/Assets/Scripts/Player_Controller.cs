@@ -39,6 +39,21 @@ public class Player_Controller : MonoBehaviour
         isControlling = state;
     }
 
+
+    public IEnumerator SlowMovement(float amount, float time)
+    {
+        movement_Speed = movement_Speed * (1 - amount);
+        yield return new WaitForSeconds(time);
+        movement_Speed = movement_Speed / (1 - amount);
+    }
+
+    public IEnumerator BuffMovement(float amount, float time)
+    {
+        movement_Speed = movement_Speed * (1 + amount);
+        yield return new WaitForSeconds(time);
+        movement_Speed = movement_Speed / (1 + amount);
+    }
+
     private void OnEnable()
     {
         isControlling = true;
@@ -83,13 +98,14 @@ public class Player_Controller : MonoBehaviour
 
         if (jump)
         {
-            CalculateJump();         
+            CalculateJump();
+            if (gameObject.GetComponent<Rigidbody>().velocity.y < -0.1)
+            {
+                animator.SetBool("Falling", true);
+            }
         }
-        //else
-        //{
-        //    rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
-        //}
         
+
 
     }
 
@@ -170,13 +186,10 @@ public class Player_Controller : MonoBehaviour
         if (CheckGrounded())
         {
             StartCoroutine(Jump());
+            StartCoroutine(BuffMovement(0.50f, 0.5f));
             jumpTime = initialVelocity;
             #region Animations
-            animator.SetTrigger("Jump");
-            //if (gameObject.GetComponent<Rigidbody>().velocity.y < 0)
-            //{ // fall
-            //    animator.SetBool("Falling", true);
-            //}
+            animator.SetTrigger("Jump");           
             #endregion
         }
     }
@@ -185,11 +198,10 @@ public class Player_Controller : MonoBehaviour
     {       
         yield return new WaitForSeconds(jumpDelay);
         jump = true;
-        Debug.Log("Jump");
         yield return new WaitWhile(CheckGrounded);
         yield return new WaitUntil(CheckGrounded);
+        animator.SetBool("Falling", false);
         jump = false;
-        Debug.Log("Stop Jump");
     }
 
 
