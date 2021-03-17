@@ -22,7 +22,7 @@ MonoBehaviour:
   defense: 0
   weaponName: Laser Blaster
   description: It kills people, today.
-  mesh: {fileID: -5398936776739586566, guid: 53620d31f40c00347aa9b9ce2e1559c9, type: 3}
+  mesh: {fileID: -5398936776739586566, guid: ad200b12a28e1ef4fbda10aa5dcd8d05, type: 3}
   material: {fileID: 2100000, guid: c181c23a6120fbe4aadd5bb53a58dd78, type: 2}
   sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   equipSlot: 0

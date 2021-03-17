@@ -11,6 +11,7 @@ public class Player_Controller : MonoBehaviour
     public Animator animator;
     public Transform centerPoint;
     public LayerMask rayMask;
+    public CapsuleCollider capCollider;
 
     [Header("Movement Settings")]
     public float movement_Speed = 1f;
@@ -81,8 +82,8 @@ public class Player_Controller : MonoBehaviour
 
             transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
         }
-        Debug.DrawRay(centerPoint.position, Vector3.up * (1.75f + 0.05f), Color.blue);
-        Debug.DrawRay(centerPoint.position, Vector3.down * (1.75f + 0.05f), Color.red);
+        Debug.DrawRay(centerPoint.position, Vector3.up * (capCollider.height/2 + 0.2f), Color.blue);
+        Debug.DrawRay(centerPoint.position, Vector3.down * (capCollider.height/2 + 0.2f), Color.red);
     }
 
     
@@ -208,7 +209,7 @@ public class Player_Controller : MonoBehaviour
     public void CalculateJump()
     {
         jumpTime += Time.deltaTime * jumpSpeed;
-        if (jumpTime < ((3 * Mathf.PI) / 2) - maxVelocity && !Physics.Raycast(centerPoint.position, Vector3.up, 1.75f + 0.05f, rayMask))
+        if (jumpTime < ((3 * Mathf.PI) / 2) - maxVelocity && !Physics.Raycast(centerPoint.position, Vector3.up, capCollider.height/2 + 0.2f, rayMask))
         {
             jumpVelocity = Mathf.Sin(0.9f * jumpTime) * jumpHeight;
         }
@@ -222,7 +223,7 @@ public class Player_Controller : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        if (Physics.Raycast(centerPoint.position, Vector3.down, 1.75f + 0.05f, rayMask))
+        if (Physics.Raycast(centerPoint.position, Vector3.down, capCollider.height/2 + 0.2f, rayMask))
         {
             Debug.Log("Grounded");
             return true;
