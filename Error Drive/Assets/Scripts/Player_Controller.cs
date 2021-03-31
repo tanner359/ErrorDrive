@@ -81,6 +81,9 @@ public class Player_Controller : MonoBehaviour
             float y = playerInputs.Player.Mouse.ReadValue<Vector2>().y;
 
             transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
+
+            moveDirection = moveX * transform.forward + moveZ * transform.right;
+            rb.velocity = new Vector3(moveDirection.x * movement_Speed, rb.velocity.y, moveDirection.z * movement_Speed);
         }
         Debug.DrawRay(centerPoint.position, Vector3.up * (capCollider.height/2 + 0.2f), Color.blue);
         Debug.DrawRay(centerPoint.position, Vector3.down * (capCollider.height/2 + 0.2f), Color.red);
@@ -91,11 +94,6 @@ public class Player_Controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isControlling)
-        {
-            moveDirection = moveX * transform.forward + moveZ * transform.right;
-            rb.velocity = new Vector3(moveDirection.x * movement_Speed, rb.velocity.y, moveDirection.z * movement_Speed);
-        }
 
         if (jump)
         {
