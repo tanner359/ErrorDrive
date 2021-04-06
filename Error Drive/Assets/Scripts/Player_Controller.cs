@@ -12,9 +12,10 @@ public class Player_Controller : MonoBehaviour
     public Transform centerPoint;
     public LayerMask rayMask;
     public CapsuleCollider capCollider;
+    public Transform followTransform;
+    Stats stats;
 
-    [Header("Movement Settings")]
-    public float movement_Speed = 1f;
+    [Header("Movement Settings")]    
     Vector3 moveDirection;
     float moveX;
     float moveZ;
@@ -40,21 +41,6 @@ public class Player_Controller : MonoBehaviour
         isControlling = state;
     }
 
-
-    public IEnumerator SlowMovement(float amount, float time)
-    {
-        movement_Speed = movement_Speed * (1 - amount);
-        yield return new WaitForSeconds(time);
-        movement_Speed = movement_Speed / (1 - amount);
-    }
-
-    public IEnumerator BuffMovement(float amount, float time)
-    {
-        movement_Speed = movement_Speed * (1 + amount);
-        yield return new WaitForSeconds(time);
-        movement_Speed = movement_Speed / (1 + amount);
-    }
-
     private void OnEnable()
     {
         isControlling = true;
@@ -62,38 +48,61 @@ public class Player_Controller : MonoBehaviour
         if (playerInputs == null)
         {
             playerInputs = new Player_Inputs();
-        }
-        
+        }      
         playerInputs.Player.Enable();
     }
 
     private void Start()
     {
+        stats = GetComponent<Stats>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {       
-        if (isControlling)
-        {
-            float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
-            float y = playerInputs.Player.Mouse.ReadValue<Vector2>().y;
-
-            transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
-
-            moveDirection = moveX * transform.forward + moveZ * transform.right;
-            rb.velocity = new Vector3(moveDirection.x * movement_Speed, rb.velocity.y, moveDirection.z * movement_Speed);
-        }
-        Debug.DrawRay(centerPoint.position, Vector3.up * (capCollider.height/2 + 0.2f), Color.blue);
-        Debug.DrawRay(centerPoint.position, Vector3.down * (capCollider.height/2 + 0.2f), Color.red);
+           
     }
-
-    
-
 
     void FixedUpdate()
     {
+        if (isControlling)
+        {
+            float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
+            float y = -playerInputs.Player.Mouse.ReadValue<Vector2>().y;
+
+            moveDirection = moveX * transform.forward + moveZ * transform.right;
+            rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
+
+            //transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
+
+            followTransform.rotation *= Quaternion.AngleAxis(x * sensitivity, Vector3.up);
+            followTransform.rotation *= Quaternion.AngleAxis(y * sensitivity, Vector3.right);
+
+            var angles = followTransform.localEulerAngles;
+            angles.z = 0;
+            var angle = followTransform.localEulerAngles.x;
+
+            if(angle > 180 && angle < 340)
+            {
+                angles.x = 340;
+            }
+            else if(angle < 180  && angle > 40)
+            {
+                angles.x = 40;
+            }
+
+            followTransform.localEulerAngles = angles;
+
+            if(moveX == 0 && moveZ == 0)
+            {
+                Debug.Log("return");
+                return;
+            }
+            Debug.Log("run");
+            transform.rotation = Quaternion.Euler(0, followTransform.rotation.eulerAngles.y, 0);
+            followTransform.localEulerAngles = new Vector3(angles.x, 0, 0);         
+        }
 
         if (jump)
         {
@@ -103,24 +112,19 @@ public class Player_Controller : MonoBehaviour
                 animator.SetBool("Falling", true);
             }
         }
-        
-
-
     }
 
+    #region INPUT CALLBACKS
     public void OnSpawnItem()
     {
         Item.SpawnRandom(transform.position + Vector3.up * 5);
-    }
-
-
+    } 
     public void OnMovement(InputValue value)
     {
         if (isControlling)
         {
             moveX = (value.Get<Vector2>().y);
             moveZ = (value.Get<Vector2>().x);
-
             #region Animations
             if (moveX > 0)
             {
@@ -158,40 +162,52 @@ public class Player_Controller : MonoBehaviour
             #endregion
         }
     }
+    public void OnAttackRight()
+    {
+        animator.SetTrigger("R_Attack");
+    }
+    public void OnAttackLeft()
+    {
+        animator.SetTrigger("L_Attack");
+    }
+    #endregion
 
+    #region RUN FUNCTION
     bool run = false;
     public void OnRun()
     {
         #region Animations
         if (!run)
         {
-            movement_Speed = movement_Speed * 1.60f;
+            stats.speed *= 1.60f;
             animator.SetBool("Run", true);
             run = true;
         }
         else if (run)
         {
-            movement_Speed = movement_Speed / 1.60f;
+            stats.speed /= 1.60f;
             animator.SetBool("Run", false);
             run = false;
         }      
         #endregion
     }
+    #endregion
 
-
+    #region JUMP FUNCTION
     bool jump = false;  
     public void OnJump()
     {
         if (CheckGrounded())
         {
             StartCoroutine(Jump());
-            StartCoroutine(BuffMovement(0.50f, 0.5f));
+            StartCoroutine(StatusEffects.HastenTarget(gameObject, 0.50f, 0.5f));
             jumpTime = initialVelocity;
             #region Animations
             animator.SetTrigger("Jump");           
             #endregion
         }
     }
+    
 
     public IEnumerator Jump()
     {       
@@ -202,6 +218,7 @@ public class Player_Controller : MonoBehaviour
         animator.SetBool("Falling", false);
         jump = false;
     }
+    
 
 
     public void CalculateJump()
@@ -218,6 +235,7 @@ public class Player_Controller : MonoBehaviour
         }
         rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);            
     }
+    #endregion
 
     public bool CheckGrounded()
     {

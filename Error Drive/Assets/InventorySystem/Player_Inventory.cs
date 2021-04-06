@@ -48,7 +48,7 @@ public class Player_Inventory : MonoBehaviour
     {
         if (interactableItems.Length > 0){ 
             pickUp();
-            StartCoroutine(GetComponent<Player_Controller>().SlowMovement(0.60f, 0.5f));
+            StartCoroutine(StatusEffects.SlowTarget(gameObject, 0.60f, 0.5f));
             #region Animation
             animator.SetTrigger("Pickup");
             #endregion

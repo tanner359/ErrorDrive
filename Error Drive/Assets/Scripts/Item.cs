@@ -48,7 +48,7 @@ public static class Item
     {
         Debug.Log(AllItems[0]);
         Debug.Log(AllItems[1]);
-        Debug.Log(AllItems[2]);
+        
         object item = AllItems[Random.Range(0, AllItems.Length)];
         if (item is Weapon)
         {
