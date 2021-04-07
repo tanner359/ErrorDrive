@@ -1644,7 +1644,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000017868749, y: -0.00000021992307, z: 2.9999995}
+  m_ConnectedAnchor: {x: 0.00000012370673, y: 0.00000021992307, z: 2.9999998}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -1969,7 +1969,7 @@ GameObject:
   - component: {fileID: 8571438084673818622}
   - component: {fileID: 7544339338965722059}
   m_Layer: 0
-  m_Name: SniperBot 1
+  m_Name: SniperBot
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
