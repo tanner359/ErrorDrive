@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     CanvasDisplay canvasDisplay;
 
@@ -69,7 +69,7 @@ public class Player_Inventory : MonoBehaviour
     {
         if (!inventoryOpen)
         {
-            gameObject.GetComponent<Player_Controller>().SetControl(false);
+            PlayerSettings.DisableControl();
             inventoryOpen = true;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
@@ -77,7 +77,7 @@ public class Player_Inventory : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<Player_Controller>().SetControl(true);
+            PlayerSettings.EnableControl();
             inventoryOpen = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -88,7 +88,7 @@ public class Player_Inventory : MonoBehaviour
     public void pickUp(){ // pick up closest item
         if(inventoryList.Count != 20)
         {
-            inventoryList.Add(getClosestItem(gameObject.transform, interactableItems));
+            inventoryList.Add(getClosestItem(transform.position, interactableItems));
             inventoryManager.updateInventory(inventoryList);
         }
         else
@@ -110,7 +110,7 @@ public class Player_Inventory : MonoBehaviour
 
         if (interactableItems.Length > 0)
         {
-            canvasDisplay.displayInteractText(getClosestItem(gameObject.transform, interactableItems).transform, "E");
+            canvasDisplay.DisplayInteractText(getClosestItem(transform.position, interactableItems).transform.position, "E");
         }
         else
         {
@@ -118,12 +118,12 @@ public class Player_Inventory : MonoBehaviour
         }
     }
 
-    public GameObject getClosestItem(Transform playerPos, Collider[] interactableItems){ // returns back the closest item
+    public GameObject getClosestItem(Vector3 playerPos, Collider[] interactableItems){ // returns back the closest item
         GameObject closestItem = interactableItems[0].gameObject;
-        float minDistance = Vector3.Distance(playerPos.position, interactableItems[0].gameObject.transform.position);
+        float minDistance = Vector3.Distance(playerPos, interactableItems[0].gameObject.transform.position);
         for (int i = 0; i < interactableItems.Length; i++){
-            if(minDistance > Vector3.Distance(playerPos.position, interactableItems[i].gameObject.transform.position)){
-                minDistance = Vector3.Distance(playerPos.position, interactableItems[i].gameObject.transform.position);
+            if(minDistance > Vector3.Distance(playerPos, interactableItems[i].gameObject.transform.position)){
+                minDistance = Vector3.Distance(playerPos, interactableItems[i].gameObject.transform.position);
                 closestItem = interactableItems[i].gameObject;
             }
         }

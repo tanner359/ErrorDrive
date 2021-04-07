@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc39df5cf1bc84f4a81980bccb8ad2d7, type: 3}
+  m_Name: Sniper Bot
+  m_EditorClassIdentifier: 
+  creatureName: Sniper Bot
+  level: 1
+  description: He never misses his target.
+  prefab: {fileID: 7336133604198610206, guid: 273bf1bf0f76a9f4289890f5a34eeebf, type: 3}
+  power: 10
+  armorPenetration: 0
+  criticalStrike: 0
+  health: 100
+  defense: 10
+  movementSpeed: 0
+  runningSpeed: 0
+  items:
+  - {fileID: 11400000, guid: 80e1123b3b6c7654e9809d21689cc034, type: 2}
+  - {fileID: 11400000, guid: 7961a67e4c5687c4fb5990124b50200a, type: 2}
+  isHostile: 1
+  aggroDistance: 50

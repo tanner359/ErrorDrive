@@ -7,66 +7,37 @@ public class CanvasDisplay : MonoBehaviour
 {
     public Vector3 pickupTextOffset = new Vector3(0, 0, 0);
     private GameObject textBox;
-    public int damageTextLimit;
-    public GameObject damageTextPrefab;
-    public TMP_FontAsset fontAsset;
+    public GameObject combatText_Prefab;
+    public GameObject interactText_Prefab;
     public GameObject worldCanvas;
-
-    public List<GameObject> damageTextBoxes = new List<GameObject>();
-
-      
-    private void Update()
-    {
-        for (int i = 0; i < damageTextBoxes.Count; i++)
-        {           
-            if (damageTextBoxes[i] != null)
-            {
-                damageTextBoxes[i].transform.position += new Vector3(0, 2f * Time.deltaTime, 0);
-            }
-            else
-            {
-                damageTextBoxes.RemoveAt(i);
-            }          
-        }
-    }
+         
     private void Awake()
     {
-        textBox = new GameObject("DamageText");
-        textBox.transform.SetParent(worldCanvas.transform);
-        textBox.AddComponent<TMPro.TextMeshPro>();
-        textBox.GetComponent<TMPro.TextMeshPro>().font = fontAsset;
-        textBox.GetComponent<TMPro.TextMeshPro>().fontSize = 8;
-        textBox.GetComponent<TMPro.TextMeshPro>().outlineWidth = 0.32f;
-        textBox.GetComponent<TMPro.TextMeshPro>().alignment = TextAlignmentOptions.Center;
-        textBox.GetComponent<RectTransform>().sizeDelta = new Vector2(2, 1);
+        textBox = Instantiate(interactText_Prefab, worldCanvas.transform);
     }
-    public void displayInteractText(Transform textPos, string text)
+
+    public void DisplayInteractText(Vector3 textPos, string text)
     {
+        textBox.SetActive(true);
         textBox.GetComponent<TMPro.TextMeshPro>().text = text;
-        textBox.transform.position = textPos.position + pickupTextOffset;
+        textBox.transform.position = textPos + pickupTextOffset;
     }
+
     public void HideText()
     {
-        textBox.GetComponent<TMPro.TextMeshPro>().text = "";
+        textBox.SetActive(false);
     }
-    public void displayDamageText(Color color, int damage, float duration, Transform location)
+
+    public void SpawnCombatText(CombatText combatText)
     {
-        GameObject damageTextBox = GameObject.Instantiate(damageTextPrefab);
-        damageTextBox.transform.position = location.position + new Vector3(Random.Range(-2f,2f),0,0);     
-        damageTextBox.GetComponent<TMPro.TextMeshPro>().color = color;
-        damageTextBox.GetComponent<TMPro.TextMeshPro>().text = damage.ToString();
-        damageTextBoxes.Add(damageTextBox);       
-        Destroy(damageTextBox, duration);    
-        
+        Instantiate(combatText_Prefab);                 
     }
 
     public void CloseWindow(GameObject window)
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>().SetControl(true);
+        PlayerSettings.EnableControl();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         window.SetActive(false);
     }
-    
-
 }

@@ -34,12 +34,7 @@ public class Player_Controller : MonoBehaviour
     float jumpVelocity = 0;
     public float jumpDelay = 0;
     
-    bool isControlling;
-
-    public void SetControl(bool state)
-    {
-        isControlling = state;
-    }
+    public bool isControlling;
 
     private void OnEnable()
     {
@@ -57,11 +52,6 @@ public class Player_Controller : MonoBehaviour
         stats = GetComponent<Stats>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void Update()
-    {       
-           
     }
 
     void FixedUpdate()
@@ -99,7 +89,6 @@ public class Player_Controller : MonoBehaviour
                 Debug.Log("return");
                 return;
             }
-            Debug.Log("run");
             transform.rotation = Quaternion.Euler(0, followTransform.rotation.eulerAngles.y, 0);
             followTransform.localEulerAngles = new Vector3(angles.x, 0, 0);         
         }

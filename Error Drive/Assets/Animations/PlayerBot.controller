@@ -782,7 +782,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Attack
     m_StateMachine: {fileID: -7476921229173698930}
-    m_Mask: {fileID: 31900000, guid: 7e0a751375acd7b4bb31e8346ad3057f, type: 2}
+    m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
@@ -1367,7 +1367,7 @@ AnimatorStateMachine:
     m_Position: {x: 620, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2333579916383301966}
-    m_Position: {x: 140, y: 430, z: 0}
+    m_Position: {x: 320, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -842023198889623673}
     m_Position: {x: 0, y: -240, z: 0}
@@ -1411,7 +1411,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 228c6137abd27f5499e83285682fcc03, type: 2}
+  m_Motion: {fileID: 0}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

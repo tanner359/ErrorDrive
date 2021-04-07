@@ -8,7 +8,7 @@ public class Item_Equiper : MonoBehaviour
     private Material originalMaterial;
     public List<GameObject> bodyParts;
     public bool equipped = false;
-    public Player_Inventory playerInventory;
+    public Inventory inventory;
 
     public GameObject itemEquipped;
     // Start is called before the first frame update
@@ -27,53 +27,41 @@ public class Item_Equiper : MonoBehaviour
         if (gameObject.transform.childCount > 1 && !equipped)
         {
             itemEquipped = gameObject.transform.GetChild(1).gameObject;
-            if (itemEquipped.tag != "Main Hand" && itemEquipped.tag != "Off Hand") // if not a weapon
+            for (int i = 0; i < bodyParts.Count; i++)
             {
-                for(int i = 0; i < bodyParts.Count; i++)
-                {
-                    bodyParts[i].GetComponent<MeshFilter>().mesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
-                    bodyParts[i].GetComponent<MeshRenderer>().material = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material;
-                }
-                equipped = true;
-                if(itemEquipped.tag == "Head")
-                {
-                    playerInventory.Head = itemEquipped;
-                }
-                else if (itemEquipped.tag == "Body")
-                {
-                    playerInventory.Body = itemEquipped;
-                }
-                else if (itemEquipped.tag == "Left_Leg")
-                {
-                    playerInventory.Left_Leg = itemEquipped;
-                }
-                else if (itemEquipped.tag == "Right_Leg")
-                {
-                    playerInventory.Right_Leg = itemEquipped;
-                }              
-            }
-            else //if a weapon main or off hand
-            {
-                GameObject weaponCopy = Instantiate(itemEquipped);
-                weaponCopy.transform.localScale = itemEquipped.transform.lossyScale;
-                itemEquipped = weaponCopy;
-                itemEquipped.transform.SetParent(bodyParts[0].transform);
-                itemEquipped.transform.position = bodyParts[0].transform.position;
-                itemEquipped.SetActive(true);
-                itemEquipped.transform.eulerAngles = bodyParts[0].transform.eulerAngles + new Vector3(0,0,60 * getDirection());              
-                itemEquipped.GetComponent<Rigidbody>().isKinematic = true;
-                itemEquipped.GetComponent<MeshCollider>().isTrigger = true;
-                equipped = true;
-                itemEquipped.transform.GetChild(0).gameObject.SetActive(false);
+                bodyParts[i].GetComponent<MeshFilter>().mesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
+                bodyParts[i].GetComponent<MeshRenderer>().material = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material;
+
                 if (itemEquipped.tag == "Main_Hand")
                 {
-                    playerInventory.Main_Hand = itemEquipped;
+                    inventory.Main_Hand = itemEquipped;
+                    bodyParts[i].GetComponent<MeshCollider>().enabled = true;
+                    bodyParts[i].GetComponent<MeshCollider>().sharedMesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
                 }
                 else if (itemEquipped.tag == "Off_Hand")
                 {
-                    playerInventory.Off_Hand = itemEquipped;
+                    inventory.Off_Hand = itemEquipped;
+                    bodyParts[i].GetComponent<MeshCollider>().enabled = true;
+                    bodyParts[i].GetComponent<MeshCollider>().sharedMesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
                 }
             }
+            equipped = true;          
+            if (itemEquipped.tag == "Head")
+            {
+                inventory.Head = itemEquipped;
+            }
+            else if (itemEquipped.tag == "Body")
+            {
+                inventory.Body = itemEquipped;
+            }
+            else if (itemEquipped.tag == "Left_Leg")
+            {
+                inventory.Left_Leg = itemEquipped;
+            }
+            else if (itemEquipped.tag == "Right_Leg")
+            {
+                inventory.Right_Leg = itemEquipped;
+            }          
         }
         if(gameObject.transform.childCount == 1 && equipped && itemEquipped.tag != "Main_Hand" && itemEquipped.tag != "Off_Hand")
         {

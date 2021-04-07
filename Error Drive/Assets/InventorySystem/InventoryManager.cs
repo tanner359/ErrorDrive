@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 {
-    public Player_Inventory playerInventory;
+    public Inventory inventory;
     public List<GameObject> slots;  
     public GameObject itemHolding;
     public GameObject slot;
@@ -18,7 +18,6 @@ public class InventoryManager : MonoBehaviour
     GameObject player;
 
     Player_Inputs playerInputs;
-
     Vector2 mousePosition;
 
     private void OnEnable()
@@ -143,7 +142,7 @@ public class InventoryManager : MonoBehaviour
     public void dropObject()
     {
         Debug.Log("drop item");
-        playerInventory.inventoryList.Remove(itemHolding);
+        inventory.inventoryList.Remove(itemHolding);
         itemHolding.SetActive(true);
         itemHolding.GetComponent<Rigidbody>().isKinematic = false;
         itemHolding.transform.parent = null;
