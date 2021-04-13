@@ -35,6 +35,7 @@ public class Player_Controller : MonoBehaviour
     public float jumpDelay = 0;
     
     public bool isControlling;
+    public bool isAttacking;
 
     private void OnEnable()
     {
@@ -100,6 +101,16 @@ public class Player_Controller : MonoBehaviour
             {
                 animator.SetBool("Falling", true);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) // if we hit something, apply damage
+    {
+        Debug.Log("Something hit");
+        if(isAttacking && other.CompareTag("Hostile"))
+        {
+            Debug.Log("Enemy Hit");
+            Combat.DamageTarget(other.GetComponent<Stats>(), stats);
         }
     }
 
@@ -238,7 +249,7 @@ public class Player_Controller : MonoBehaviour
             Debug.Log("Not Grounded");
             return false;
         }
-    }
+    }   
 
     private void OnDisable()
     {

@@ -7,7 +7,6 @@ public class CanvasDisplay : MonoBehaviour
 {
     public Vector3 pickupTextOffset = new Vector3(0, 0, 0);
     private GameObject textBox;
-    public GameObject combatText_Prefab;
     public GameObject interactText_Prefab;
     public GameObject worldCanvas;
          
@@ -26,11 +25,6 @@ public class CanvasDisplay : MonoBehaviour
     public void HideText()
     {
         textBox.SetActive(false);
-    }
-
-    public void SpawnCombatText(CombatText combatText)
-    {
-        Instantiate(combatText_Prefab);                 
     }
 
     public void CloseWindow(GameObject window)

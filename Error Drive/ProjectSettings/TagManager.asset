@@ -20,6 +20,7 @@ TagManager:
   - Right_Leg
   - Off Hand
   - Right Leg
+  - Hostile
   layers:
   - Default
   - TransparentFX

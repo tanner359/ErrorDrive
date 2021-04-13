@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3214762692623787030}
   - component: {fileID: 1555319360222306013}
   - component: {fileID: 7104779416427201070}
+  - component: {fileID: 6624920747420772401}
   m_Layer: 13
   m_Name: CombatText
   m_TagString: Untagged
@@ -170,3 +171,16 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+--- !u!114 &6624920747420772401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282932491467745826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4169e861b6a1044cb7476948652b893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshPro: {fileID: 7104779416427201070}
