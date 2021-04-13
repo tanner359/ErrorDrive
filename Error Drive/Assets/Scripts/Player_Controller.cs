@@ -13,7 +13,7 @@ public class Player_Controller : MonoBehaviour
     public LayerMask rayMask;
     public CapsuleCollider capCollider;
     public Transform followTransform;
-    Stats stats;
+    public Stats stats;
 
     [Header("Movement Settings")]    
     Vector3 moveDirection;
@@ -37,6 +37,8 @@ public class Player_Controller : MonoBehaviour
     public bool isControlling;
     public bool isAttacking;
 
+
+
     private void OnEnable()
     {
         isControlling = true;
@@ -50,7 +52,6 @@ public class Player_Controller : MonoBehaviour
 
     private void Start()
     {
-        stats = GetComponent<Stats>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -104,15 +105,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) // if we hit something, apply damage
-    {
-        Debug.Log("Something hit");
-        if(isAttacking && other.CompareTag("Hostile"))
-        {
-            Debug.Log("Enemy Hit");
-            Combat.DamageTarget(other.GetComponent<Stats>(), stats);
-        }
-    }
+    
 
     #region INPUT CALLBACKS
     public void OnSpawnItem()

@@ -15,6 +15,7 @@ public class Stats : MonoBehaviour
     public int defense;
 
     [Header("Utility")]
-    public float speed = 1f;     
+    public float speed = 1f;
+    public int knockback;
 }
 

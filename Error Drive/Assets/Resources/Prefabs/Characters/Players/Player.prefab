@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7023854432349253758}
   m_Layer: 0
   m_Name: BodyMesh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 5077194354714321251}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,7 +187,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.103143334, y: 0.6246032, z: 0.7399807}
+  m_ConnectedAnchor: {x: 0.10314334, y: 0.6246032, z: 0.7399807}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 5077194355438568625}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 2983369683230751808}
   m_Layer: 0
   m_Name: LHand
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 5383130366117244141}
   m_Layer: 0
   m_Name: RHand CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 5383130366189096950}
   m_Layer: 0
   m_Name: LElbowCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 5383130366255441403}
   m_Layer: 0
   m_Name: LHip
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,7 +700,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.100179, y: -2.7902298, z: 0.26009825}
+  m_ConnectedAnchor: {x: -1.1002699, y: -2.7902298, z: 0.26006895}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 690246491126955138}
   m_Layer: 0
   m_Name: NewPlayerBot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 5383130366387415539}
   m_Layer: 0
   m_Name: RUpperArm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 5383130366424340245}
   m_Layer: 0
   m_Name: RKnee
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1012,7 +1012,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000000082471146, y: -0.00000021992305, z: 3.0000005}
+  m_ConnectedAnchor: {x: 0.000000027490383, y: 0.00000021992307, z: 2.9999998}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -1059,7 +1059,7 @@ GameObject:
   - component: {fileID: 5383130366501202983}
   m_Layer: 0
   m_Name: LThigh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1143,7 +1143,7 @@ GameObject:
   - component: {fileID: 5383130366519945314}
   m_Layer: 0
   m_Name: RElbow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1255,7 +1255,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000000029802322, y: -0.00000023841858, z: 2.4999998}
+  m_ConnectedAnchor: {x: -0.000000059604645, y: 0.00000023841858, z: 2.5000002}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -1301,9 +1301,11 @@ GameObject:
   - component: {fileID: 5383130366674096240}
   - component: {fileID: 5383130366674096239}
   - component: {fileID: 6305077019918204081}
+  - component: {fileID: 4949272065819544949}
+  - component: {fileID: 5440829692061105188}
   m_Layer: 0
   m_Name: LForearm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1385,6 +1387,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 816343263715038232, guid: 18799469f3123834d85ef070383a9754, type: 3}
+--- !u!114 &4949272065819544949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383130366674096237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e266d8ce4a7657e4db2e97217e4eb9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1870049349031165357}
+  controller: {fileID: 8978467346439625937}
+--- !u!54 &5440829692061105188
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383130366674096237}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &5383130366809930325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1434,7 @@ GameObject:
   - component: {fileID: 5383130366809930331}
   m_Layer: 0
   m_Name: RHip
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1536,7 +1568,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 1.110199, y: -2.7901387, z: 0.26009017}
+  m_ConnectedAnchor: {x: 1.1101199, y: -2.7901387, z: 0.26006895}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1583,7 +1615,7 @@ GameObject:
   - component: {fileID: 5383130366853906319}
   m_Layer: 0
   m_Name: LUpperArm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1663,9 +1695,11 @@ GameObject:
   - component: {fileID: 5383130366951633260}
   - component: {fileID: 5383130366951633259}
   - component: {fileID: 2372669784962967654}
+  - component: {fileID: 4424770826341205248}
+  - component: {fileID: 368477343112033848}
   m_Layer: 0
   m_Name: RForearm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1747,6 +1781,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 816343263715038232, guid: 18799469f3123834d85ef070383a9754, type: 3}
+--- !u!114 &4424770826341205248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383130366951633257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e266d8ce4a7657e4db2e97217e4eb9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1870049349031165357}
+  controller: {fileID: 8978467346439625937}
+--- !u!54 &368477343112033848
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383130366951633257}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &5383130367073067970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1824,7 @@ GameObject:
   - component: {fileID: 5383130367073067972}
   m_Layer: 0
   m_Name: RCalf
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1841,7 +1905,7 @@ GameObject:
   - component: {fileID: 5383130367078973590}
   m_Layer: 0
   m_Name: RKneeCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1923,7 +1987,7 @@ GameObject:
   - component: {fileID: 5383130367081048469}
   m_Layer: 0
   m_Name: LHand CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2017,7 +2081,7 @@ GameObject:
   - component: {fileID: 5383130367090294595}
   m_Layer: 0
   m_Name: RFoot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2099,7 +2163,7 @@ GameObject:
   - component: {fileID: 5383130367114261878}
   m_Layer: 0
   m_Name: LFoot CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2194,7 +2258,7 @@ GameObject:
   - component: {fileID: 5383130367229916420}
   m_Layer: 0
   m_Name: RFoot CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2292,7 +2356,7 @@ GameObject:
   - component: {fileID: 5383130367232221904}
   m_Layer: 0
   m_Name: RShoulder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2426,7 +2490,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 7.483902, y: -0.021940367, z: 0.38962242}
+  m_ConnectedAnchor: {x: 7.483689, y: -0.021940367, z: 0.38977975}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -2477,7 +2541,7 @@ GameObject:
   - component: {fileID: 5383130367531595153}
   m_Layer: 0
   m_Name: LShoulder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2611,7 +2675,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -7.3463492, y: -0.04555891, z: 0.60392874}
+  m_ConnectedAnchor: {x: -7.34677, y: -0.04555891, z: 0.60372424}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -2658,7 +2722,7 @@ GameObject:
   - component: {fileID: 5383130367590445440}
   m_Layer: 0
   m_Name: LCalf
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2739,7 +2803,7 @@ GameObject:
   - component: {fileID: 5383130367607806654}
   m_Layer: 0
   m_Name: LFoot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2820,7 +2884,7 @@ GameObject:
   - component: {fileID: 5383130367663250444}
   m_Layer: 0
   m_Name: RElbowCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2901,7 +2965,7 @@ GameObject:
   - component: {fileID: 5383130367736962441}
   m_Layer: 0
   m_Name: RHand
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2982,7 +3046,7 @@ GameObject:
   - component: {fileID: 5383130367808678697}
   m_Layer: 0
   m_Name: RThigh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3066,7 +3130,7 @@ GameObject:
   - component: {fileID: 5383130367934192209}
   m_Layer: 0
   m_Name: LElbow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3178,7 +3242,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000000029802322, y: 0.00000023841858, z: 2.500001}
+  m_ConnectedAnchor: {x: 0.00000011920929, y: 0.0000009536743, z: 2.5000002}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -3228,7 +3292,7 @@ GameObject:
   - component: {fileID: 5383130368100695877}
   m_Layer: 0
   m_Name: LKnee
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3340,7 +3404,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000041235573, y: -0.00000021992305, z: 3.0000005}
+  m_ConnectedAnchor: {x: 0.000000027490383, y: 0, z: 3.0000005}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -3387,7 +3451,7 @@ GameObject:
   - component: {fileID: 5383130368139751279}
   m_Layer: 0
   m_Name: LKneeCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3471,7 +3535,7 @@ GameObject:
   - component: {fileID: 8431714470111518770}
   m_Layer: 0
   m_Name: Spine
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3627,7 +3691,7 @@ GameObject:
   - component: {fileID: 6560250688399181595}
   m_Layer: 0
   m_Name: HeadMesh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3785,6 +3849,7 @@ MonoBehaviour:
     m_Bits: 384
   capCollider: {fileID: 8978467346439625932}
   followTransform: {fileID: 0}
+  stats: {fileID: 1870049349031165357}
   sensitivity: 20
   maxVelocity: 0.2
   initialVelocity: 2.8

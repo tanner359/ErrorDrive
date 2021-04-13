@@ -7,17 +7,23 @@ public class CombatText : MonoBehaviour
 {
     public TextMeshPro meshPro;
 
-    Color color;
-    int damage;
-    float duration;
-    Vector3 location;
+    static Color color;
+    static int damage;
+    static float duration;
+    static Vector3 location;
 
-    public CombatText(Color _color, int _damage, float _duration, Vector3 _location)
+    public static void CombatTextInfo(Color _color, int _damage, float _duration, Vector3 _location)
     {
         color = _color;
         damage = _damage;
         duration = _duration;
         location = _location;
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, 0.01f);
+        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.01f);
     }
 
     private void Awake()
