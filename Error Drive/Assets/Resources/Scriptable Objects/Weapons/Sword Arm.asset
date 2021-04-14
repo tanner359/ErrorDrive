@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword Arm
   m_EditorClassIdentifier: 
   levelRequirement: 0
-  damage: 10
+  damage: 100
   knockback: 0
   health: 0
   power: 0

@@ -84,15 +84,14 @@ public class Player_Controller : MonoBehaviour
                 angles.x = 40;
             }
 
-            followTransform.localEulerAngles = angles;
-
-            if(moveX == 0 && moveZ == 0)
+            followTransform.localEulerAngles = angles;          
+            if (moveX == 0 && moveZ == 0)
             {
-                Debug.Log("return");
                 return;
             }
-            transform.rotation = Quaternion.Euler(0, followTransform.rotation.eulerAngles.y, 0);
-            followTransform.localEulerAngles = new Vector3(angles.x, 0, 0);         
+
+            transform.rotation = Quaternion.Euler(0, followTransform.eulerAngles.y, 0);
+            followTransform.localEulerAngles = new Vector3(angles.x, 0, 0);              
         }
 
         if (jump)

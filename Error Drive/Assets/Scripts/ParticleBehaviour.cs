@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ParticleBehaviour : MonoBehaviour
 {
-
+    public Light pointLight;
+    public ParticleSystem particle;
     public float itemZ;
 
     private void Start()
     {
         itemZ = gameObject.transform.parent.transform.rotation.z;
+        pointLight.color = particle.trails.colorOverTrail.color;
     }
     void FixedUpdate()
     {       

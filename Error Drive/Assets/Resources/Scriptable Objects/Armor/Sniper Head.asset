@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c607b0f3389102144a0a0089b21d812b, type: 3}
   m_Name: Sniper Head
   m_EditorClassIdentifier: 
-  levelRequirement: 0
+  levelRequirement: 1
   health: 0
   power: 0
   pen: 0
   crit: 0
   defense: 0
-  armorName: 
-  description: 
+  armorName: Sniper Head
+  description: quick scoped!
   mesh: {fileID: 5394818818436597403, guid: ab49dc2511e2f654bad147a98f3ce8c9, type: 3}
   material: {fileID: 2100000, guid: e8abd99daa8c6854c9fd40be8183fade, type: 2}
   sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}

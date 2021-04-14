@@ -10,25 +10,24 @@ public class CombatText : MonoBehaviour
     static Color color;
     static int damage;
     static float duration;
-    static Vector3 location;
 
-    public static void CombatTextInfo(Color _color, int _damage, float _duration, Vector3 _location)
+    public static void CombatTextInfo(Color _color, int _damage, float _duration)
     {
         color = _color;
         damage = _damage;
         duration = _duration;
-        location = _location;
     }
 
     private void Update()
     {
+        //transform.LookAt(Camera.main.transform, Vector3.forward);
         transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, 0.01f);
         transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.01f);
     }
 
     private void Awake()
     {
-        transform.position = location + new Vector3(Random.Range(-2f,2f),0,0);     
+        transform.position += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         meshPro.color = color;
         meshPro.text = damage.ToString();
         Destroy(gameObject, duration);

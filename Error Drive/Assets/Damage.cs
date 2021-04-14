@@ -5,7 +5,7 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     public Stats stats;
-    public Player_Controller controller;
+    public Player_Controller controller;  
 
     private void OnTriggerEnter(Collider other) // if we hit something, apply damage
     {
@@ -14,6 +14,7 @@ public class Damage : MonoBehaviour
         {
             Debug.Log("Hostile Hit");
             Combat.DamageTarget(other.GetComponent<Stats>(), stats);
+            controller.isAttacking = false;
         }
     }
 
