@@ -1,32 +1,63 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    Animator animator;
     Stats stats;
-    InventoryManager inventoryManager;
 
-    public List<Item> inventoryList = new List<Item>();
+    public Transform inventoryContainer;
+    GameObject inventorySlotsContainer;
+
     public Collider[] interactableItems;
-
     public SphereCollider playerZone;
     public LayerMask contactFilter;
+
     public Item Main_Hand, Off_Hand, Head, Body, Left_Leg, Right_Leg;
 
-    public Animator animator;
-    
-    public int inventoryMax = 20;
+    int filledSlotsCount = 0;
+    int inventoryMax = 20;
 
-    bool inventoryOpen;
+    bool isOpen;
 
+    GameObject icon;
+    public Item itemHolding;
+    Slot originSlot;
 
+    Player_Inputs playerInputs;
+    Vector2 mousePosition;
 
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        if (playerInputs == null)
+        {
+            playerInputs = new Player_Inputs();
+        }
+        playerInputs.Player.Enable();
+    }
+
+    private void Awake()
+    {
+        if(icon == null) //spawns icon into the inventory disabled at awake
+        {
+            this.icon = Resources.Load<GameObject>(Path.Combine("Prefabs", "BaseIcon"));
+            GameObject newIcon = Instantiate(icon, inventoryContainer);
+            icon = newIcon;
+            icon.SetActive(false);
+        }
+    }
+
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         stats = GetComponent<Stats>();
-        inventoryManager = GameObject.Find("Canvas_Display").transform.GetChild(0).GetComponent<InventoryManager>();
+
+        inventorySlotsContainer = inventoryContainer.Find("InventorySlots").gameObject;
+        inventoryMax = inventorySlotsContainer.transform.childCount;
     }
 
 
@@ -34,7 +65,13 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         ScanInteractArea(playerZone);
-        UpdateStats();
+
+        mousePosition = new Vector3(playerInputs.Player.MousePosition.ReadValue<Vector2>().x, playerInputs.Player.MousePosition.ReadValue<Vector2>().y, Mathf.Abs(Camera.main.transform.position.z));
+        if (icon.activeSelf.Equals(true))
+        {
+            icon.transform.position = mousePosition;
+        }
+        Debug.DrawRay((Vector3)mousePosition + Vector3.back * 25, Vector3.forward * 50, Color.red);
     }
 
     Item[] equipped = new Item[6];
@@ -45,7 +82,7 @@ public class Inventory : MonoBehaviour
             equipped[0] = Main_Hand;
             stats.AddStats(Main_Hand);
         }
-        else if(equipped[1] != Off_Hand)
+        else if (equipped[1] != Off_Hand)
         {
             equipped[1] = Off_Hand;
             stats.AddStats(Off_Hand);
@@ -77,15 +114,16 @@ public class Inventory : MonoBehaviour
 
     }
 
-
+    #region INPUT CALLBACKS
     public void OnInventory()
     {
-        InventoryOpenClose();
+        ToggleInventory();
     }
 
     public void OnPickup()
     {
-        if (interactableItems.Length > 0){ 
+        if (interactableItems.Length > 0)
+        {
             PickUp();
             StartCoroutine(StatusEffects.SlowTarget(gameObject, 0.60f, 0.5f));
             #region Animation
@@ -94,58 +132,90 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void OnDrop()
+    public void OnLeftClick(InputValue value) // user clicks the left mouse button
     {
-        DropItem(inventoryList[0]);
-        #region Animation
-        //animator.SetBool("Drop", true);
-        #endregion
+        float clickValue = value.Get<float>();
+
+        if (clickValue == 1 && isOpen) // button down
+        {
+            Slot slot = InventorySystem.FindSlot(mousePosition);
+            if (slot.item == null && itemHolding != null) //place item if slot available
+            {
+                InventorySystem.TransferItem(originSlot, slot);
+                slot.image.sprite = originSlot.item.sprite;
+                icon.SetActive(false);
+                itemHolding = null;
+            }
+            else if (slot.item != null && itemHolding != null) //drop item if slot is not available and holding item
+            {
+                InventorySystem.DropItem(itemHolding);
+                filledSlotsCount--;
+                icon.SetActive(false);
+                itemHolding = null;
+            }
+            else if (slot.item != null && itemHolding == null) //move item if slot has an item and not holding an item
+            {
+                slot.image.enabled = false;
+                originSlot = slot;
+                itemHolding = slot.item;
+                MoveItem(itemHolding);
+            }
+        }
     }
 
+    #endregion
 
+    public void MoveItem(Item item)
+    {             
+        icon.transform.position = mousePosition;
+        icon.SetActive(true);
+        icon.GetComponent<Image>().sprite = item.sprite;
+    }
 
-    public void InventoryOpenClose()
+    public void ToggleInventory()
     {
-        if (!inventoryOpen)
+        if (!isOpen)
         {
             PlayerSettings.DisableControl();
-            inventoryOpen = true;
+            isOpen = true;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            inventoryManager.gameObject.SetActive(true);
+            inventoryContainer.gameObject.SetActive(true);
         }
         else
         {
             PlayerSettings.EnableControl();
-            inventoryOpen = false;
+            isOpen = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            inventoryManager.gameObject.SetActive(false);
+            inventoryContainer.gameObject.SetActive(false);
         }
     }
 
-    public void PickUp(){ // pick up closest item
-        if(inventoryList.Count != 20)
+    public void PickUp()
+    { // pick up closest item
+        if (filledSlotsCount != 20)
         {
-            Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;            
-            inventoryList.Add(item);
-            //inventoryManager.updateInventory(inventoryList);
+            Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;
+            for(int i = 0; i < inventorySlotsContainer.transform.childCount; i++)
+            {
+                if(inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>().item == null)
+                {
+                    inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>().item = item;
+                    filledSlotsCount++;
+                }
+            }
         }
         else
         {
             Debug.Log("Inventory Full");
         }
     }
-    public void DropItem(Item item){
-
-        ItemSystem.Spawn(item, transform.position + transform.forward * 3 + Vector3.up * 3);       
-        inventoryList.RemoveAt(0);
-    }
 
     public void ScanInteractArea(SphereCollider playerCollider)
     { // check for interactables  
-        interactableItems = Physics.OverlapSphere(transform.position + new Vector3(0, playerZone.center.y, 0) , playerCollider.radius, contactFilter);
-        
+        interactableItems = Physics.OverlapSphere(transform.position + new Vector3(0, playerZone.center.y, 0), playerCollider.radius, contactFilter);
+
 
         if (interactableItems.Length > 0)
         {
@@ -157,15 +227,23 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public GameObject GetClosestItem(Vector3 playerPos, Collider[] interactableItems){ // returns back the closest item
+    public GameObject GetClosestItem(Vector3 playerPos, Collider[] interactableItems)
+    { // returns back the closest item
         GameObject closestItem = interactableItems[0].gameObject;
         float minDistance = Vector3.Distance(playerPos, interactableItems[0].gameObject.transform.position);
-        for (int i = 0; i < interactableItems.Length; i++){
-            if(minDistance > Vector3.Distance(playerPos, interactableItems[i].gameObject.transform.position)){
+        for (int i = 0; i < interactableItems.Length; i++)
+        {
+            if (minDistance > Vector3.Distance(playerPos, interactableItems[i].gameObject.transform.position))
+            {
                 minDistance = Vector3.Distance(playerPos, interactableItems[i].gameObject.transform.position);
                 closestItem = interactableItems[i].gameObject;
             }
-        }      
+        }
         return closestItem;
+    }
+
+    private void OnDisable()
+    {
+        playerInputs.Player.Disable();
     }
 }

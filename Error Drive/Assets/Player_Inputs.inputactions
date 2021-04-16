@@ -70,7 +70,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "RightMouseButton",
+                    "name": "LeftClick",
                     "type": "PassThrough",
                     "id": "308168d9-fff9-42d1-8e25-1da23b0e2981",
                     "expectedControlType": "Button",
@@ -308,7 +308,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightMouseButton",
+                    "action": "LeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

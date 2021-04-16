@@ -83,7 +83,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""RightMouseButton"",
+                    ""name"": ""LeftClick"",
                     ""type"": ""PassThrough"",
                     ""id"": ""308168d9-fff9-42d1-8e25-1da23b0e2981"",
                     ""expectedControlType"": ""Button"",
@@ -321,7 +321,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightMouseButton"",
+                    ""action"": ""LeftClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -390,7 +390,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
-        m_Player_RightMouseButton = m_Player.FindAction("RightMouseButton", throwIfNotFound: true);
+        m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_SpawnItem = m_Player.FindAction("SpawnItem", throwIfNotFound: true);
@@ -451,7 +451,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_Pickup;
     private readonly InputAction m_Player_Drop;
-    private readonly InputAction m_Player_RightMouseButton;
+    private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_SpawnItem;
@@ -467,7 +467,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @Pickup => m_Wrapper.m_Player_Pickup;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
-        public InputAction @RightMouseButton => m_Wrapper.m_Player_RightMouseButton;
+        public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @SpawnItem => m_Wrapper.m_Player_SpawnItem;
@@ -504,9 +504,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @Drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                 @Drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                 @Drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
-                @RightMouseButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouseButton;
-                @RightMouseButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouseButton;
-                @RightMouseButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouseButton;
+                @LeftClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftClick;
+                @LeftClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftClick;
+                @LeftClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftClick;
                 @MousePosition.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
@@ -544,9 +544,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @Drop.started += instance.OnDrop;
                 @Drop.performed += instance.OnDrop;
                 @Drop.canceled += instance.OnDrop;
-                @RightMouseButton.started += instance.OnRightMouseButton;
-                @RightMouseButton.performed += instance.OnRightMouseButton;
-                @RightMouseButton.canceled += instance.OnRightMouseButton;
+                @LeftClick.started += instance.OnLeftClick;
+                @LeftClick.performed += instance.OnLeftClick;
+                @LeftClick.canceled += instance.OnLeftClick;
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
@@ -579,7 +579,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
-        void OnRightMouseButton(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnSpawnItem(InputAction.CallbackContext context);
