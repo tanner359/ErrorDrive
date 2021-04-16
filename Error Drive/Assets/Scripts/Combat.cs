@@ -14,7 +14,7 @@ public static class Combat
     {
         int damageDealt = myStats.power * (myStats.armorPen / targetStats.defense);
         targetStats.health -= damageDealt;
-        targetStats.gameObject.GetComponent<Rigidbody>().AddForce((targetStats.transform.position - myStats.transform.position).normalized * myStats.knockback, ForceMode.Impulse);
+        targetStats.gameObject.GetComponent<Rigidbody>().AddForce(((targetStats.transform.position - myStats.transform.position).normalized * myStats.knockback) + Vector3.up * 5, ForceMode.Impulse);
         SpawnCombatText(Color.red, damageDealt, 1.5f, targetStats.transform.position + new Vector3(0,3,0));
         GameObject sparks = Object.Instantiate(sparks_Prefab, targetStats.transform.position + new Vector3(0, 3, 0), Quaternion.identity, targetStats.transform);
         Object.Destroy(sparks, 3);
@@ -22,7 +22,7 @@ public static class Combat
 
     public static void SpawnCombatText(Color _color, int _damage, float _duration, Vector3 _location)
     {
-        Object.Instantiate(combatText_Prefab, _location, player.transform.rotation, worldCanvas);
-        CombatText.CombatTextInfo(_color, _damage, _duration); 
+        CombatText.CombatTextInfo(_color, _damage, _duration);
+        Object.Instantiate(combatText_Prefab, _location, player.transform.rotation, worldCanvas);        
     }
 }

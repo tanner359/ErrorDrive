@@ -9,21 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07883cd13ad5e134aa16cfaa0ee79eb8, type: 3}
-  m_Name: Sword Arm
+  m_Script: {fileID: 11500000, guid: fd1a21221a8a6ad43b9c87c236e4fa18, type: 3}
+  m_Name: Energy Sword
   m_EditorClassIdentifier: 
-  levelRequirement: 0
-  damage: 100
-  knockback: 0
-  health: 0
-  power: 0
-  pen: 0
-  crit: 0
+  levelRequirement: 1
+  health: 25
+  power: 50
+  pen: 10
+  crit: 20
   defense: 0
-  weaponName: Sword Arm
-  description: Slice them to pieces!
+  speed: 0
+  knockback: 5
+  itemName: Energy Sword
+  description: Bam! Bam!
   mesh: {fileID: -3417637348199415853, guid: b82afc4c2daa1fe4cbc08cde43a81eac, type: 3}
   material: {fileID: 2100000, guid: 0ceae8731a1fe70448fb2dc1f5d8cee5, type: 2}
   sprite: {fileID: 21300000, guid: 8f10e848a3ece7c44acbc52e4057b9a3, type: 3}
-  equipSlot: 0
-  rarity: 4
+  equipSlot: 4
+  rarity: 3

@@ -9,11 +9,13 @@ public class Item_Equiper : MonoBehaviour
     public List<GameObject> bodyParts;
     public bool equipped = false;
     public Inventory inventory;
+    Slot slot;
 
-    public GameObject itemEquipped;
+    public Item itemEquipped;
     // Start is called before the first frame update
     void Start()
     {
+        slot = GetComponent<Slot>();
         if (bodyParts[0].name != "Hand_01" && bodyParts[0].name != "Hand_02")
         {
             originalMesh = bodyParts[0].GetComponent<MeshFilter>().mesh;
@@ -26,19 +28,19 @@ public class Item_Equiper : MonoBehaviour
     {
         if (gameObject.transform.childCount > 1 && !equipped)
         {
-            itemEquipped = gameObject.transform.GetChild(1).gameObject;
+            itemEquipped = slot.item;
             for (int i = 0; i < bodyParts.Count; i++)
             {
                 bodyParts[i].GetComponent<MeshFilter>().mesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
                 bodyParts[i].GetComponent<MeshRenderer>().material = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material;
 
-                if (itemEquipped.tag == "Main_Hand")
+                if (itemEquipped.equipSlot.ToString() == "Main_Hand")
                 {
                     inventory.Main_Hand = itemEquipped;
                     bodyParts[i].GetComponent<MeshCollider>().enabled = true;
                     bodyParts[i].GetComponent<MeshCollider>().sharedMesh = gameObject.transform.GetChild(1).GetComponent<MeshFilter>().mesh;
                 }
-                else if (itemEquipped.tag == "Off_Hand")
+                else if (itemEquipped.equipSlot.ToString() == "Off_Hand")
                 {
                     inventory.Off_Hand = itemEquipped;
                     bodyParts[i].GetComponent<MeshCollider>().enabled = true;
@@ -46,24 +48,24 @@ public class Item_Equiper : MonoBehaviour
                 }
             }
             equipped = true;          
-            if (itemEquipped.tag == "Head")
+            if (itemEquipped.equipSlot.ToString() == "Head")
             {
                 inventory.Head = itemEquipped;
             }
-            else if (itemEquipped.tag == "Body")
+            else if (itemEquipped.equipSlot.ToString() == "Body")
             {
                 inventory.Body = itemEquipped;
             }
-            else if (itemEquipped.tag == "Left_Leg")
+            else if (itemEquipped.equipSlot.ToString() == "Left_Leg")
             {
                 inventory.Left_Leg = itemEquipped;
             }
-            else if (itemEquipped.tag == "Right_Leg")
+            else if (itemEquipped.equipSlot.ToString() == "Right_Leg")
             {
                 inventory.Right_Leg = itemEquipped;
             }          
         }
-        if(gameObject.transform.childCount == 1 && equipped && itemEquipped.tag != "Main_Hand" && itemEquipped.tag != "Off_Hand")
+        if(gameObject.transform.childCount == 1 && equipped && itemEquipped.equipSlot.ToString() != "Main_Hand" && itemEquipped.equipSlot.ToString() != "Off_Hand")
         {
             for (int i = 0; i < bodyParts.Count; i++)
             {

@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    CanvasDisplay canvasDisplay;
-
+    Stats stats;
     InventoryManager inventoryManager;
 
-    public List<GameObject> inventoryList = new List<GameObject>();
+    public List<Item> inventoryList = new List<Item>();
     public Collider[] interactableItems;
 
     public SphereCollider playerZone;
     public LayerMask contactFilter;
-    public GameObject Main_Hand, Off_Hand, Head, Body, Left_Leg, Right_Leg;
+    public Item Main_Hand, Off_Hand, Head, Body, Left_Leg, Right_Leg;
 
     public Animator animator;
     
-
     public int inventoryMax = 20;
 
     bool inventoryOpen;
@@ -27,7 +25,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canvasDisplay = GameObject.Find("Canvas_Display").GetComponent<CanvasDisplay>();
+        stats = GetComponent<Stats>();
         inventoryManager = GameObject.Find("Canvas_Display").transform.GetChild(0).GetComponent<InventoryManager>();
     }
 
@@ -35,7 +33,48 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        checkForInteractables(playerZone);
+        ScanInteractArea(playerZone);
+        UpdateStats();
+    }
+
+    Item[] equipped = new Item[6];
+    public void UpdateStats()
+    {
+        if (equipped[0] != Main_Hand)
+        {
+            equipped[0] = Main_Hand;
+            stats.AddStats(Main_Hand);
+        }
+        else if(equipped[1] != Off_Hand)
+        {
+            equipped[1] = Off_Hand;
+            stats.AddStats(Off_Hand);
+        }
+        else if (equipped[2] != Head)
+        {
+            equipped[2] = Head;
+            stats.AddStats(Head);
+        }
+        else if (equipped[3] != Body)
+        {
+            equipped[3] = Body;
+            stats.AddStats(Body);
+        }
+        else if (equipped[4] != Left_Leg)
+        {
+            equipped[4] = Left_Leg;
+            stats.AddStats(Left_Leg);
+        }
+        else if (equipped[5] != Right_Leg)
+        {
+            equipped[5] = Right_Leg;
+            stats.AddStats(Right_Leg);
+        }
+        else
+        {
+            return;
+        }
+
     }
 
 
@@ -47,7 +86,7 @@ public class Inventory : MonoBehaviour
     public void OnPickup()
     {
         if (interactableItems.Length > 0){ 
-            pickUp();
+            PickUp();
             StartCoroutine(StatusEffects.SlowTarget(gameObject, 0.60f, 0.5f));
             #region Animation
             animator.SetTrigger("Pickup");
@@ -57,7 +96,7 @@ public class Inventory : MonoBehaviour
 
     public void OnDrop()
     {
-        DropItem(inventoryList[0].gameObject);
+        DropItem(inventoryList[0]);
         #region Animation
         //animator.SetBool("Drop", true);
         #endregion
@@ -85,40 +124,40 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void pickUp(){ // pick up closest item
+    public void PickUp(){ // pick up closest item
         if(inventoryList.Count != 20)
         {
-            inventoryList.Add(getClosestItem(transform.position, interactableItems));
-            inventoryManager.updateInventory(inventoryList);
+            Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;            
+            inventoryList.Add(item);
+            //inventoryManager.updateInventory(inventoryList);
         }
         else
         {
             Debug.Log("Inventory Full");
         }
     }
-    public void DropItem(GameObject itemToDrop){
-        itemToDrop.AddComponent<Rigidbody>();
-        itemToDrop.GetComponent<Collider>().isTrigger = false;
-        itemToDrop.GetComponent<Transform>().SetParent(null);
+    public void DropItem(Item item){
+
+        ItemSystem.Spawn(item, transform.position + transform.forward * 3 + Vector3.up * 3);       
         inventoryList.RemoveAt(0);
     }
 
-    public void checkForInteractables(SphereCollider playerCollider)
-    { // check for interactables       
+    public void ScanInteractArea(SphereCollider playerCollider)
+    { // check for interactables  
         interactableItems = Physics.OverlapSphere(transform.position + new Vector3(0, playerZone.center.y, 0) , playerCollider.radius, contactFilter);
         
 
         if (interactableItems.Length > 0)
         {
-            canvasDisplay.DisplayInteractText(getClosestItem(transform.position, interactableItems).transform.position, "E");
+            CanvasDisplay.DisplayInteractText(GetClosestItem(transform.position, interactableItems).transform.position, "E");
         }
         else
         {
-            canvasDisplay.HideText();
+            CanvasDisplay.HideText();
         }
     }
 
-    public GameObject getClosestItem(Vector3 playerPos, Collider[] interactableItems){ // returns back the closest item
+    public GameObject GetClosestItem(Vector3 playerPos, Collider[] interactableItems){ // returns back the closest item
         GameObject closestItem = interactableItems[0].gameObject;
         float minDistance = Vector3.Distance(playerPos, interactableItems[0].gameObject.transform.position);
         for (int i = 0; i < interactableItems.Length; i++){
@@ -126,7 +165,7 @@ public class Inventory : MonoBehaviour
                 minDistance = Vector3.Distance(playerPos, interactableItems[i].gameObject.transform.position);
                 closestItem = interactableItems[i].gameObject;
             }
-        }
+        }      
         return closestItem;
     }
 }

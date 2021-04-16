@@ -9,7 +9,6 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) // if we hit something, apply damage
     {
-        Debug.Log("something Hit");
         if (controller.isAttacking && other.CompareTag("Hostile"))
         {
             Debug.Log("Hostile Hit");

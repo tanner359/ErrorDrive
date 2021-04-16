@@ -5,8 +5,7 @@ using TMPro;
 
 public class CanvasDisplay : MonoBehaviour
 {
-    public Vector3 pickupTextOffset = new Vector3(0, 0, 0);
-    private GameObject textBox;
+    private static GameObject textBox;
     public GameObject interactText_Prefab;
     public GameObject worldCanvas;
          
@@ -15,14 +14,14 @@ public class CanvasDisplay : MonoBehaviour
         textBox = Instantiate(interactText_Prefab, worldCanvas.transform);
     }
 
-    public void DisplayInteractText(Vector3 textPos, string text)
+    public static void DisplayInteractText(Vector3 textPos, string text)
     {
         textBox.SetActive(true);
         textBox.GetComponent<TMPro.TextMeshPro>().text = text;
-        textBox.transform.position = textPos + pickupTextOffset;
+        textBox.transform.position = textPos;
     }
 
-    public void HideText()
+    public static void HideText()
     {
         textBox.SetActive(false);
     }

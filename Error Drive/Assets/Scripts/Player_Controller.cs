@@ -109,7 +109,7 @@ public class Player_Controller : MonoBehaviour
     #region INPUT CALLBACKS
     public void OnSpawnItem()
     {
-        Item.SpawnRandom(transform.position + Vector3.up * 5);
+        ItemSystem.SpawnRandom(transform.position + Vector3.up * 5);
     } 
     public void OnMovement(InputValue value)
     {
