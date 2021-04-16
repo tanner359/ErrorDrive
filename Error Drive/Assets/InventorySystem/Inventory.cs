@@ -19,14 +19,13 @@ public class Inventory : MonoBehaviour
 
     public Item Main_Hand, Off_Hand, Head, Body, Left_Leg, Right_Leg;
 
-    int filledSlotsCount = 0;
+    public int filledSlotsCount = 0;
     int inventoryMax = 20;
 
     bool isOpen;
 
     GameObject icon;
     public Item itemHolding;
-    Slot originSlot;
 
     Player_Inputs playerInputs;
     Vector2 mousePosition;
@@ -139,10 +138,19 @@ public class Inventory : MonoBehaviour
         if (clickValue == 1 && isOpen) // button down
         {
             Slot slot = InventorySystem.FindSlot(mousePosition);
-            if (slot.item == null && itemHolding != null) //place item if slot available
+            if(slot == null && itemHolding != null)
             {
-                InventorySystem.TransferItem(originSlot, slot);
-                slot.image.sprite = originSlot.item.sprite;
+                InventorySystem.DropItem(itemHolding);
+                filledSlotsCount--;
+                icon.SetActive(false);
+                itemHolding = null;
+            }
+            else if (slot.item == null && itemHolding != null) //place item if slot available
+            {
+                InventorySystem.TransferItem(itemHolding, slot);
+                slot.image.enabled = true;
+                slot.image.sprite = itemHolding.sprite;
+                slot.label.text = itemHolding.itemName;
                 icon.SetActive(false);
                 itemHolding = null;
             }
@@ -155,9 +163,8 @@ public class Inventory : MonoBehaviour
             }
             else if (slot.item != null && itemHolding == null) //move item if slot has an item and not holding an item
             {
-                slot.image.enabled = false;
-                originSlot = slot;
                 itemHolding = slot.item;
+                InventorySystem.EmptySlot(slot);
                 MoveItem(itemHolding);
             }
         }
@@ -197,12 +204,19 @@ public class Inventory : MonoBehaviour
         if (filledSlotsCount != 20)
         {
             Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;
+            GameObject itemObj = GetClosestItem(transform.position, interactableItems);
             for(int i = 0; i < inventorySlotsContainer.transform.childCount; i++)
             {
-                if(inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>().item == null)
+                Slot slot = inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>();
+                if (slot.item == null)
                 {
-                    inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>().item = item;
+                    slot.item = item;
+                    slot.image.enabled = true;
+                    slot.image.sprite = item.sprite;
+                    slot.label.text = item.itemName;
+                    Destroy(itemObj);                 
                     filledSlotsCount++;
+                    i = 9999;
                 }
             }
         }
@@ -219,7 +233,8 @@ public class Inventory : MonoBehaviour
 
         if (interactableItems.Length > 0)
         {
-            CanvasDisplay.DisplayInteractText(GetClosestItem(transform.position, interactableItems).transform.position, "E");
+            GameObject item = GetClosestItem(transform.position, interactableItems);
+            CanvasDisplay.DisplayInteractText(item.transform.position, "E");
         }
         else
         {
@@ -240,10 +255,5 @@ public class Inventory : MonoBehaviour
             }
         }
         return closestItem;
-    }
-
-    private void OnDisable()
-    {
-        playerInputs.Player.Disable();
     }
 }

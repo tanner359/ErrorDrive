@@ -18,7 +18,7 @@ public class CanvasDisplay : MonoBehaviour
     {
         textBox.SetActive(true);
         textBox.GetComponent<TMPro.TextMeshPro>().text = text;
-        textBox.transform.position = textPos;
+        textBox.transform.position = textPos + Vector3.up * 3;
     }
 
     public static void HideText()
