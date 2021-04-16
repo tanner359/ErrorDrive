@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -16,8 +14,6 @@ public class Inventory : MonoBehaviour
     public Collider[] interactableItems;
     public SphereCollider playerZone;
     public LayerMask contactFilter;
-
-    public Item Main_Hand, Off_Hand, Head, Body, Left_Leg, Right_Leg;
 
     public int filledSlotsCount = 0;
     int inventoryMax = 20;
@@ -73,46 +69,6 @@ public class Inventory : MonoBehaviour
         Debug.DrawRay((Vector3)mousePosition + Vector3.back * 25, Vector3.forward * 50, Color.red);
     }
 
-    Item[] equipped = new Item[6];
-    public void UpdateStats()
-    {
-        if (equipped[0] != Main_Hand)
-        {
-            equipped[0] = Main_Hand;
-            stats.AddStats(Main_Hand);
-        }
-        else if (equipped[1] != Off_Hand)
-        {
-            equipped[1] = Off_Hand;
-            stats.AddStats(Off_Hand);
-        }
-        else if (equipped[2] != Head)
-        {
-            equipped[2] = Head;
-            stats.AddStats(Head);
-        }
-        else if (equipped[3] != Body)
-        {
-            equipped[3] = Body;
-            stats.AddStats(Body);
-        }
-        else if (equipped[4] != Left_Leg)
-        {
-            equipped[4] = Left_Leg;
-            stats.AddStats(Left_Leg);
-        }
-        else if (equipped[5] != Right_Leg)
-        {
-            equipped[5] = Right_Leg;
-            stats.AddStats(Right_Leg);
-        }
-        else
-        {
-            return;
-        }
-
-    }
-
     #region INPUT CALLBACKS
     public void OnInventory()
     {
@@ -138,19 +94,20 @@ public class Inventory : MonoBehaviour
         if (clickValue == 1 && isOpen) // button down
         {
             Slot slot = InventorySystem.FindSlot(mousePosition);
-            if(slot == null && itemHolding != null)
+            if(slot == null && itemHolding != null) // drop item if placed outside the inventory space
             {
                 InventorySystem.DropItem(itemHolding);
                 filledSlotsCount--;
                 icon.SetActive(false);
                 itemHolding = null;
             }
+            else if (slot == null) // return if clicked on nothing
+            {
+                return;
+            }
             else if (slot.item == null && itemHolding != null) //place item if slot available
             {
-                InventorySystem.TransferItem(itemHolding, slot);
-                slot.image.enabled = true;
-                slot.image.sprite = itemHolding.sprite;
-                slot.label.text = itemHolding.itemName;
+                InventorySystem.TransferItem(itemHolding, slot);               
                 icon.SetActive(false);
                 itemHolding = null;
             }

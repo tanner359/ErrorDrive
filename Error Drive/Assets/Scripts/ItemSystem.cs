@@ -30,8 +30,12 @@ public static class ItemSystem
     }
 
     public static void SpawnRandom(Vector3 position)
-    {
+    {      
         Item item = AllItems[Random.Range(0, AllItems.Length)];
+        if(item == null){
+            Debug.Log("Not Items Available to Spawn");
+            return;
+        }
         Spawn(item, position);
     }
 
