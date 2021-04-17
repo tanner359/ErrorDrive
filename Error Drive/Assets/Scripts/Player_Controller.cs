@@ -56,6 +56,12 @@ public class Player_Controller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    void Update()
+    {
+        moveDirection = moveX * transform.forward + moveZ * transform.right;
+        rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
+    }
+
     void FixedUpdate()
     {
         if (isControlling)
@@ -63,17 +69,18 @@ public class Player_Controller : MonoBehaviour
             float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
             float y = -playerInputs.Player.Mouse.ReadValue<Vector2>().y;
 
-            moveDirection = moveX * transform.forward + moveZ * transform.right;
-            rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
-
             //transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
 
-            followTransform.rotation *= Quaternion.AngleAxis(x * sensitivity, Vector3.up);
-            followTransform.rotation *= Quaternion.AngleAxis(y * sensitivity, Vector3.right);
+         
+           followTransform.rotation *= Quaternion.AngleAxis(x * sensitivity, Vector3.up);
+           followTransform.rotation *= Quaternion.AngleAxis(y * sensitivity, Vector3.right);
+            
+            
+            
 
-            var angles = followTransform.localEulerAngles;
+            var angles = followTransform.eulerAngles;
             angles.z = 0;
-            var angle = followTransform.localEulerAngles.x;
+            var angle = followTransform.eulerAngles.x;
 
             if(angle > 180 && angle < 340)
             {
@@ -84,14 +91,14 @@ public class Player_Controller : MonoBehaviour
                 angles.x = 40;
             }
 
-            followTransform.localEulerAngles = angles;          
+            followTransform.eulerAngles = angles;          
             if (moveX == 0 && moveZ == 0)
             {
                 return;
             }
 
-            transform.rotation = Quaternion.Euler(0, followTransform.eulerAngles.y, 0);
-            followTransform.localEulerAngles = new Vector3(angles.x, 0, 0);              
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.eulerAngles.y, 0), Quaternion.Euler(0, followTransform.eulerAngles.y, 0), 0.2f);
+            followTransform.eulerAngles = new Vector3(angles.x, angles.y, 0);              
         }
 
         if (jump)

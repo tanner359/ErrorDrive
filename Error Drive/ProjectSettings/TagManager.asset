@@ -7,8 +7,6 @@ TagManager:
   - Inventory Slot
   - Head
   - Floor
-  - Body
-  - Chest
   - Ring
   - Boots
   - Legs
@@ -21,6 +19,7 @@ TagManager:
   - Off Hand
   - Right Leg
   - Hostile
+  - Torso
   layers:
   - Default
   - TransparentFX

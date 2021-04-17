@@ -170,6 +170,7 @@ public class Inventory : MonoBehaviour
                     slot.item = item;
                     slot.image.enabled = true;
                     slot.image.sprite = item.sprite;
+                    slot.label.color = ItemSystem.GetRarityColor(item.rarity);
                     slot.label.text = item.itemName;
                     Destroy(itemObj);                 
                     filledSlotsCount++;

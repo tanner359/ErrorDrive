@@ -9,13 +9,15 @@ public static class InventorySystem
         slot.image.enabled = true;
         slot.image.sprite = item.sprite;
         slot.label.text = item.itemName;
+        slot.label.color = ItemSystem.GetRarityColor(item.rarity);
 
-        if(slot.TryGetComponent(out Equip_Slot equipSlot))
+        if(slot.TryGetComponent(out Equip equip))
         {
-            for(int i = 0; i < equipSlot.bodyParts.Count; i++)
+            for(int i = 0; i < equip.bodyParts.Count; i++)
             {
-                equipSlot.bodyParts[i].GetComponent<MeshFilter>().mesh = item.mesh;
-                equipSlot.bodyParts[i].GetComponent<MeshRenderer>().material = item.material;
+                equip.bodyParts[i].GetComponent<MeshFilter>().mesh = item.mesh;
+                equip.bodyParts[i].GetComponent<MeshRenderer>().material = item.material;
+                equip.IgnorePartsSetActive(false);
                 Combat.player.AddStats(item);
             }
         }
@@ -48,12 +50,15 @@ public static class InventorySystem
         slot.label.text = "";
         slot.image.enabled = false;
 
-        if (slot.TryGetComponent(out Equip_Slot equipSlot))
+        if (slot.TryGetComponent(out Equip equip))
         {
-            for (int i = 0; i < equipSlot.bodyParts.Count; i++)
+            slot.label.text = slot.tag.ToString().Replace('_', ' ');
+            slot.label.color = Color.white;
+            for (int i = 0; i < equip.bodyParts.Count; i++)
             {
-                equipSlot.bodyParts[i].GetComponent<MeshFilter>().mesh = equipSlot.GetOriginalMeshes(i);
-                equipSlot.bodyParts[i].GetComponent<MeshRenderer>().material = equipSlot.GetOriginalMaterials(i);
+                equip.bodyParts[i].GetComponent<MeshFilter>().mesh = equip.GetOriginalMeshes(i);
+                equip.bodyParts[i].GetComponent<MeshRenderer>().material = equip.GetOriginalMaterials(i);
+                equip.IgnorePartsSetActive(true);            
                 Combat.player.RemoveStats(slot.item);
             }
         }
