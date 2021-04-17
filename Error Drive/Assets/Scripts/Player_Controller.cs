@@ -56,11 +56,7 @@ public class Player_Controller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
-    {
-        moveDirection = moveX * transform.forward + moveZ * transform.right;
-        rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
-    }
+
 
     void FixedUpdate()
     {
@@ -74,6 +70,9 @@ public class Player_Controller : MonoBehaviour
                     animator.SetBool("Falling", true);
                 }
             }
+
+            moveDirection = moveX * transform.forward + moveZ * transform.right;
+            rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
 
             float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
             float y = -playerInputs.Player.Mouse.ReadValue<Vector2>().y;

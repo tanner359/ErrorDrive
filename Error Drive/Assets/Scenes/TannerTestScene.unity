@@ -26394,6 +26394,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8978467346439625937, guid: b69fc47a43021a942ac16fbbea82aa6a, type: 3}
+      propertyPath: fallSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978467346439625937, guid: b69fc47a43021a942ac16fbbea82aa6a, type: 3}
+      propertyPath: jumpPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978467346439625937, guid: b69fc47a43021a942ac16fbbea82aa6a, type: 3}
       propertyPath: sensitivity
       value: 1
       objectReference: {fileID: 0}
