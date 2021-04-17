@@ -66,6 +66,15 @@ public class Player_Controller : MonoBehaviour
     {
         if (isControlling)
         {
+            if (jump)
+            {
+                CalculateJump();
+                if (gameObject.GetComponent<Rigidbody>().velocity.y < -0.1)
+                {
+                    animator.SetBool("Falling", true);
+                }
+            }
+
             float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
             float y = -playerInputs.Player.Mouse.ReadValue<Vector2>().y;
 
@@ -99,16 +108,7 @@ public class Player_Controller : MonoBehaviour
 
             transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.eulerAngles.y, 0), Quaternion.Euler(0, followTransform.eulerAngles.y, 0), 0.2f);
             followTransform.eulerAngles = new Vector3(angles.x, angles.y, 0);              
-        }
-
-        if (jump)
-        {
-            CalculateJump();
-            if (gameObject.GetComponent<Rigidbody>().velocity.y < -0.1)
-            {
-                animator.SetBool("Falling", true);
-            }
-        }
+        }      
     }
 
     

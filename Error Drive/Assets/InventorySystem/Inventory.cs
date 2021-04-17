@@ -107,9 +107,12 @@ public class Inventory : MonoBehaviour
             }
             else if (slot.item == null && itemHolding != null) //place item if slot available
             {
-                InventorySystem.TransferItem(itemHolding, slot);               
-                icon.SetActive(false);
-                itemHolding = null;
+                InventorySystem.TransferItem(itemHolding, slot);
+                if(slot.item != null)
+                {
+                    icon.SetActive(false);
+                    itemHolding = null;
+                }                              
             }
             else if (slot.item != null && itemHolding != null) //drop item if slot is not available and holding item
             {
@@ -167,11 +170,7 @@ public class Inventory : MonoBehaviour
                 Slot slot = inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>();
                 if (slot.item == null)
                 {
-                    slot.item = item;
-                    slot.image.enabled = true;
-                    slot.image.sprite = item.sprite;
-                    slot.label.color = ItemSystem.GetRarityColor(item.rarity);
-                    slot.label.text = item.itemName;
+                    InventorySystem.TransferItem(item, slot);              
                     Destroy(itemObj);                 
                     filledSlotsCount++;
                     i = 9999;

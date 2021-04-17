@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd1a21221a8a6ad43b9c87c236e4fa18, type: 3}
-  m_Name: Energy Sword
+  m_Name: Laser SMG
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  health: 25
-  power: 20
-  pen: 20
-  crit: 20
+  health: 10
+  power: 30
+  pen: 10
+  crit: 30
   defense: 0
   speed: 0
-  knockback: 20
-  itemName: Energy Sword
-  description: Bam! Bam!
-  mesh: {fileID: -3417637348199415853, guid: b82afc4c2daa1fe4cbc08cde43a81eac, type: 3}
-  material: {fileID: 2100000, guid: 0ceae8731a1fe70448fb2dc1f5d8cee5, type: 2}
+  knockback: 2
+  itemName: Laser SMG
+  description: Shoots really fast!
+  mesh: {fileID: -5398936776739586566, guid: dc36c131325965049ac62fa61e8aa639, type: 3}
+  material: {fileID: 2100000, guid: c46b74f25a735d94894572337d2806cc, type: 2}
   sprite: {fileID: 21300000, guid: 8f10e848a3ece7c44acbc52e4057b9a3, type: 3}
-  equipSlot: 4
-  rarity: 3
-  weaponClass: 1
+  equipSlot: 5
+  rarity: 4
+  weaponClass: 0

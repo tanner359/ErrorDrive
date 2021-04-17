@@ -12,7 +12,7 @@ public static class Combat
 
     public static void DamageTarget(Stats targetStats, Stats myStats)
     {
-        int damageDealt = myStats.power * (myStats.armorPen / targetStats.defense);
+        int damageDealt = myStats.power / (targetStats.defense / myStats.armorPen);
         targetStats.health -= damageDealt;
         targetStats.gameObject.GetComponent<Rigidbody>().AddForce(((targetStats.transform.position - myStats.transform.position).normalized * myStats.knockback) + Vector3.up * 5, ForceMode.Impulse);
         SpawnCombatText(Color.red, damageDealt, 1.5f, targetStats.transform.position + new Vector3(0,3,0));

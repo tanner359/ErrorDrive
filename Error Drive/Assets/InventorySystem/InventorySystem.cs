@@ -5,22 +5,37 @@ public static class InventorySystem
     public static LayerMask slotMask = LayerMask.GetMask("Inventory Slot");
     public static void TransferItem(Item item, Slot slot)
     {
+        if (slot.TryGetComponent(out Equip equip))
+        {
+            if (slot.tag == item.equipSlot.ToString())
+            {
+                for (int i = 0; i < equip.bodyParts.Count; i++)
+                {
+                    equip.bodyParts[i].GetComponent<MeshFilter>().mesh = item.mesh;
+                    equip.bodyParts[i].GetComponent<MeshRenderer>().material = item.material;
+                    equip.IgnorePartsSetActive(false);
+                    Combat.player.AddStats(item);
+                }
+                if (item.weaponClass == Item.WeaponClass.Melee)
+                {
+                    MeshCollider meshCol = equip.bodyParts[0].GetComponent<MeshCollider>();
+                    meshCol.enabled = true;
+                    meshCol.sharedMesh = item.mesh;
+                }
+            }
+            else
+            {
+                Debug.Log("Wrong Equip Slot");
+                slot.item = null;
+                slot.image.enabled = false;
+                return;
+            }       
+        }
         slot.item = item;
         slot.image.enabled = true;
         slot.image.sprite = item.sprite;
         slot.label.text = item.itemName;
         slot.label.color = ItemSystem.GetRarityColor(item.rarity);
-
-        if(slot.TryGetComponent(out Equip equip))
-        {
-            for(int i = 0; i < equip.bodyParts.Count; i++)
-            {
-                equip.bodyParts[i].GetComponent<MeshFilter>().mesh = item.mesh;
-                equip.bodyParts[i].GetComponent<MeshRenderer>().material = item.material;
-                equip.IgnorePartsSetActive(false);
-                Combat.player.AddStats(item);
-            }
-        }
     }
 
     public static Slot FindSlot(Vector3 position)
@@ -34,7 +49,6 @@ public static class InventorySystem
         {
             return null;
         }
-
     }
 
     public static void DropItem(Item item)
@@ -60,6 +74,12 @@ public static class InventorySystem
                 equip.bodyParts[i].GetComponent<MeshRenderer>().material = equip.GetOriginalMaterials(i);
                 equip.IgnorePartsSetActive(true);            
                 Combat.player.RemoveStats(slot.item);
+            }
+            if (slot.item.weaponClass == Item.WeaponClass.Melee)
+            {
+                MeshCollider meshCol = equip.bodyParts[0].GetComponent<MeshCollider>();
+                meshCol.enabled = false;
+                meshCol.sharedMesh = null;
             }
         }
         slot.item = null;
