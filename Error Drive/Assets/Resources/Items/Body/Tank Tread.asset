@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1a21221a8a6ad43b9c87c236e4fa18, type: 3}
+  m_Name: Tank Tread
+  m_EditorClassIdentifier: 
+  levelRequirement: 1
+  health: 100
+  power: 65
+  pen: 5
+  crit: 5
+  defense: 80
+  speed: 5
+  knockback: 2
+  itemName: Tank Tread
+  description: I am Speed!
+  mesh: {fileID: -152397805181763545, guid: 225d51637799ed843a792383a6b1e0e7, type: 3}
+  material: {fileID: 2100000, guid: 63392efc969ac6b449e8450733b24cb2, type: 2}
+  sprite: {fileID: 21300000, guid: f423cf3728d7ef44db32719bfbb14517, type: 3}
+  equipSlot: 1
+  rarity: 4
+  itemClass: 2

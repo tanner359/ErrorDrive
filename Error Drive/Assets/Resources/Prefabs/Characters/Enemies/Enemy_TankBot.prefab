@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 259121464401459646}
   - component: {fileID: 259121464401459647}
   - component: {fileID: 4769493897994092077}
+  - component: {fileID: -2196175443568112591}
+  - component: {fileID: -1769856147961876217}
   m_Layer: 11
   m_Name: Enemy_TankBot
   m_TagString: Untagged
@@ -46,12 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442a765423a31d48b3681d308731d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 0}
   power: 0
   armorPen: 0
   critChance: 0
   health: 0
   defense: 0
   speed: 1
+  knockback: 0
 --- !u!136 &259121464401459647
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -78,10 +82,50 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!195 &-2196175443568112591
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259121464401459584}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.75
+  m_Speed: 5
+  m_Acceleration: 1000
+  avoidancePriority: 50
+  m_AngularSpeed: 400
+  m_StoppingDistance: 0.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 3.65
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-1769856147961876217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259121464401459584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac861d6c31d5e841a97913805822fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: -2196175443568112591}
+  wanderRange: 10
+  aggroRange: 10
+  origin: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
+  wander: 0
 --- !u!1 &4502856615412082599
 GameObject:
   m_ObjectHideFlags: 0

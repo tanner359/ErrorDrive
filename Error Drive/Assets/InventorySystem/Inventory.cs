@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     public SphereCollider playerZone;
     public LayerMask contactFilter;
 
-    public int filledSlotsCount = 0;
+    public int inventoryCount = 0;
     int inventoryMax = 20;
 
     bool isOpen;
@@ -97,7 +97,7 @@ public class Inventory : MonoBehaviour
             if(slot == null && itemHolding != null) // drop item if placed outside the inventory space
             {
                 InventorySystem.DropItem(itemHolding);
-                filledSlotsCount--;
+                inventoryCount--;
                 icon.SetActive(false);
                 itemHolding = null;
             }
@@ -117,7 +117,7 @@ public class Inventory : MonoBehaviour
             else if (slot.item != null && itemHolding != null) //drop item if slot is not available and holding item
             {
                 InventorySystem.DropItem(itemHolding);
-                filledSlotsCount--;
+                inventoryCount--;
                 icon.SetActive(false);
                 itemHolding = null;
             }
@@ -161,7 +161,7 @@ public class Inventory : MonoBehaviour
 
     public void PickUp()
     { // pick up closest item
-        if (filledSlotsCount != 20)
+        if (inventoryCount != 20)
         {
             Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;
             GameObject itemObj = GetClosestItem(transform.position, interactableItems);
@@ -172,7 +172,7 @@ public class Inventory : MonoBehaviour
                 {
                     InventorySystem.TransferItem(item, slot);              
                     Destroy(itemObj);                 
-                    filledSlotsCount++;
+                    inventoryCount++;
                     i = 9999;
                 }
             }

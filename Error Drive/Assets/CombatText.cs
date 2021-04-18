@@ -20,16 +20,23 @@ public class CombatText : MonoBehaviour
 
     private void Update()
     {
-        //transform.LookAt(Camera.main.transform, Vector3.forward);
-        transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, 0.005f);
-        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.005f);
+        transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up, 0.003f);
+        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.003f);
     }
 
     private void Awake()
     {
         transform.position += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         meshPro.color = color;
-        meshPro.text = damage.ToString();
+        if(damage > 999)
+        {
+            meshPro.text = (damage / 1000f).ToString("#.00") + "K";
+        }
+        else
+        {
+            meshPro.text = damage.ToString();
+
+        }
         Destroy(gameObject, duration);
     }
 }

@@ -16,7 +16,7 @@ public static class InventorySystem
                     equip.IgnorePartsSetActive(false);
                     Combat.player.AddStats(item);
                 }
-                if (item.weaponClass == Item.WeaponClass.Melee)
+                if (item.itemClass == Item.ItemClass.Melee)
                 {
                     MeshCollider meshCol = equip.bodyParts[0].GetComponent<MeshCollider>();
                     meshCol.enabled = true;
@@ -75,7 +75,7 @@ public static class InventorySystem
                 equip.IgnorePartsSetActive(true);            
                 Combat.player.RemoveStats(slot.item);
             }
-            if (slot.item.weaponClass == Item.WeaponClass.Melee)
+            if (slot.item.itemClass == Item.ItemClass.Melee)
             {
                 MeshCollider meshCol = equip.bodyParts[0].GetComponent<MeshCollider>();
                 meshCol.enabled = false;

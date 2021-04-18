@@ -6,10 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
 public class Item : ScriptableObject
 {
-    public enum EquipType { Torso, Left_Leg, Right_Leg, Head , Main_Hand, Off_Hand }
+    public enum EquipType { Torso, Legs, Head , Main_Hand, Off_Hand }
     public enum RarityType { Common, Uncommon, Rare, Epic, Legendary }
 
-    public enum WeaponClass { Ranged, Melee }
+    public enum ItemClass { Ranged, Melee, Armor }
 
     [Header("Stats")]
     public int levelRequirement;
@@ -30,5 +30,5 @@ public class Item : ScriptableObject
     public Sprite sprite;
     public EquipType equipSlot;
     public RarityType rarity;
-    public WeaponClass weaponClass;
+    public ItemClass itemClass;
 }
