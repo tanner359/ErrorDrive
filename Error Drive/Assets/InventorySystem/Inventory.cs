@@ -66,7 +66,23 @@ public class Inventory : MonoBehaviour
         {
             icon.transform.position = mousePosition;
         }
-        Debug.DrawRay((Vector3)mousePosition + Vector3.back * 25, Vector3.forward * 50, Color.red);
+        if (isOpen)
+        {
+            Item item = InventorySystem.FindSlot(mousePosition).item;
+            if (item != null && ToolTip.inspectedItem != item)
+            {
+                ToolTip.UpdateToolTip(item);
+            }
+            else if(item != null)
+            {
+                CanvasDisplay.SetToolTipActive(true);
+            }
+            else
+            {
+                CanvasDisplay.SetToolTipActive(false);
+            }
+        }
+        
     }
 
     #region INPUT CALLBACKS

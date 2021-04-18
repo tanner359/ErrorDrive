@@ -8,6 +8,8 @@ public class CanvasDisplay : MonoBehaviour
     private static GameObject textBox;
     public GameObject interactText_Prefab;
     public GameObject worldCanvas;
+    public GameObject ToolTip;
+    static bool toolTipState;
          
     private void Awake()
     {
@@ -21,6 +23,10 @@ public class CanvasDisplay : MonoBehaviour
         textBox.transform.position = textPos + Vector3.up * 3;
     }
 
+    public static void SetToolTipActive(bool state)
+    {
+        toolTipState = true;
+    }
     public static void HideText()
     {
         textBox.SetActive(false);
@@ -32,5 +38,10 @@ public class CanvasDisplay : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         window.SetActive(false);
+    }
+
+    private void Update()
+    {
+        ToolTip.SetActive(toolTipState);
     }
 }
