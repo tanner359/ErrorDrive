@@ -34,8 +34,9 @@ public static class InventorySystem
         slot.item = item;
         slot.image.enabled = true;
         slot.image.sprite = item.sprite;
-        slot.label.text = item.itemName;
-        slot.label.color = ItemSystem.GetRarityColor(item.rarity);
+        slot.slotImage.color = ItemSystem.GetRarityColor(item.rarity);
+        //slot.label.text = item.itemName; [REMOVED] => Sets label name
+        //slot.label.color = ItemSystem.GetRarityColor(item.rarity); [REMOVED] => Sets label color
     }
 
     public static Slot FindSlot(Vector3 position)
@@ -61,13 +62,15 @@ public static class InventorySystem
     {
         
         slot.image.sprite = null;
-        slot.label.text = "";
+        //slot.label.text = ""; [REMOVED] => Clears label text
         slot.image.enabled = false;
+        slot.slotImage.color = Color.white;
 
         if (slot.TryGetComponent(out Equip equip))
         {
             slot.label.text = slot.tag.ToString().Replace('_', ' ');
             slot.label.color = Color.white;
+            slot.slotImage.color = Color.white;
             for (int i = 0; i < equip.bodyParts.Count; i++)
             {
                 equip.bodyParts[i].GetComponent<MeshFilter>().mesh = equip.GetOriginalMeshes(i);

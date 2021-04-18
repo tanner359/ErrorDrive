@@ -5,14 +5,23 @@ using TMPro;
 
 public class CanvasDisplay : MonoBehaviour
 {
+    public static CanvasDisplay instance;
+
     private static GameObject textBox;
     public GameObject interactText_Prefab;
     public GameObject worldCanvas;
-    public GameObject ToolTip;
-    static bool toolTipState;
-         
+    public GameObject tooltip;
+    
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         textBox = Instantiate(interactText_Prefab, worldCanvas.transform);
     }
 
@@ -23,10 +32,11 @@ public class CanvasDisplay : MonoBehaviour
         textBox.transform.position = textPos + Vector3.up * 3;
     }
 
-    public static void SetToolTipActive(bool state)
+    public void TooltipActive(bool state)
     {
-        toolTipState = true;
+        tooltip.SetActive(state);
     }
+
     public static void HideText()
     {
         textBox.SetActive(false);
@@ -38,10 +48,5 @@ public class CanvasDisplay : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         window.SetActive(false);
-    }
-
-    private void Update()
-    {
-        ToolTip.SetActive(toolTipState);
     }
 }

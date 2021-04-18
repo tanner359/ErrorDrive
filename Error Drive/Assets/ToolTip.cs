@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 using UnityEngine.InputSystem;
 
 public class ToolTip : MonoBehaviour
 {
-    Player_Inputs playerInputs;
+    public static ToolTip instance;
 
     public static string equipTypeText, labelText, descriptionText, powerText,
             critText, penText, healthText, defenseText, speedText, knockbackText, levelReqText;
@@ -17,10 +16,20 @@ public class ToolTip : MonoBehaviour
 
     public static Color rarityColor;
 
-    public static Item inspectedItem;
-    
+    public Item inspectedItem;
 
-    public static void UpdateToolTip(Item item)
+    private void Awake()
+    {
+        if(instance!= null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+    public void UpdateToolTip(Item item)
     {
         inspectedItem = item;
         itemDetails.Clear();
@@ -46,20 +55,11 @@ public class ToolTip : MonoBehaviour
         itemDetails.Add(knockbackText);
         levelReqText = "Level Requirement: " + item.levelRequirement;
         itemDetails.Add(levelReqText);
-        rarityColor = ItemSystem.GetRarityColor(item.rarity);            
-    }
-
-    private void OnEnable()
-    {
-        if (playerInputs == null)
-        {
-            playerInputs = new Player_Inputs();
-        }
-        playerInputs.Player.Enable();
+        rarityColor = ItemSystem.GetRarityColor(item.rarity);
 
         for (int i = 0; i < itemDetails.Count; i++)
         {
-            if (itemDetails[i].Count(f => (f == '0')) == 0)
+            if (itemDetails[i][1] == '0')
             {
                 Texts[i].text = "";
                 Texts[i].transform.parent.gameObject.SetActive(false);
@@ -67,15 +67,9 @@ public class ToolTip : MonoBehaviour
             else
             {
                 Texts[i].transform.parent.gameObject.SetActive(true);
-                Texts[i].text = equipTypeText;
+                Texts[i].text = itemDetails[i];
             }
         }
         Texts[1].color = rarityColor;
-    }
-
-    private void Update()
-    {
-        Vector2 mousePosition = new Vector3(playerInputs.Player.MousePosition.ReadValue<Vector2>().x, playerInputs.Player.MousePosition.ReadValue<Vector2>().y, Mathf.Abs(Camera.main.transform.position.z));
-        transform.position = mousePosition;
     }
 }

@@ -7,5 +7,6 @@ public class Slot : MonoBehaviour
 
     [Header("References")]
     public Image image;
+    public RawImage slotImage;
     public Text label;
 }

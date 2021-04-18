@@ -68,21 +68,29 @@ public class Inventory : MonoBehaviour
         }
         if (isOpen)
         {
-            Item item = InventorySystem.FindSlot(mousePosition).item;
-            if (item != null && ToolTip.inspectedItem != item)
+            Slot slot = InventorySystem.FindSlot(mousePosition);
+            if(slot != null)
             {
-                ToolTip.UpdateToolTip(item);
-            }
-            else if(item != null)
-            {
-                CanvasDisplay.SetToolTipActive(true);
+                if (slot.item != null)
+                {
+                    CanvasDisplay.instance.TooltipActive(true);
+                    ToolTip.instance.transform.position = mousePosition;
+
+                    if (ToolTip.instance.inspectedItem != slot.item)
+                    {
+                        ToolTip.instance.UpdateToolTip(slot.item);
+                    }
+                }
+                else if (slot.item == null)
+                {
+                    CanvasDisplay.instance.TooltipActive(false);
+                }
             }
             else
             {
-                CanvasDisplay.SetToolTipActive(false);
+                CanvasDisplay.instance.TooltipActive(false);
             }
-        }
-        
+        }       
     }
 
     #region INPUT CALLBACKS
