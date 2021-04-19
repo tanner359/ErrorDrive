@@ -2650,6 +2650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactText_Prefab: {fileID: 1282932491467745826, guid: 5265c2b6f76f6d64090b88aa727d977f, type: 3}
   worldCanvas: {fileID: 0}
+  reticle: {fileID: 0}
   tooltip: {fileID: 0}
 --- !u!1 &3434601101316382206
 GameObject:
