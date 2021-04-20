@@ -20,6 +20,7 @@ TagManager:
   - Right Leg
   - Hostile
   - Torso
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Obstacle
   - Terrain
   - Items
-  - 
+  - Projectiles
   - Hostiles
   - 
   - DamageText

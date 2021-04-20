@@ -10,7 +10,8 @@ public class CanvasDisplay : MonoBehaviour
     private static GameObject textBox;
     public GameObject interactText_Prefab;
     public GameObject worldCanvas;
-    public GameObject reticle;
+    public Transform inventory;
+    public Transform equipSlotsContent;
     public GameObject tooltip;
     
     private void Awake()

@@ -22,6 +22,8 @@ public class Player_Controller : MonoBehaviour
     
     [Header("Control Settings")]
     public float sensitivity = 100f;
+    public bool isControlling;
+    public bool isAttacking;
     Vector2 mousePos;
     
 
@@ -33,9 +35,21 @@ public class Player_Controller : MonoBehaviour
     public float jumpHeight = 1;
     float jumpVelocity = 0;
     public float jumpDelay = 0;
+
+    [Header("Aiming")]
+    public bool aimRight;
+    public bool aimLeft;
+    public Transform rightArmCTRL;
+    public Transform leftArmCTRL;
+    public InverseKinematics rightArmIK;
+    public InverseKinematics leftArmIK;
+
+    [Header("Cameras")]
+    public GameObject mainCam;
+    public GameObject aimCam;
     
-    public bool isControlling;
-    public bool isAttacking;
+    
+    
 
 
 
@@ -73,50 +87,63 @@ public class Player_Controller : MonoBehaviour
 
             moveDirection = moveX * transform.forward + moveZ * transform.right;
             rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
-
-            float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
-            float y = -playerInputs.Player.Mouse.ReadValue<Vector2>().y;
-
-            //transform.Rotate(Vector3.up * x * Time.deltaTime * sensitivity);
-
-         
-           followTransform.rotation *= Quaternion.AngleAxis(x * sensitivity, Vector3.up);
-           followTransform.rotation *= Quaternion.AngleAxis(y * sensitivity, Vector3.right);
-            
-            
-            
-
-            var angles = followTransform.eulerAngles;
-            angles.z = 0;
-            var angle = followTransform.eulerAngles.x;
-
-            if(angle > 180 && angle < 340)
-            {
-                angles.x = 340;
-            }
-            else if(angle < 180  && angle > 40)
-            {
-                angles.x = 40;
-            }
-
-            followTransform.eulerAngles = angles;          
-            if (moveX == 0 && moveZ == 0)
-            {
-                return;
-            }
-
-            transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.eulerAngles.y, 0), Quaternion.Euler(0, followTransform.eulerAngles.y, 0), 0.2f);
-            followTransform.eulerAngles = new Vector3(angles.x, angles.y, 0);              
         }      
     }
 
-    
+    private void Update()
+    {
+        if (isControlling)
+        {
+            CameraControl();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (aimLeft && aimRight)
+        {
+            leftArmCTRL.position = Reticle.instance.transform.position;
+            rightArmCTRL.position = Reticle.instance.transform.position;
+        }
+        else if (aimRight)
+        {
+            rightArmCTRL.position = Reticle.instance.transform.position;
+        }
+        else if (aimLeft)
+        {
+            leftArmCTRL.position = Reticle.instance.transform.position;
+        }
+        
+    }
+
+    public void RefreshIK()
+    {
+        rightArmIK.enabled = false;
+        leftArmIK.enabled = false;
+
+        rightArmIK.enabled = true;
+        leftArmIK.enabled = true;
+    }
 
     #region INPUT CALLBACKS
     public void OnSpawnItem()
     {
         ItemSystem.SpawnRandom(transform.position + Vector3.up * 5);
     } 
+
+    public void OnAim()
+    {
+        if (aimCam.activeInHierarchy)
+        {
+            mainCam.SetActive(true);
+            aimCam.SetActive(false);
+        }
+        else
+        {          
+            aimCam.SetActive(true);
+            mainCam.SetActive(false);
+        }
+    }
     public void OnMovement(InputValue value)
     {
         if (isControlling)
@@ -162,11 +189,25 @@ public class Player_Controller : MonoBehaviour
     }
     public void OnAttackRight()
     {
-        animator.SetTrigger("R_Attack");
+        if (!aimRight && isControlling)
+        {
+            animator.SetTrigger("R_Attack");
+        }
+        else if (aimRight)
+        {
+            Combat.FireBullet(InventorySystem.FindEquipSlot("Main_Hand"));
+        }
     }
     public void OnAttackLeft()
     {
-        animator.SetTrigger("L_Attack");
+        if(!aimLeft && isControlling)
+        {
+            animator.SetTrigger("L_Attack");
+        }
+        else if (aimLeft)
+        {
+            Combat.FireBullet(InventorySystem.FindEquipSlot("Off_Hand"));
+        }
     }
     #endregion
 
@@ -234,6 +275,37 @@ public class Player_Controller : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);            
     }
     #endregion
+
+    public void CameraControl()
+    {
+        float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
+        float y = -playerInputs.Player.Mouse.ReadValue<Vector2>().y;
+
+        followTransform.rotation *= Quaternion.AngleAxis(x * sensitivity/100, Vector3.up);
+        followTransform.rotation *= Quaternion.AngleAxis(y * sensitivity/100, Vector3.right);
+
+        var angles = followTransform.eulerAngles;
+        angles.z = 0;
+        var angle = followTransform.eulerAngles.x;
+
+        if (angle > 180 && angle < 340)
+        {
+            angles.x = 340;
+        }
+        else if (angle < 180 && angle > 40)
+        {
+            angles.x = 40;
+        }
+
+        followTransform.eulerAngles = angles;
+        if (moveX == 0 && moveZ == 0)
+        {
+            return;
+        }
+
+        transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.eulerAngles.y, 0), Quaternion.Euler(0, followTransform.eulerAngles.y, 0), 0.2f);
+        followTransform.eulerAngles = new Vector3(angles.x, angles.y, 0);
+    }
 
     public bool CheckGrounded()
     {

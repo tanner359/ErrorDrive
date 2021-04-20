@@ -30,5 +30,5 @@ public class Equip : MonoBehaviour
             originalMeshes.Add(bodyParts[i].GetComponent<MeshFilter>().mesh);
             originalMaterials.Add(bodyParts[i].GetComponent<MeshRenderer>().material);
         }
-    }      
+    }    
 }

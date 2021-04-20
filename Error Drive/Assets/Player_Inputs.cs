@@ -113,6 +113,14 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d51349b-1b20-4488-96c5-8a85841c58f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -357,6 +365,17 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""action"": ""SpawnItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a1288b0-3d87-4a16-8685-d7fb381859cf"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -394,6 +413,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_SpawnItem = m_Player.FindAction("SpawnItem", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,6 +475,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_SpawnItem;
+    private readonly InputAction m_Player_Aim;
     public struct PlayerActions
     {
         private @Player_Inputs m_Wrapper;
@@ -471,6 +492,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @SpawnItem => m_Wrapper.m_Player_SpawnItem;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -516,6 +538,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @SpawnItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnItem;
                 @SpawnItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnItem;
                 @SpawnItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnItem;
+                @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -556,6 +581,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @SpawnItem.started += instance.OnSpawnItem;
                 @SpawnItem.performed += instance.OnSpawnItem;
                 @SpawnItem.canceled += instance.OnSpawnItem;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -583,5 +611,6 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnSpawnItem(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }

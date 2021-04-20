@@ -22,6 +22,20 @@ public static class InventorySystem
                     meshCol.enabled = true;
                     meshCol.sharedMesh = item.mesh;
                 }
+                if (item.itemClass == Item.ItemClass.Ranged)
+                {
+                    Player_Controller controller = Combat.player.GetComponent<Player_Controller>();
+                    if (item.equipSlot == Item.EquipType.Main_Hand)
+                    {
+                        controller.aimRight = true;
+                        controller.RefreshIK();
+                    }
+                    else if(item.equipSlot == Item.EquipType.Off_Hand)
+                    {
+                        controller.aimLeft = true;
+                        controller.RefreshIK();
+                    }                
+                }
             }
             else
             {
@@ -54,7 +68,7 @@ public static class InventorySystem
 
     public static void DropItem(Item item)
     {
-        Transform tran = GameObject.FindGameObjectWithTag("Player").transform;
+        Transform tran = Combat.player.transform;
         ItemSystem.Spawn(item, tran.position + tran.forward * 3 + Vector3.up * 3);
     }
 
@@ -84,7 +98,35 @@ public static class InventorySystem
                 meshCol.enabled = false;
                 meshCol.sharedMesh = null;
             }
+            if (slot.item.itemClass == Item.ItemClass.Ranged)
+            {
+                Player_Controller controller = Combat.player.GetComponent<Player_Controller>();
+                if (slot.item.equipSlot == Item.EquipType.Main_Hand)
+                {
+                    controller.aimRight = false;
+                    controller.RefreshIK();
+                }
+                else if (slot.item.equipSlot == Item.EquipType.Off_Hand)
+                {
+                    controller.aimLeft = false;
+                    controller.RefreshIK();
+                }
+            }
         }
         slot.item = null;
+    }
+
+    public static GameObject FindEquipSlot(string slotTag)
+    {
+        Transform equipSlots = CanvasDisplay.instance.equipSlotsContent;
+        for(int i = 0; i < equipSlots.childCount; i++)
+        {
+            if (equipSlots.GetChild(i).CompareTag(slotTag))
+            {
+                return equipSlots.GetChild(i).gameObject;             
+            }          
+        }
+        Debug.LogError("Slot not Found");
+        return null;
     }
 }

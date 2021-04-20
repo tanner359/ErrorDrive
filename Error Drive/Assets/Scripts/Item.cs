@@ -8,8 +8,8 @@ public class Item : ScriptableObject
 {
     public enum EquipType { Torso, Legs, Head , Main_Hand, Off_Hand }
     public enum RarityType { Common, Uncommon, Rare, Epic, Legendary }
-
     public enum ItemClass { Ranged, Melee, Armor }
+    public enum FiringMode { automatic, semi_automatic, burst, single_Shot }
 
     [Header("Stats")]
     public int levelRequirement;
@@ -31,4 +31,7 @@ public class Item : ScriptableObject
     public EquipType equipSlot;
     public RarityType rarity;
     public ItemClass itemClass;
+    [Header("RANGED ONLY!")]
+    public GameObject bullet;
+    public FiringMode firingMode;
 }

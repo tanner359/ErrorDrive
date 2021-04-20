@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 using UnityEngine.AI;
 
 public static class Combat
@@ -34,5 +32,15 @@ public static class Combat
     {
         CombatText.CombatTextInfo(_color, _damage, _duration);
         Object.Instantiate(combatText_Prefab, _location, player.transform.rotation, worldCanvas);        
+    }
+
+    public static void FireBullet(GameObject equipSlot)
+    {
+        Item weapon = equipSlot.GetComponent<Slot>().item;
+        GameObject bulletPrefab = weapon.bullet;
+        Transform equipPoint = equipSlot.GetComponent<Equip>().bodyParts[0].gameObject.transform;
+        GameObject bullet = Object.Instantiate(bulletPrefab, equipPoint.position + equipPoint.transform.forward * 2, equipPoint.rotation);
+        bullet.GetComponent<Bullet>().sharedStats = player;
+        bullet.GetComponent<Rigidbody>().AddForce(equipPoint.forward * 3000f);
     }
 }
