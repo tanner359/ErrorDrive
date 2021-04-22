@@ -18,7 +18,7 @@ MonoBehaviour:
   pen: 5
   crit: 5
   defense: 80
-  speed: 5
+  speed: 2
   knockback: 2
   itemName: Tank Tread
   description: I am Speed!
@@ -28,3 +28,5 @@ MonoBehaviour:
   equipSlot: 1
   rarity: 4
   itemClass: 2
+  bullet: {fileID: 0}
+  firingMode: 0

@@ -44,14 +44,6 @@ public class Player_Controller : MonoBehaviour
     public InverseKinematics rightArmIK;
     public InverseKinematics leftArmIK;
 
-    [Header("Cameras")]
-    public GameObject mainCam;
-    public GameObject aimCam;
-    
-    
-    
-
-
 
     private void OnEnable()
     {
@@ -84,19 +76,19 @@ public class Player_Controller : MonoBehaviour
                     animator.SetBool("Falling", true);
                 }
             }
-
             moveDirection = moveX * transform.forward + moveZ * transform.right;
             rb.velocity = new Vector3(moveDirection.x * stats.speed, rb.velocity.y, moveDirection.z * stats.speed);
-        }      
-    }
-
-    private void Update()
-    {
-        if (isControlling)
-        {
             CameraControl();
         }
     }
+
+    //private void Update()
+    //{
+    //    if (isControlling)
+    //    {
+            
+    //    }
+    //}
 
     private void LateUpdate()
     {
@@ -112,8 +104,7 @@ public class Player_Controller : MonoBehaviour
         else if (aimLeft)
         {
             leftArmCTRL.position = Reticle.instance.transform.position;
-        }
-        
+        }      
     }
 
     public void RefreshIK()
@@ -133,16 +124,15 @@ public class Player_Controller : MonoBehaviour
 
     public void OnAim()
     {
-        if (aimCam.activeInHierarchy)
+        if (!CameraMaster.instance.aimCam.activeInHierarchy)
         {
-            mainCam.SetActive(true);
-            aimCam.SetActive(false);
+            CameraMaster.instance.SwitchToCamera(CameraMaster.CMCams.aimCam);
         }
         else
-        {          
-            aimCam.SetActive(true);
-            mainCam.SetActive(false);
+        {
+            CameraMaster.instance.SwitchToCamera(CameraMaster.CMCams.mainCam);
         }
+        
     }
     public void OnMovement(InputValue value)
     {

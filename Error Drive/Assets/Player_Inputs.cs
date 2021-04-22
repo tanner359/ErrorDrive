@@ -160,7 +160,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": ""WASD"",
                     ""id"": ""a86735cf-3239-457e-96f0-a114b947ca1d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -215,7 +215,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": ""ArrowKeys"",
                     ""id"": ""e42afb17-2045-4956-a8bf-f539bf2d4da7"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

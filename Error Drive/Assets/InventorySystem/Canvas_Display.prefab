@@ -2650,7 +2650,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactText_Prefab: {fileID: 1282932491467745826, guid: 5265c2b6f76f6d64090b88aa727d977f, type: 3}
   worldCanvas: {fileID: 0}
-  reticle: {fileID: 0}
+  inventory: {fileID: 0}
+  equipSlotsContent: {fileID: 0}
   tooltip: {fileID: 0}
 --- !u!1 &3434601101316382206
 GameObject:
@@ -3712,11 +3713,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3434601101244981281}
         m_TargetAssemblyTypeName: CanvasDisplay, Assembly-CSharp
-        m_MethodName: CloseWindow
-        m_Mode: 2
+        m_MethodName: ToggleInventory
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 3434601101316382206}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

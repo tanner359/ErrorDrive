@@ -44,6 +44,21 @@ public class CanvasDisplay : MonoBehaviour
         textBox.SetActive(false);
     }
 
+    public static void ToggleInventory() 
+    {
+        GameObject inventory = instance.inventory.gameObject;
+        if (inventory.activeInHierarchy)
+        {
+            PlayerSettings.EnableControl();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            inventory.SetActive(false);
+            CameraMaster.instance.SwitchToCamera(CameraMaster.CMCams.mainCam);
+            return;
+        }
+        inventory.SetActive(true);
+    }
+
     public void CloseWindow(GameObject window)
     {
         PlayerSettings.EnableControl();

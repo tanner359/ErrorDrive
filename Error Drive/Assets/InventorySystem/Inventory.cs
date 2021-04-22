@@ -168,6 +168,7 @@ public class Inventory : MonoBehaviour
         if (!isOpen)
         {
             PlayerSettings.DisableControl();
+            CameraMaster.instance.SwitchToCamera(CameraMaster.CMCams.inventoryCam);
             isOpen = true;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
@@ -176,6 +177,7 @@ public class Inventory : MonoBehaviour
         else
         {
             PlayerSettings.EnableControl();
+            CameraMaster.instance.SwitchToCamera(CameraMaster.CMCams.mainCam);
             isOpen = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

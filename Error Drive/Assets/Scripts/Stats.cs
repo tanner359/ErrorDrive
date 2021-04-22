@@ -37,6 +37,7 @@ public class Stats : MonoBehaviour
         critChance = item.crit;
         health = item.health;
         defense = item.defense;
+        speed = item.speed;
         source = item;
     }
     
@@ -47,6 +48,7 @@ public class Stats : MonoBehaviour
         critChance += item.crit;
         health += item.health;
         defense += item.defense;
+        speed += item.speed;
     }
 
     public void RemoveStats(Item item)
@@ -56,6 +58,7 @@ public class Stats : MonoBehaviour
         critChance -= item.crit;
         health -= item.health;
         defense -= item.defense;
+        speed -= item.speed;
     }
 }
 
