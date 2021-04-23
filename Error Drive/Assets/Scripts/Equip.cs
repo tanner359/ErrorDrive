@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Equip : MonoBehaviour
 {
+    public enum Tags { Legs, Torso, Head, Main_Hand, Off_Hand };
+
     private List<Mesh> originalMeshes = new List<Mesh>();
     private List<Material> originalMaterials = new List<Material>();
     public List<GameObject> bodyParts;

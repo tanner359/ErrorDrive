@@ -116,14 +116,14 @@ public static class InventorySystem
         slot.item = null;
     }
 
-    public static GameObject FindEquipSlot(string slotTag)
+    public static Slot GetEquipSlot(Equip.Tags equipTag)
     {
         Transform equipSlots = CanvasDisplay.instance.equipSlotsContent;
         for(int i = 0; i < equipSlots.childCount; i++)
         {
-            if (equipSlots.GetChild(i).CompareTag(slotTag))
+            if (equipSlots.GetChild(i).CompareTag(equipTag.ToString()))
             {
-                return equipSlots.GetChild(i).gameObject;             
+                return equipSlots.GetChild(i).GetComponent<Slot>();             
             }          
         }
         Debug.LogError("Slot not Found");

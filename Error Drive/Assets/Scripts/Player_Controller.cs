@@ -177,17 +177,32 @@ public class Player_Controller : MonoBehaviour
             #endregion
         }
     }
-    public void OnAttackRight()
+    public void OnAttackRight(InputValue value)
     {
-        if (!aimRight && isControlling)
+        if (!isControlling){return;}
+
+        float clickValue = value.Get<float>();
+        Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Main_Hand).GetComponent<Slot>();
+
+        if (clickValue == 1)
         {
-            animator.SetTrigger("R_Attack");
+            if (slot.item.itemClass == Item.ItemClass.Ranged)
+            {
+                Combat.ranged.Shoot(slot);
+                return;
+            }
+            else if (slot.item.itemClass == Item.ItemClass.Melee)
+            {
+                animator.SetTrigger("R_Attack");
+                return;
+            }
+            return;
         }
-        else if (aimRight)
-        {
-            Combat.FireBullet(InventorySystem.FindEquipSlot("Main_Hand"));
-        }
+        Combat.ranged.StopShooting();
     }
+
+
+
     public void OnAttackLeft()
     {
         if(!aimLeft && isControlling)
@@ -196,7 +211,7 @@ public class Player_Controller : MonoBehaviour
         }
         else if (aimLeft)
         {
-            Combat.FireBullet(InventorySystem.FindEquipSlot("Off_Hand"));
+            Combat.FireBullet(InventorySystem.GetEquipSlot("Off_Hand"));
         }
     }
     #endregion

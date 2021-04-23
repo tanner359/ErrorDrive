@@ -9,7 +9,7 @@ public class Item : ScriptableObject
     public enum EquipType { Torso, Legs, Head , Main_Hand, Off_Hand }
     public enum RarityType { Common, Uncommon, Rare, Epic, Legendary }
     public enum ItemClass { Ranged, Melee, Armor }
-    public enum FiringMode { automatic, semi_automatic, burst, single_Shot }
+    public enum FiringMode { auto, semi, burst, single }
 
     [Header("Stats")]
     public int levelRequirement;

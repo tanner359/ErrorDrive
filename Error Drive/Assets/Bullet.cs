@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Stats sharedStats;
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, 3f);
     }
@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hostile"))
         {
+            Debug.Log("Hostile Hit");
             Combat.DamageTarget(collision.gameObject.GetComponent<Stats>(), sharedStats);
             Destroy(gameObject);
         }
