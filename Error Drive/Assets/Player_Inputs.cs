@@ -20,7 +20,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""AttackRight"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""3c761495-778e-4d75-af27-42fcaf2637ca"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -28,7 +28,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""AttackLeft"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""84a9893b-1d0e-4ab5-886e-408b928f3fc0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

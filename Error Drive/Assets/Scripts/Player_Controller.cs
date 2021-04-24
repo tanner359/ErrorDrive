@@ -44,7 +44,6 @@ public class Player_Controller : MonoBehaviour
     public InverseKinematics rightArmIK;
     public InverseKinematics leftArmIK;
 
-
     private void OnEnable()
     {
         isControlling = true;
@@ -55,15 +54,11 @@ public class Player_Controller : MonoBehaviour
         }      
         playerInputs.Player.Enable();
     }
-
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-
-
     void FixedUpdate()
     {
         if (isControlling)
@@ -81,15 +76,6 @@ public class Player_Controller : MonoBehaviour
             CameraControl();
         }
     }
-
-    //private void Update()
-    //{
-    //    if (isControlling)
-    //    {
-            
-    //    }
-    //}
-
     private void LateUpdate()
     {
         if (aimLeft && aimRight)
@@ -107,21 +93,11 @@ public class Player_Controller : MonoBehaviour
         }      
     }
 
-    public void RefreshIK()
-    {
-        rightArmIK.enabled = false;
-        leftArmIK.enabled = false;
-
-        rightArmIK.enabled = true;
-        leftArmIK.enabled = true;
-    }
-
     #region INPUT CALLBACKS
     public void OnSpawnItem()
     {
         ItemSystem.SpawnRandom(transform.position + Vector3.up * 5);
     } 
-
     public void OnAim()
     {
         if (!CameraMaster.instance.aimCam.activeInHierarchy)
@@ -177,6 +153,7 @@ public class Player_Controller : MonoBehaviour
             #endregion
         }
     }
+    bool isShootingRight;
     public void OnAttackRight(InputValue value)
     {
         if (!isControlling){return;}
@@ -184,11 +161,11 @@ public class Player_Controller : MonoBehaviour
         float clickValue = value.Get<float>();
         Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Main_Hand).GetComponent<Slot>();
 
-        if (clickValue == 1)
+        if (clickValue == 1 && slot.item != null)
         {
-            if (slot.item.itemClass == Item.ItemClass.Ranged)
+            if (slot.item.itemClass == Item.ItemClass.Ranged && !isShootingRight)
             {
-                Combat.ranged.Shoot(slot);
+                StartCoroutine(ShootRight(slot));
                 return;
             }
             else if (slot.item.itemClass == Item.ItemClass.Melee)
@@ -198,22 +175,139 @@ public class Player_Controller : MonoBehaviour
             }
             return;
         }
-        Combat.ranged.StopShooting();
+        else if (clickValue == 0)
+        {
+            StartCoroutine(StopShootingRight());
+        }
     }
-
-
-
-    public void OnAttackLeft()
+    bool isShootingLeft;
+    public void OnAttackLeft(InputValue value)
     {
-        if(!aimLeft && isControlling)
+        if (!isControlling) { return; }
+
+        float clickValue = value.Get<float>();
+        Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Off_Hand).GetComponent<Slot>();
+
+        if (clickValue == 1 && slot.item != null)
         {
-            animator.SetTrigger("L_Attack");
+            if (slot.item.itemClass == Item.ItemClass.Ranged && !isShootingLeft)
+            {
+                StartCoroutine(ShootLeft(slot));
+                return;
+            }
+            else if (slot.item.itemClass == Item.ItemClass.Melee)
+            {
+                animator.SetTrigger("L_Attack");
+                return;
+            }
+            return;
         }
-        else if (aimLeft)
+        else if (clickValue == 0)
         {
-            Combat.FireBullet(InventorySystem.GetEquipSlot("Off_Hand"));
+            StartCoroutine(StopShootingLeft());         
         }
     }
+    #endregion
+
+    #region COROUTINES
+
+    #region SHOOTING
+    private IEnumerator StopShootingRight()
+    {
+        yield return new WaitWhile(() => isShootingRight);
+        StopCoroutine(ShootRight(null));
+    }
+    private IEnumerator StopShootingLeft()
+    {
+        yield return new WaitUntil(() => isShootingLeft == false);
+        StopCoroutine(ShootLeft(null));
+    }
+    private IEnumerator ShootRight(Slot equipSlot)
+    {
+        float fireRate = equipSlot.item.fireRate;
+        switch (equipSlot.item.firingMode)
+        {
+            case Item.FiringMode.auto:
+                isShootingRight = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(1 / fireRate);
+                isShootingRight = false;
+                yield return new WaitForSeconds(0.01f);
+                StartCoroutine(ShootRight(equipSlot));
+                break;
+
+            case Item.FiringMode.burst:
+                isShootingRight = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(0.1f);
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(0.1f);
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(1 / fireRate);
+                isShootingRight = false;
+                yield return new WaitForSeconds(0.01f);
+                StartCoroutine(ShootRight(equipSlot));
+                break;
+
+            case Item.FiringMode.semi:
+                isShootingRight = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(0.05f);
+                isShootingRight = false;
+                break;
+
+            case Item.FiringMode.single:
+                isShootingRight = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(fireRate);
+                isShootingRight = false;
+                break;
+        }
+    }
+    private IEnumerator ShootLeft(Slot equipSlot)
+    {
+        float fireRate = equipSlot.item.fireRate;
+        switch (equipSlot.item.firingMode)
+        {
+            case Item.FiringMode.auto:
+                isShootingLeft = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(1 / fireRate);
+                isShootingLeft = false;
+                yield return new WaitForSeconds(0.01f);
+                StartCoroutine(ShootLeft(equipSlot));
+                break;
+
+            case Item.FiringMode.burst:
+                isShootingLeft = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(0.1f);
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(0.1f);
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(1 / fireRate);
+                isShootingLeft = false;
+                yield return new WaitForSeconds(0.01f);
+                StartCoroutine(ShootLeft(equipSlot));
+                break;
+
+            case Item.FiringMode.semi:
+                isShootingLeft = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(0.05f);
+                isShootingLeft = false;
+                break;
+
+            case Item.FiringMode.single:
+                isShootingLeft = true;
+                Combat.FireBullet(equipSlot);
+                yield return new WaitForSeconds(fireRate);
+                isShootingLeft = false;
+                break;
+        }
+    }
+    #endregion
+
     #endregion
 
     #region RUN FUNCTION
@@ -281,6 +375,7 @@ public class Player_Controller : MonoBehaviour
     }
     #endregion
 
+    #region CAMERA/CHARACTER CONTROLS
     public void CameraControl()
     {
         float x = playerInputs.Player.Mouse.ReadValue<Vector2>().x;
@@ -312,6 +407,9 @@ public class Player_Controller : MonoBehaviour
         followTransform.eulerAngles = new Vector3(angles.x, angles.y, 0);
     }
 
+    #endregion
+
+    #region UTILITY
     public bool CheckGrounded()
     {
         if (Physics.Raycast(centerPoint.position, Vector3.down, capCollider.height/2 + 0.2f, rayMask))
@@ -324,7 +422,16 @@ public class Player_Controller : MonoBehaviour
             Debug.Log("Not Grounded");
             return false;
         }
-    }   
+    }
+    public void RefreshIK()
+    {
+        rightArmIK.enabled = false;
+        leftArmIK.enabled = false;
+
+        rightArmIK.enabled = true;
+        leftArmIK.enabled = true;
+    }
+    #endregion
 
     private void OnDisable()
     {
