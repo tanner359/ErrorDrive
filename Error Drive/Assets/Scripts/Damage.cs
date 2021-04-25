@@ -11,8 +11,9 @@ public class Damage : MonoBehaviour
     {
         if (controller.isAttacking && other.CompareTag("Hostile"))
         {
-            Debug.Log("Hostile Hit");
             Combat.DamageTarget(other.GetComponent<Stats>(), stats);
+            other.GetComponent<Enemy>().DisableAgent();
+            other.GetComponent<Rigidbody>().AddForce(((other.transform.position - transform.position) * stats.knockback) + Vector3.up * 2, ForceMode.Impulse);
             controller.isAttacking = false;
         }
     }

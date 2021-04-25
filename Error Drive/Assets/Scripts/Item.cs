@@ -34,6 +34,6 @@ public class Item : ScriptableObject
     [Header("RANGED ONLY!")]
     public GameObject bullet;
     public FiringMode firingMode;
-    [Range(1, 10)]
+    [Range(1, 20)]
     public float fireRate;
 }

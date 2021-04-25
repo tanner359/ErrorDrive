@@ -29,3 +29,5 @@ MonoBehaviour:
   rarity: 4
   itemClass: 0
   bullet: {fileID: 761949688513548944, guid: fb682e4af2f49a24b81b4ce6a458d5e9, type: 3}
+  firingMode: 3
+  fireRate: 5

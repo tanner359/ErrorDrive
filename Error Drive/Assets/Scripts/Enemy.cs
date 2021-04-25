@@ -21,18 +21,18 @@ public class Enemy : MonoBehaviour
 
     public bool wander;
 
-    float pathTimer;
-
     public void Start()
     {
         terrainMask = LayerMask.GetMask("Terrain");
-        origin = transform.position;      
+        NavMeshHit hit;
+        NavMesh.SamplePosition(transform.position, out hit, wanderRange, 1);
+        origin = hit.position;     
         StartCoroutine(Wander());        
     }
 
     void Update()
     {
-        if (agent.enabled)
+        if (agent.enabled && disabledTime <= 0)
         {
             Search();
         }
@@ -40,38 +40,36 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Timers();  
+    }
+
+    #region TIMER
+    float pathTimer;
+    public float disabledTime;
+    private void Timers()
+    {
+        #region DISABLED TIMER
+        if (disabledTime > 0)
+        {
+            disabledTime -= Time.deltaTime;
+        }
+        else if (disabledTime <= 0 && rb.velocity == Vector3.zero && !agent.enabled)
+        {
+            Debug.Log("Re-Enable Agent");
+            EnableAgent();
+        }
+        #endregion
+
+        #region PATH TIMER
         if (pathTimer >= 0)
         {
             pathTimer -= Time.deltaTime;
         }
+        #endregion
     }
+    #endregion
 
-    public void AgentActive(bool state)
-    {
-        if (state == false)
-        {
-            StopAllCoroutines();
-            agent.enabled = false;
-            rb.isKinematic = false;
-            StartCoroutine(DisableAgent());
-        }
-        else
-        {
-            agent.enabled = true;
-            rb.isKinematic = true;
-            StartCoroutine(Wander());
-        }
-    }
-
-    public IEnumerator DisableAgent()
-    {
-        animator.SetTrigger("Damaged");
-        yield return new WaitForSeconds(0.1f);      
-        yield return new WaitUntil(() => rb.velocity.magnitude == 0);    
-        AgentActive(true);
-        StartCoroutine(Wander());
-    }
-
+    #region COROUTINES
     public IEnumerator Wander()
     {
         animator.SetBool("Walk", true);
@@ -89,7 +87,24 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Wander());
         }
     }
+    #endregion
 
+    #region UTILITY
+
+    public void DisableAgent()
+    {
+        StopAllCoroutines();
+        agent.enabled = false;
+        rb.isKinematic = false;
+        disabledTime = 1f;
+        animator.SetTrigger("Damaged");
+    }
+    public void EnableAgent()
+    {
+        agent.enabled = true;
+        rb.isKinematic = true;
+        StartCoroutine(Wander());       
+    }
     public bool IsPathCompleted()
     {
         if(pathTimer <= 0 || agent.remainingDistance < 0.5f)
@@ -98,7 +113,6 @@ public class Enemy : MonoBehaviour
         }
         return false;
     }
-
     public Vector3 GetWanderPoint()
     {
         Vector3 randomDirection = Random.insideUnitSphere * wanderRange;
@@ -108,7 +122,6 @@ public class Enemy : MonoBehaviour
         Vector3 finalPosition = hit.position;
         return finalPosition;
     }
-
     public void Search()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, aggroRange);
@@ -133,4 +146,6 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Wander());
         }
     }
+
+    #endregion
 }

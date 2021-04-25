@@ -153,7 +153,7 @@ public class Player_Controller : MonoBehaviour
             #endregion
         }
     }
-    bool isShootingRight;
+    public bool isShootingRight;
     public void OnAttackRight(InputValue value)
     {
         if (!isControlling){return;}
@@ -180,7 +180,7 @@ public class Player_Controller : MonoBehaviour
             StartCoroutine(StopShootingRight());
         }
     }
-    bool isShootingLeft;
+    public bool isShootingLeft;
     public void OnAttackLeft(InputValue value)
     {
         if (!isControlling) { return; }
@@ -215,12 +215,12 @@ public class Player_Controller : MonoBehaviour
     private IEnumerator StopShootingRight()
     {
         yield return new WaitWhile(() => isShootingRight);
-        StopCoroutine(ShootRight(null));
+        StopAllCoroutines();
     }
     private IEnumerator StopShootingLeft()
     {
-        yield return new WaitUntil(() => isShootingLeft == false);
-        StopCoroutine(ShootLeft(null));
+        yield return new WaitWhile(() => isShootingLeft);
+        StopAllCoroutines();
     }
     private IEnumerator ShootRight(Slot equipSlot)
     {

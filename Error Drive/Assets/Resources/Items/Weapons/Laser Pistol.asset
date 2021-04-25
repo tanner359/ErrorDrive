@@ -22,9 +22,9 @@ MonoBehaviour:
   knockback: 2
   itemName: Laser Pistol
   description: Pew Pew!
-  mesh: {fileID: -5398936776739586566, guid: dc36c131325965049ac62fa61e8aa639, type: 3}
-  material: {fileID: 2100000, guid: c46b74f25a735d94894572337d2806cc, type: 2}
-  sprite: {fileID: 21300000, guid: 52561e91d79e84f4683397eafe03341d, type: 3}
+  mesh: {fileID: -1816560082258613788, guid: f1923893cd65ae94b85412dca441399e, type: 3}
+  material: {fileID: 2100000, guid: e067b6b49e8ff604a9faea2a378243dd, type: 2}
+  sprite: {fileID: 21300000, guid: 75b087f566f2ad343b8ea40b281e5eb0, type: 3}
   equipSlot: 3
   rarity: 2
   itemClass: 0

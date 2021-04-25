@@ -30,4 +30,4 @@ MonoBehaviour:
   itemClass: 0
   bullet: {fileID: 761949688513548944, guid: 1b388f6e7994acb4d90e3f8e0860728b, type: 3}
   firingMode: 0
-  fireRate: 3
+  fireRate: 10

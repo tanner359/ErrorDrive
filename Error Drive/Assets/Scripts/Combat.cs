@@ -13,19 +13,8 @@ public static class Combat
 
     public static void DamageTarget(Stats targetStats, Stats myStats)
     {
-        Rigidbody rb = targetStats.GetComponent<Rigidbody>();
         int damageDealt = myStats.power / (targetStats.defense / myStats.armorPen);
         targetStats.health -= damageDealt;
-
-        if (targetStats.TryGetComponent(out NavMeshAgent agent))
-        {
-            targetStats.GetComponent<Enemy>().AgentActive(false);
-            rb.AddForce(((targetStats.transform.position - myStats.transform.position).normalized * myStats.knockback) + Vector3.up * 5, ForceMode.Impulse);          
-        }
-        else
-        {
-            rb.AddForce(((targetStats.transform.position - myStats.transform.position).normalized * myStats.knockback) + Vector3.up * 5, ForceMode.Impulse);
-        }
         SpawnCombatText(Color.red, damageDealt, 1.5f, targetStats.transform.position + new Vector3(0,3,0));
         GameObject sparks = Object.Instantiate(sparks_Prefab, targetStats.transform.position + new Vector3(0, 3, 0), Quaternion.identity, targetStats.transform);
         Object.Destroy(sparks, 3);   
@@ -43,7 +32,7 @@ public static class Combat
         Transform equipPoint = equipSlot.gameObject.GetComponent<Equip>().bodyParts[0].gameObject.transform;
         GameObject bullet = Object.Instantiate(bulletPrefab, equipPoint.position, Quaternion.identity);
         bullet.transform.LookAt(Reticle.instance.transform);
-        bullet.GetComponent<Bullet>().sharedStats = Combat.player;
+        bullet.GetComponent<Bullet>().sharedStats = player;
         bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward * 100f);
     }
 }

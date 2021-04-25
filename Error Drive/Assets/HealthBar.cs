@@ -34,8 +34,10 @@ public class HealthBar : MonoBehaviour
         {
             currentHealth = target.health;
             healthbar.fillAmount = currentHealth / maxHealth;
-
-            StartCoroutine(DamageFlash());
+            if (!flash.enabled)
+            {
+                StartCoroutine(DamageFlash());
+            }
         }
     }
 

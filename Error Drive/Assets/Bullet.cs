@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public Rigidbody rb;
     public Stats sharedStats;
     private void Start()
     {
         Destroy(gameObject, 3f);
-    }
-
-    // Update is called once per frame
-    private void OnCollisionEnter(Collision collision)
+    } 
+    private void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.CompareTag("Hostile"))
+        if (other.gameObject.CompareTag("Hostile"))
         {
             Debug.Log("Hostile Hit");
-            Combat.DamageTarget(collision.gameObject.GetComponent<Stats>(), sharedStats);
+            Combat.DamageTarget(other.gameObject.GetComponent<Stats>(), sharedStats);
+            other.gameObject.GetComponent<Enemy>().DisableAgent();
+            other.gameObject.GetComponent<Rigidbody>().AddForce(((transform.position - other.transform.position) * sharedStats.knockback) + Vector3.up * 2, ForceMode.Impulse);          
             Destroy(gameObject);
         }
         Destroy(gameObject);
