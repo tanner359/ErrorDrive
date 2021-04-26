@@ -6,12 +6,21 @@ public class Bullet : MonoBehaviour
 {
     public Rigidbody rb;
     public Stats sharedStats;
+
+    [Header("Optional")]
+    public GameObject explosion;
+    public AudioClip soundClip;
     private void Start()
     {
         Destroy(gameObject, 3f);
     } 
     private void OnCollisionEnter(Collision other)
     {
+        if(explosion != null)
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(soundClip, transform.position);
+        }
         if (other.gameObject.CompareTag("Hostile"))
         {
             Debug.Log("Hostile Hit");
