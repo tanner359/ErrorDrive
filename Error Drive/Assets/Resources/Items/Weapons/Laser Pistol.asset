@@ -26,8 +26,9 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: e067b6b49e8ff604a9faea2a378243dd, type: 2}
   sprite: {fileID: 21300000, guid: 75b087f566f2ad343b8ea40b281e5eb0, type: 3}
   equipSlot: 3
-  rarity: 2
+  rarity: 0
   itemClass: 0
   bullet: {fileID: 761949688513548944, guid: 1b388f6e7994acb4d90e3f8e0860728b, type: 3}
   firingMode: 1
   fireRate: 1
+  shotSound: {fileID: 8300000, guid: 66832bc317e868d45843585f279b67d8, type: 3}

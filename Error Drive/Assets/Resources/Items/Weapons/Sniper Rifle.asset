@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelRequirement: 1
   health: 10
-  power: 30
-  pen: 10
-  crit: 30
+  power: 200
+  pen: 50
+  crit: 50
   defense: 0
   speed: 0
   knockback: 2
@@ -26,8 +26,9 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 43591e38854b44043814fa00bcd0ea68, type: 2}
   sprite: {fileID: 21300000, guid: 91695eb6c7694b04894771e22ab9f7e2, type: 3}
   equipSlot: 4
-  rarity: 0
+  rarity: 4
   itemClass: 0
   bullet: {fileID: 761949688513548944, guid: 1b388f6e7994acb4d90e3f8e0860728b, type: 3}
   firingMode: 3
   fireRate: 3
+  shotSound: {fileID: 8300000, guid: f2edb48a9d9da46458bb4eb2c3ef8c0b, type: 3}

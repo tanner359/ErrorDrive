@@ -31,3 +31,4 @@ MonoBehaviour:
   bullet: {fileID: 761949688513548944, guid: fb682e4af2f49a24b81b4ce6a458d5e9, type: 3}
   firingMode: 3
   fireRate: 5
+  shotSound: {fileID: 8300000, guid: f2edb48a9d9da46458bb4eb2c3ef8c0b, type: 3}
