@@ -34,6 +34,7 @@ public static class Combat
         bullet.transform.LookAt(Reticle.instance.transform);
         bullet.GetComponent<Bullet>().sharedStats = player;
         bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward * 100f);
+        AudioSource.PlayClipAtPoint(equipSlot.item.shotSound, equipPoint.position);
     }
 }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
 public class Item : ScriptableObject
 {
-    public enum EquipType { Torso, Legs, Head , Main_Hand, Off_Hand }
+    public enum EquipType { Torso, Legs, Head, Main_Hand, Off_Hand }
     public enum RarityType { Common, Uncommon, Rare, Epic, Legendary }
     public enum ItemClass { Ranged, Melee, Armor }
     public enum FiringMode { auto, semi, burst, single }
@@ -36,4 +36,5 @@ public class Item : ScriptableObject
     public FiringMode firingMode;
     [Range(1, 20)]
     public float fireRate;
+    public AudioClip shotSound;
 }

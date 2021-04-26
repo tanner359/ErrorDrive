@@ -216,11 +216,13 @@ public class Player_Controller : MonoBehaviour
     {
         yield return new WaitWhile(() => isShootingRight);
         StopAllCoroutines();
+        isShootingRight = false;
     }
     private IEnumerator StopShootingLeft()
     {
         yield return new WaitWhile(() => isShootingLeft);
         StopAllCoroutines();
+        isShootingLeft = false;
     }
     private IEnumerator ShootRight(Slot equipSlot)
     {
