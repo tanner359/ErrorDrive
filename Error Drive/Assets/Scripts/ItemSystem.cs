@@ -7,7 +7,7 @@ public static class ItemSystem
 {
     public static GameObject baseItem = Resources.Load<GameObject>(Path.Combine("Prefabs", "BaseItem"));
     public static Item[] AllItems = Resources.LoadAll<Item>("Items");   
-    public static GameObject rarityParticle = Resources.Load<GameObject>(Path.Combine("Particles", "Rarity_Particle"));
+    public static GameObject rarityParticle = Resources.Load<GameObject>(Path.Combine("Particles", "Rarity_Beam"));
  
     public static void Spawn(Item item, Vector3 position)
     {
