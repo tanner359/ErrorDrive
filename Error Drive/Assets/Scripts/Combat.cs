@@ -11,9 +11,9 @@ public static class Combat
     public static Transform worldCanvas = GameObject.Find("World_Canvas").transform;
     public static Stats player = GameObject.FindGameObjectWithTag("Player").GetComponent<Stats>();
 
-    public static void DamageTarget(Stats targetStats, Stats myStats)
+    public static void DamageTarget(Item item, Stats targetStats, Stats myStats)
     {
-        int damageDealt = myStats.power / (targetStats.defense / myStats.armorPen);
+        int damageDealt = item.baseDamage + myStats.power / (targetStats.defense - myStats.armorPen) + 1;
         targetStats.health -= damageDealt;
         SpawnCombatText(Color.red, damageDealt, 1.5f, targetStats.transform.position + new Vector3(0,3,0));
         GameObject sparks = Object.Instantiate(sparks_Prefab, targetStats.transform.position + new Vector3(0, 3, 0), Quaternion.identity, targetStats.transform);
@@ -33,6 +33,7 @@ public static class Combat
         GameObject bullet = Object.Instantiate(bulletPrefab, equipPoint.position, Quaternion.identity);
         bullet.transform.LookAt(Reticle.instance.transform);
         bullet.GetComponent<Bullet>().sharedStats = player;
+        bullet.GetComponent<Bullet>().weapon = equipSlot.item;
         bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward * 100f);
         AudioSource.PlayClipAtPoint(equipSlot.item.shotSound, equipPoint.position);
     }

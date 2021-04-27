@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Laser SMG
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  health: 10
+  baseDamage: 10
   power: 30
   pen: 10
   crit: 30
+  health: 10
   defense: 0
   speed: 0
   knockback: 2

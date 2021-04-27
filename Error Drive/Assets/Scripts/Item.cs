@@ -14,11 +14,15 @@ public class Item : ScriptableObject
     [Header("Stats")]
     public int levelRequirement;
     [Space(5)]
-    public int health;
+    [Header("Offense")]
+    public int baseDamage;  
     public int power;
     public int pen;
     public int crit;
+    [Header("Defense")]
+    public int health;
     public int defense;
+    [Header("Utility")]
     public float speed;
     public int knockback;
 

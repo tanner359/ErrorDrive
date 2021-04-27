@@ -153,15 +153,16 @@ public class Player_Controller : MonoBehaviour
             #endregion
         }
     }
-    public bool isShootingRight;
+    bool isShootingRight;
+    float R_ClickValue = 0;
     public void OnAttackRight(InputValue value)
     {
         if (!isControlling){return;}
 
-        float clickValue = value.Get<float>();
+        R_ClickValue = value.Get<float>();
         Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Main_Hand).GetComponent<Slot>();
 
-        if (clickValue == 1 && slot.item != null)
+        if (R_ClickValue == 1 && slot.item != null)
         {
             if (slot.item.itemClass == Item.ItemClass.Ranged && !isShootingRight)
             {
@@ -175,20 +176,17 @@ public class Player_Controller : MonoBehaviour
             }
             return;
         }
-        else if (clickValue == 0)
-        {
-            StartCoroutine(StopShootingRight());
-        }
     }
-    public bool isShootingLeft;
+    bool isShootingLeft;
+    float L_ClickValue = 0;
     public void OnAttackLeft(InputValue value)
     {
         if (!isControlling) { return; }
 
-        float clickValue = value.Get<float>();
+        L_ClickValue = value.Get<float>();
         Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Off_Hand).GetComponent<Slot>();
 
-        if (clickValue == 1 && slot.item != null)
+        if (L_ClickValue == 1 && slot.item != null)
         {
             if (slot.item.itemClass == Item.ItemClass.Ranged && !isShootingLeft)
             {
@@ -202,28 +200,12 @@ public class Player_Controller : MonoBehaviour
             }
             return;
         }
-        else if (clickValue == 0)
-        {
-            StartCoroutine(StopShootingLeft());         
-        }
     }
     #endregion
 
     #region COROUTINES
 
     #region SHOOTING
-    private IEnumerator StopShootingRight()
-    {
-        yield return new WaitWhile(() => isShootingRight);
-        StopAllCoroutines();
-        isShootingRight = false;
-    }
-    private IEnumerator StopShootingLeft()
-    {
-        yield return new WaitWhile(() => isShootingLeft);
-        StopAllCoroutines();
-        isShootingLeft = false;
-    }
     private IEnumerator ShootRight(Slot equipSlot)
     {
         float fireRate = equipSlot.item.fireRate;
@@ -233,9 +215,9 @@ public class Player_Controller : MonoBehaviour
                 isShootingRight = true;
                 Combat.FireBullet(equipSlot);
                 yield return new WaitForSeconds(1 / fireRate);
-                isShootingRight = false;
                 yield return new WaitForSeconds(0.01f);
-                StartCoroutine(ShootRight(equipSlot));
+                if (R_ClickValue == 1) { StartCoroutine(ShootRight(equipSlot)); }
+                else { isShootingRight = false; }
                 break;
 
             case Item.FiringMode.burst:
@@ -246,9 +228,9 @@ public class Player_Controller : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 Combat.FireBullet(equipSlot);
                 yield return new WaitForSeconds(1 / fireRate);
-                isShootingRight = false;
                 yield return new WaitForSeconds(0.01f);
-                StartCoroutine(ShootRight(equipSlot));
+                if (R_ClickValue == 1) { StartCoroutine(ShootRight(equipSlot)); }
+                else { isShootingRight = false; }
                 break;
 
             case Item.FiringMode.semi:
@@ -275,9 +257,9 @@ public class Player_Controller : MonoBehaviour
                 isShootingLeft = true;
                 Combat.FireBullet(equipSlot);
                 yield return new WaitForSeconds(1 / fireRate);
-                isShootingLeft = false;
                 yield return new WaitForSeconds(0.01f);
-                StartCoroutine(ShootLeft(equipSlot));
+                if(L_ClickValue == 1){StartCoroutine(ShootLeft(equipSlot));}
+                else { isShootingLeft = false; }
                 break;
 
             case Item.FiringMode.burst:
@@ -288,9 +270,9 @@ public class Player_Controller : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 Combat.FireBullet(equipSlot);
                 yield return new WaitForSeconds(1 / fireRate);
-                isShootingLeft = false;
                 yield return new WaitForSeconds(0.01f);
-                StartCoroutine(ShootLeft(equipSlot));
+                if (L_ClickValue == 1) { StartCoroutine(ShootLeft(equipSlot)); }
+                else { isShootingLeft = false; }
                 break;
 
             case Item.FiringMode.semi:
@@ -407,6 +389,23 @@ public class Player_Controller : MonoBehaviour
 
         transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.eulerAngles.y, 0), Quaternion.Euler(0, followTransform.eulerAngles.y, 0), 0.2f);
         followTransform.eulerAngles = new Vector3(angles.x, angles.y, 0);
+    }
+
+    #endregion
+
+    #region TIMERS
+    float R_Delay = 0;
+    float L_Delay = 0;
+    public void Timers()
+    {
+        if(R_Delay > 0)
+        {
+            R_Delay -= Time.deltaTime;
+        }
+        if(L_Delay > 0)
+        {
+            L_Delay -= Time.deltaTime;
+        }
     }
 
     #endregion

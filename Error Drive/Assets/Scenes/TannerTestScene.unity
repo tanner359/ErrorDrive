@@ -12009,7 +12009,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17356
+  m_Name: pb_Mesh29732
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18576,7 +18576,7 @@ PrefabInstance:
       objectReference: {fileID: 735112307}
     - target: {fileID: 377814286, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 377814286, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
       propertyPath: aggroRange
@@ -18588,7 +18588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 87895235992717466, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 87895235992717466, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
       propertyPath: m_AngularSpeed
@@ -19016,7 +19016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9079740795921038670, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
       propertyPath: m_Constraints
-      value: 126
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 9079740795921038670, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
       propertyPath: m_IsKinematic

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Rocket Launcher
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  health: 30
+  baseDamage: 100
   power: 150
   pen: 5
   crit: 5
+  health: 30
   defense: 5
   speed: -1
   knockback: 20

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Sniper Rifle
   m_EditorClassIdentifier: 
   levelRequirement: 1
+  baseDamage: 50
+  power: 100
+  pen: 100
+  crit: 0
   health: 10
-  power: 200
-  pen: 50
-  crit: 50
   defense: 0
   speed: 0
   knockback: 2
