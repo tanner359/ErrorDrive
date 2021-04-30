@@ -17,8 +17,8 @@ public static class ItemSystem
         newItem.name = item.itemName;
         newItem.tag = item.equipSlot.ToString();
         props.transform.position = position;
-        props.meshFilter.mesh = item.mesh;
-        props.collider.sharedMesh = item.mesh;
+        props.meshFilter.mesh = item.meshes[0];
+        props.collider.sharedMesh = item.meshes[0];
         props.meshRend.material = item.material;
         props.stats.SetStats(item);
 

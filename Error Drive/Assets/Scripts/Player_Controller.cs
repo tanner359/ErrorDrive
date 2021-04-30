@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player_Controller : MonoBehaviour
 {
+    public Player player;
+
     [Header("References")]
     public Player_Inputs playerInputs;
     public Rigidbody rb;
@@ -14,6 +16,7 @@ public class Player_Controller : MonoBehaviour
     public CapsuleCollider capCollider;
     public Transform followTransform;
     public Stats stats;
+    public Inventory inventory;
 
     [Header("Movement Settings")]    
     Vector3 moveDirection;
@@ -44,6 +47,9 @@ public class Player_Controller : MonoBehaviour
     public InverseKinematics rightArmIK;
     public InverseKinematics leftArmIK;
 
+    [Header("Body Parts")]
+    Transform R_ForeArm, L_ForeArm, Torso, Head, R_UpperLeg, R_LowerLeg, L_UpperLeg, L_LowerLeg;
+
     private void OnEnable()
     {
         isControlling = true;
@@ -54,8 +60,14 @@ public class Player_Controller : MonoBehaviour
         }      
         playerInputs.Player.Enable();
     }
+    
     private void Start()
     {
+        ItemPackage items = new ItemPackage(InventorySystem.GetItemsEquipped());
+        Equipment equipment = new Equipment(items);
+
+        player = new Player(gameObject, stats, equipment);
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -160,7 +172,7 @@ public class Player_Controller : MonoBehaviour
         if (!isControlling){return;}
 
         R_ClickValue = value.Get<float>();
-        Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Main_Hand).GetComponent<Slot>();
+        Slot slot = InventorySystem.GetEquipSlot(Item.EquipSlot.Main_Hand).GetComponent<Slot>();
 
         if (R_ClickValue == 1 && slot.item != null)
         {
@@ -184,7 +196,7 @@ public class Player_Controller : MonoBehaviour
         if (!isControlling) { return; }
 
         L_ClickValue = value.Get<float>();
-        Slot slot = InventorySystem.GetEquipSlot(Equip.Tags.Off_Hand).GetComponent<Slot>();
+        Slot slot = InventorySystem.GetEquipSlot(Item.EquipSlot.Off_Hand).GetComponent<Slot>();
 
         if (L_ClickValue == 1 && slot.item != null)
         {
@@ -213,7 +225,7 @@ public class Player_Controller : MonoBehaviour
         {
             case Item.FiringMode.auto:
                 isShootingRight = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
                 if (R_ClickValue == 1) { StartCoroutine(ShootRight(equipSlot)); }
@@ -222,11 +234,11 @@ public class Player_Controller : MonoBehaviour
 
             case Item.FiringMode.burst:
                 isShootingRight = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(0.1f);
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(0.1f);
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
                 if (R_ClickValue == 1) { StartCoroutine(ShootRight(equipSlot)); }
@@ -235,14 +247,14 @@ public class Player_Controller : MonoBehaviour
 
             case Item.FiringMode.semi:
                 isShootingRight = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(0.05f);
                 isShootingRight = false;
                 break;
 
             case Item.FiringMode.single:
                 isShootingRight = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(fireRate);
                 isShootingRight = false;
                 break;
@@ -255,7 +267,7 @@ public class Player_Controller : MonoBehaviour
         {
             case Item.FiringMode.auto:
                 isShootingLeft = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
                 if(L_ClickValue == 1){StartCoroutine(ShootLeft(equipSlot));}
@@ -264,11 +276,11 @@ public class Player_Controller : MonoBehaviour
 
             case Item.FiringMode.burst:
                 isShootingLeft = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(0.1f);
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(0.1f);
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
                 if (L_ClickValue == 1) { StartCoroutine(ShootLeft(equipSlot)); }
@@ -277,14 +289,14 @@ public class Player_Controller : MonoBehaviour
 
             case Item.FiringMode.semi:
                 isShootingLeft = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(0.05f);
                 isShootingLeft = false;
                 break;
 
             case Item.FiringMode.single:
                 isShootingLeft = true;
-                Combat.FireBullet(equipSlot);
+                Combat.FireBullet(player, equipSlot.item);
                 yield return new WaitForSeconds(fireRate);
                 isShootingLeft = false;
                 break;

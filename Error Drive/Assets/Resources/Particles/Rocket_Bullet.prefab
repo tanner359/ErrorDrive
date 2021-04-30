@@ -4834,7 +4834,7 @@ SphereCollider:
   m_GameObject: {fileID: 761949688513548944}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.19
   m_Center: {x: -0.000021219254, y: -0.00009775162, z: 0}
@@ -4852,6 +4852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8489160290900038404}
   sharedStats: {fileID: 0}
+  weapon: {fileID: 0}
   explosion: {fileID: 7479416524950321452, guid: db9ad39684c51be4f924bb9a14168cd9, type: 3}
   soundClip: {fileID: 8300000, guid: 4375d8c3436e8584d8ff149e73204010, type: 3}
 --- !u!1 &1835588735898264989

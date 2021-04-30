@@ -5,27 +5,35 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    #region VARIABLES AND REFERENCES
+
     Animator animator;
     Stats stats;
 
-    public Transform inventoryContainer;
-    GameObject inventorySlotsContainer;
-
-    public Collider[] interactableItems;
-    public SphereCollider playerZone;
-    public LayerMask contactFilter;
-
-    public int inventoryCount = 0;
-    int inventoryMax = 20;
-
-    bool isOpen;
-
-    GameObject icon;
-    public Item itemHolding;
-
+    #region INPUTS
     Player_Inputs playerInputs;
     Vector2 mousePosition;
+    #endregion
 
+    #region INVENTORY
+    [Header("Inventory Settings")]
+    public Transform inventoryContainer;
+    GameObject inventorySlotsContainer;
+    public int inventoryCount = 0;
+    private int inventoryMax = 20;
+    private bool isOpen;
+    private GameObject icon;
+    private Item itemHolding;
+    #endregion
+
+    #region INTERACTIONS
+    private Collider[] interactableItems;
+    private SphereCollider playerZone;
+    [Header("Player Interaction Filter")]
+    public LayerMask interactionFilter;
+    #endregion
+
+    #endregion
     private void OnEnable()
     {
         if (playerInputs == null)
@@ -34,9 +42,9 @@ public class Inventory : MonoBehaviour
         }
         playerInputs.Player.Enable();
     }
-
     private void Awake()
     {
+        playerZone = gameObject.GetComponent<SphereCollider>();
         if(icon == null) //spawns icon into the inventory disabled at awake
         {
             this.icon = Resources.Load<GameObject>(Path.Combine("Prefabs", "BaseIcon"));
@@ -45,18 +53,13 @@ public class Inventory : MonoBehaviour
             icon.SetActive(false);
         }
     }
-
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         stats = GetComponent<Stats>();
-
         inventorySlotsContainer = inventoryContainer.Find("InventorySlots").gameObject;
         inventoryMax = inventorySlotsContainer.transform.childCount;
     }
-
-
-    // Update is called once per frame
     private void Update()
     {
         ScanInteractArea(playerZone);
@@ -156,14 +159,14 @@ public class Inventory : MonoBehaviour
 
     #endregion
 
-    public void MoveItem(Item item)
+    public void MoveItem(Item item) // item icon moves to mouse pos
     {             
         icon.transform.position = mousePosition;
         icon.SetActive(true);
         icon.GetComponent<Image>().sprite = item.sprite;
     }
 
-    public void ToggleInventory()
+    public void ToggleInventory() // toggle inventory open/closed
     {
         if (!isOpen)
         {
@@ -185,8 +188,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void PickUp()
-    { // pick up closest item
+    public void PickUp() // pick up closest item
+    { 
         if (inventoryCount != 20)
         {
             Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;
@@ -203,30 +206,21 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("Inventory Full");
-        }
+        else{Debug.Log("Inventory Full");}
     }
-
-    public void ScanInteractArea(SphereCollider playerCollider)
-    { // check for interactables  
-        interactableItems = Physics.OverlapSphere(transform.position + new Vector3(0, playerZone.center.y, 0), playerCollider.radius, contactFilter);
-
-
+    public void ScanInteractArea(SphereCollider playerCollider) // check for interactables
+    {   
+        interactableItems = Physics.OverlapSphere(transform.position + new Vector3(0, playerZone.center.y, 0), playerCollider.radius, interactionFilter);
         if (interactableItems.Length > 0)
         {
             GameObject item = GetClosestItem(transform.position, interactableItems);
             CanvasDisplay.DisplayInteractText(item.transform.position, "E");
         }
-        else
-        {
-            CanvasDisplay.HideText();
-        }
+        else{CanvasDisplay.HideText();}
     }
 
-    public GameObject GetClosestItem(Vector3 playerPos, Collider[] interactableItems)
-    { // returns back the closest item
+    public GameObject GetClosestItem(Vector3 playerPos, Collider[] interactableItems) // returns back the closest item
+    { 
         GameObject closestItem = interactableItems[0].gameObject;
         float minDistance = Vector3.Distance(playerPos, interactableItems[0].gameObject.transform.position);
         for (int i = 0; i < interactableItems.Length; i++)

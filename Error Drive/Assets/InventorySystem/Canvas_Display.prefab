@@ -2230,9 +2230,8 @@ GameObject:
   - component: {fileID: 3434601100925177120}
   - component: {fileID: 3434601100925177135}
   - component: {fileID: 745034480666294238}
-  - component: {fileID: 3434601100925177121}
   - component: {fileID: 4589025385635765197}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Slot (Body)
   m_TagString: Torso
   m_Icon: {fileID: 0}
@@ -2307,21 +2306,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 183, y: 183, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3434601100925177121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434601100925177132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 0}
-  ignoreParts: []
 --- !u!114 &4589025385635765197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2350,9 +2334,8 @@ GameObject:
   - component: {fileID: 3434601100934508068}
   - component: {fileID: 3434601100934508067}
   - component: {fileID: 8330995785957592045}
-  - component: {fileID: 3434601100934508069}
   - component: {fileID: 8788013541257652353}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Slot (Offhand)
   m_TagString: Off_Hand
   m_Icon: {fileID: 0}
@@ -2427,22 +2410,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 183, y: 183, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3434601100934508069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434601100934508064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 0}
-  ignoreParts:
-  - {fileID: 0}
 --- !u!114 &8788013541257652353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2651,7 +2618,7 @@ MonoBehaviour:
   interactText_Prefab: {fileID: 1282932491467745826, guid: 5265c2b6f76f6d64090b88aa727d977f, type: 3}
   worldCanvas: {fileID: 0}
   inventory: {fileID: 0}
-  equipSlotsContent: {fileID: 0}
+  equipSlotsContent: {fileID: 774936671139654015}
   tooltip: {fileID: 0}
 --- !u!1 &3434601101316382206
 GameObject:
@@ -3127,9 +3094,8 @@ GameObject:
   - component: {fileID: 3434601101538107920}
   - component: {fileID: 3434601101538107935}
   - component: {fileID: 86241050366481113}
-  - component: {fileID: 3434601101538107921}
   - component: {fileID: 1705910388562126363}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Slot (Mainhand)
   m_TagString: Main_Hand
   m_Icon: {fileID: 0}
@@ -3204,22 +3170,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 183, y: 183, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3434601101538107921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434601101538107932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 0}
-  ignoreParts:
-  - {fileID: 0}
 --- !u!114 &1705910388562126363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3248,11 +3198,10 @@ GameObject:
   - component: {fileID: 3434601101577875230}
   - component: {fileID: 3434601101577875229}
   - component: {fileID: 4642032549257900040}
-  - component: {fileID: 3434601101577875231}
   - component: {fileID: 2172647898933383028}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Slot (Left_Leg)
-  m_TagString: Legs
+  m_TagString: L_Leg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3325,23 +3274,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 183, y: 183, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3434601101577875231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434601101577875226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 0}
-  - {fileID: 0}
-  ignoreParts:
-  - {fileID: 0}
 --- !u!114 &2172647898933383028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4122,9 +4054,8 @@ GameObject:
   - component: {fileID: 3434601102849933982}
   - component: {fileID: 3434601102849933981}
   - component: {fileID: 1886713648505967627}
-  - component: {fileID: 3434601102849933983}
   - component: {fileID: 4639482184747261598}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Slot (Head)
   m_TagString: Head
   m_Icon: {fileID: 0}
@@ -4199,21 +4130,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 183, y: 183, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3434601102849933983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434601102849933978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 0}
-  ignoreParts: []
 --- !u!114 &4639482184747261598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7125,11 +7041,10 @@ GameObject:
   - component: {fileID: 3064652569780889424}
   - component: {fileID: 4013899468223483952}
   - component: {fileID: 6521704044920868824}
-  - component: {fileID: 7048014748614270603}
   - component: {fileID: 1953462199535705159}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Slot (Right_Leg)
-  m_TagString: Legs
+  m_TagString: R_Leg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7202,23 +7117,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 183, y: 183, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7048014748614270603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7102139743278602286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 0}
-  - {fileID: 0}
-  ignoreParts:
-  - {fileID: 0}
 --- !u!114 &1953462199535705159
 MonoBehaviour:
   m_ObjectHideFlags: 0

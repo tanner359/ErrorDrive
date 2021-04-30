@@ -10,7 +10,7 @@ public class ItemProperties
     public MeshRenderer meshRend;
     public Stats stats;
 
-    public ItemProperties(Transform _transform, MeshCollider _collider, 
+    public ItemProperties(Transform _transform, MeshCollider _collider,
         MeshFilter _meshFilter, MeshRenderer _meshRend, Stats _stats)
     {
         transform = _transform;

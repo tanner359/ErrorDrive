@@ -25,17 +25,18 @@ public static class Combat
         Object.Instantiate(combatText_Prefab, _location, player.transform.rotation, worldCanvas);        
     }
 
-    public static void FireBullet(Slot equipSlot)
+    public static void FireBullet(Player player, Item weapon)
     {
-        Item weapon = equipSlot.item;
         GameObject bulletPrefab = weapon.bullet;
-        Transform equipPoint = equipSlot.gameObject.GetComponent<Equip>().bodyParts[0].gameObject.transform;
-        GameObject bullet = Object.Instantiate(bulletPrefab, equipPoint.position, Quaternion.identity);
-        bullet.transform.LookAt(Reticle.instance.transform);
-        bullet.GetComponent<Bullet>().sharedStats = player;
-        bullet.GetComponent<Bullet>().weapon = equipSlot.item;
+        player.gameObject.GetComponent<EquipmentLink>().bodyLinks.TryGetValue(weapon.equipSlot, out List<GameObject> links);
+        GameObject bullet = Object.Instantiate(bulletPrefab, links[0].transform.position, Quaternion.identity);
+        Physics.IgnoreCollision(bullet.GetComponent<SphereCollider>(), player.gameObject.GetComponent<CapsuleCollider>(), true);
+        if (player.gameObject.CompareTag("Player")) { bullet.transform.LookAt(Reticle.instance.transform); }
+        else { bullet.transform.LookAt(links[0].transform.position + links[0].transform.forward); }
+        bullet.GetComponent<Bullet>().sharedStats = player.stats;
+        bullet.GetComponent<Bullet>().weapon = weapon;
         bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward * 100f);
-        AudioSource.PlayClipAtPoint(equipSlot.item.shotSound, equipPoint.position);
+        AudioSource.PlayClipAtPoint(weapon.shotSound, links[0].transform.position);
     }
 }
 

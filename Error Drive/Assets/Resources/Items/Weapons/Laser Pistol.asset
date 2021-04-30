@@ -13,19 +13,21 @@ MonoBehaviour:
   m_Name: Laser Pistol
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  health: 10
+  baseDamage: 0
   power: 30
   pen: 10
   crit: 30
+  health: 10
   defense: 0
   speed: 0
   knockback: 2
   itemName: Laser Pistol
   description: Pew Pew!
-  mesh: {fileID: -1816560082258613788, guid: f1923893cd65ae94b85412dca441399e, type: 3}
+  meshes:
+  - {fileID: -1816560082258613788, guid: f1923893cd65ae94b85412dca441399e, type: 3}
   material: {fileID: 2100000, guid: e067b6b49e8ff604a9faea2a378243dd, type: 2}
   sprite: {fileID: 21300000, guid: 75b087f566f2ad343b8ea40b281e5eb0, type: 3}
-  equipSlot: 3
+  equipSlot: 1
   rarity: 0
   itemClass: 0
   bullet: {fileID: 761949688513548944, guid: 1b388f6e7994acb4d90e3f8e0860728b, type: 3}

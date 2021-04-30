@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6566827529569179928}
   - component: {fileID: 8900761888872733769}
   m_Layer: 10
-  m_Name: SMG_Shot
+  m_Name: SMG_Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4851,6 +4851,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8489160290900038404}
   sharedStats: {fileID: 0}
+  weapon: {fileID: 0}
+  explosion: {fileID: 0}
+  soundClip: {fileID: 0}
 --- !u!1 &1835588735898264989
 GameObject:
   m_ObjectHideFlags: 0
