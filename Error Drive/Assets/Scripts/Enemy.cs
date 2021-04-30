@@ -167,11 +167,15 @@ public class Enemy : MonoBehaviour
     }
     public void AnimationControls()
     {
-        if (agent.remainingDistance == 0) {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Run", false);
-            return;
-        }
+        if (agent.enabled)
+        {
+            if (agent.remainingDistance == 0)
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("Run", false);
+                return;
+            }
+        }       
 
         switch (currentState)
         {

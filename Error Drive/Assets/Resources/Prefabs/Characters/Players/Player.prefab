@@ -3992,10 +3992,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainHand_meshes:
+  - {fileID: 5383130366387415537}
   - {fileID: 5383130366951633257}
   MainHand_ignores:
   - {fileID: 5383130367736962439}
   OffHand_meshes:
+  - {fileID: 5383130366853906317}
   - {fileID: 5383130366674096237}
   OffHand_ignores:
   - {fileID: 5222526736710733597}

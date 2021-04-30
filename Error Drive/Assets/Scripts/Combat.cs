@@ -26,11 +26,13 @@ public static class Combat
     }
 
     public static void FireBullet(Player player, Item weapon)
-    {       
+    {
         GameObject bulletPrefab = weapon.bullet;
         player.gameObject.GetComponent<EquipmentLink>().bodyLinks.TryGetValue(weapon.equipSlot, out List<GameObject> links);
         GameObject bullet = Object.Instantiate(bulletPrefab, links[0].transform.position, Quaternion.identity);
-        bullet.transform.LookAt(Reticle.instance.transform);
+        Physics.IgnoreCollision(bullet.GetComponent<SphereCollider>(), player.gameObject.GetComponent<CapsuleCollider>(), true);
+        if (player.gameObject.CompareTag("Player")) { bullet.transform.LookAt(Reticle.instance.transform); }
+        else { bullet.transform.LookAt(links[0].transform.position + links[0].transform.forward); }
         bullet.GetComponent<Bullet>().sharedStats = player.stats;
         bullet.GetComponent<Bullet>().weapon = weapon;
         bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward * 100f);
