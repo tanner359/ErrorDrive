@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3361411215876450032}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FollowPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1742630937751637938}
   - component: {fileID: 8700279680179581860}
   - component: {fileID: 7023854432349253758}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BodyMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5077194354714321253}
   - component: {fileID: 5077194354714321250}
   - component: {fileID: 5077194354714321251}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 5565888324632616692}
   - component: {fileID: 5077194355438568624}
   - component: {fileID: 5077194355438568625}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 3410173384665475010}
   - component: {fileID: 203638934077308122}
   - component: {fileID: 2983369683230751808}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 5383130366117244143}
   - component: {fileID: 5383130366117244142}
   - component: {fileID: 5383130366117244141}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RHand CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 5383130366189096948}
   - component: {fileID: 5383130366189096951}
   - component: {fileID: 5383130366189096950}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LElbowCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 5383130366255441402}
   - component: {fileID: 5383130366255441396}
   - component: {fileID: 5383130366255441403}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LHip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 5383130366292814260}
   - component: {fileID: 6121946201352963457}
   - component: {fileID: 690246491126955138}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 5383130366387415538}
   - component: {fileID: 5383130366387415540}
   - component: {fileID: 5383130366387415539}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RUpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   - component: {fileID: 5383130366424340247}
   - component: {fileID: 5383130366424340244}
   - component: {fileID: 5383130366424340245}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RKnee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 5383130366501202982}
   - component: {fileID: 5383130366501202984}
   - component: {fileID: 5383130366501202983}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LThigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 5383130366519945321}
   - component: {fileID: 5383130366519945319}
   - component: {fileID: 5383130366519945314}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 6305077019918204081}
   - component: {fileID: 4949272065819544949}
   - component: {fileID: 5440829692061105188}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LForearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1401,6 +1401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1870049349031165357}
   controller: {fileID: 8978467346439625937}
+  handSlot: 4
 --- !u!54 &5440829692061105188
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1432,7 +1433,7 @@ GameObject:
   - component: {fileID: 5383130366809930330}
   - component: {fileID: 5383130366809930324}
   - component: {fileID: 5383130366809930331}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RHip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +1614,7 @@ GameObject:
   - component: {fileID: 5383130366853906318}
   - component: {fileID: 5383130366853906320}
   - component: {fileID: 5383130366853906319}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LUpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,7 +1698,7 @@ GameObject:
   - component: {fileID: 2372669784962967654}
   - component: {fileID: 4424770826341205248}
   - component: {fileID: 368477343112033848}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RForearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1795,6 +1796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1870049349031165357}
   controller: {fileID: 8978467346439625937}
+  handSlot: 3
 --- !u!54 &368477343112033848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1822,7 +1824,7 @@ GameObject:
   - component: {fileID: 5383130367073067971}
   - component: {fileID: 5383130367073067973}
   - component: {fileID: 5383130367073067972}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RCalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1905,7 @@ GameObject:
   - component: {fileID: 5383130367078973588}
   - component: {fileID: 5383130367078973591}
   - component: {fileID: 5383130367078973590}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RKneeCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1985,7 +1987,7 @@ GameObject:
   - component: {fileID: 5383130367081048471}
   - component: {fileID: 5383130367081048470}
   - component: {fileID: 5383130367081048469}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LHand CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2079,7 +2081,7 @@ GameObject:
   - component: {fileID: 5383130367090294594}
   - component: {fileID: 5383130367090294596}
   - component: {fileID: 5383130367090294595}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2161,7 +2163,7 @@ GameObject:
   - component: {fileID: 5383130367114261880}
   - component: {fileID: 5383130367114261879}
   - component: {fileID: 5383130367114261878}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LFoot CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2256,7 +2258,7 @@ GameObject:
   - component: {fileID: 5383130367229916422}
   - component: {fileID: 5383130367229916421}
   - component: {fileID: 5383130367229916420}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RFoot CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2354,7 +2356,7 @@ GameObject:
   - component: {fileID: 5383130367232221907}
   - component: {fileID: 5383130367232221905}
   - component: {fileID: 5383130367232221904}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2539,7 +2541,7 @@ GameObject:
   - component: {fileID: 5383130367531595152}
   - component: {fileID: 5383130367531595180}
   - component: {fileID: 5383130367531595153}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2720,7 +2722,7 @@ GameObject:
   - component: {fileID: 5383130367590445567}
   - component: {fileID: 5383130367590445441}
   - component: {fileID: 5383130367590445440}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LCalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2801,7 +2803,7 @@ GameObject:
   - component: {fileID: 5383130367607806653}
   - component: {fileID: 5383130367607806655}
   - component: {fileID: 5383130367607806654}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2882,7 +2884,7 @@ GameObject:
   - component: {fileID: 5383130367663250442}
   - component: {fileID: 5383130367663250445}
   - component: {fileID: 5383130367663250444}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RElbowCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2963,7 +2965,7 @@ GameObject:
   - component: {fileID: 5383130367736962440}
   - component: {fileID: 5383130367736962442}
   - component: {fileID: 5383130367736962441}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3044,7 +3046,7 @@ GameObject:
   - component: {fileID: 5383130367808678696}
   - component: {fileID: 5383130367808678698}
   - component: {fileID: 5383130367808678697}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RThigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3128,7 +3130,7 @@ GameObject:
   - component: {fileID: 5383130367934192211}
   - component: {fileID: 5383130367934192208}
   - component: {fileID: 5383130367934192209}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3290,7 +3292,7 @@ GameObject:
   - component: {fileID: 5383130368100695879}
   - component: {fileID: 5383130368100695876}
   - component: {fileID: 5383130368100695877}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LKnee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3449,7 +3451,7 @@ GameObject:
   - component: {fileID: 5383130368139751277}
   - component: {fileID: 5383130368139751280}
   - component: {fileID: 5383130368139751279}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LKneeCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3533,7 +3535,7 @@ GameObject:
   - component: {fileID: 8431714470111518773}
   - component: {fileID: 8431714470111518771}
   - component: {fileID: 8431714470111518770}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3689,7 +3691,7 @@ GameObject:
   - component: {fileID: 988839657320359848}
   - component: {fileID: 7647944472089995182}
   - component: {fileID: 6560250688399181595}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HeadMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3768,7 +3770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8978467345241496928}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CenterPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

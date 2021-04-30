@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Energy Sword
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  health: 25
+  baseDamage: 0
   power: 100
   pen: 20
   crit: 20
+  health: 25
   defense: 0
   speed: 0
-  knockback: 20
+  knockback: 200
   itemName: Energy Sword
   description: Bam! Bam!
   mesh: {fileID: -3417637348199415853, guid: b82afc4c2daa1fe4cbc08cde43a81eac, type: 3}
@@ -28,3 +29,7 @@ MonoBehaviour:
   equipSlot: 3
   rarity: 3
   itemClass: 1
+  bullet: {fileID: 0}
+  firingMode: 0
+  fireRate: 0
+  shotSound: {fileID: 0}

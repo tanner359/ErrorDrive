@@ -30,11 +30,11 @@ public static class InventorySystem
                         controller.aimRight = true;
                         controller.RefreshIK();
                     }
-                    else if(item.equipSlot == Item.EquipType.Off_Hand)
+                    else if (item.equipSlot == Item.EquipType.Off_Hand)
                     {
                         controller.aimLeft = true;
                         controller.RefreshIK();
-                    }                
+                    }
                 }
             }
             else
@@ -43,7 +43,7 @@ public static class InventorySystem
                 slot.item = null;
                 slot.image.enabled = false;
                 return;
-            }       
+            }
         }
         slot.item = item;
         slot.image.enabled = true;
@@ -74,7 +74,7 @@ public static class InventorySystem
 
     public static void EmptySlot(Slot slot)
     {
-        
+
         slot.image.sprite = null;
         //slot.label.text = ""; [REMOVED] => Clears label text
         slot.image.enabled = false;
@@ -89,7 +89,7 @@ public static class InventorySystem
             {
                 equip.bodyParts[i].GetComponent<MeshFilter>().mesh = equip.GetOriginalMeshes(i);
                 equip.bodyParts[i].GetComponent<MeshRenderer>().material = equip.GetOriginalMaterials(i);
-                equip.IgnorePartsSetActive(true);            
+                equip.IgnorePartsSetActive(true);
                 Combat.player.RemoveStats(slot.item);
             }
             if (slot.item.itemClass == Item.ItemClass.Melee)
@@ -116,17 +116,28 @@ public static class InventorySystem
         slot.item = null;
     }
 
-    public static Slot GetEquipSlot(Equip.Tags equipTag)
+    public static Slot GetEquipSlot(Equip.EquipSlot equipTag)
     {
         Transform equipSlots = CanvasDisplay.instance.equipSlotsContent;
-        for(int i = 0; i < equipSlots.childCount; i++)
+        for (int i = 0; i < equipSlots.childCount; i++)
         {
             if (equipSlots.GetChild(i).CompareTag(equipTag.ToString()))
             {
-                return equipSlots.GetChild(i).GetComponent<Slot>();             
-            }          
+                return equipSlots.GetChild(i).GetComponent<Slot>();
+            }
         }
         Debug.LogError("Slot not Found");
         return null;
+    }
+
+    public static Item[] GetItemsEquipped()
+    {
+        Item[] items = new Item[5];
+
+        for(int i = 0; i < 5; i++)
+        {
+            items[i] = GetEquipSlot(Equip.EquipSlot.Main_Hand + i).item;
+        }
+        return items;
     }
 }

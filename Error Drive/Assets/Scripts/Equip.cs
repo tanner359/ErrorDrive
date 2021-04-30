@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Equip : MonoBehaviour
 {
-    public enum Tags { Legs, Torso, Head, Main_Hand, Off_Hand };
+    public enum EquipSlot { Main_Hand, Off_Hand, Torso, Head, R_Leg, L_Leg, };
 
     private List<Mesh> originalMeshes = new List<Mesh>();
     private List<Material> originalMaterials = new List<Material>();
@@ -24,7 +24,7 @@ public class Equip : MonoBehaviour
             }
         }
         return;
-    }
+    } 
     void Start()
     {
         for(int i = 0; i < bodyParts.Count; i++)

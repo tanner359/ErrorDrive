@@ -20,7 +20,7 @@ MonoBehaviour:
   health: 30
   defense: 5
   speed: -1
-  knockback: 20
+  knockback: 200
   itemName: Rocket Launcher
   description: BOOM! BOOM! BOOM!
   mesh: {fileID: -7988769573586701425, guid: 8aafccacd4391d244842cbedc23ecd13, type: 3}
