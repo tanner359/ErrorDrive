@@ -60,15 +60,14 @@ public class Player_Controller : MonoBehaviour
         }      
         playerInputs.Player.Enable();
     }
-    private void Awake()
+    
+    private void Start()
     {
         ItemPackage items = new ItemPackage(InventorySystem.GetItemsEquipped());
         Equipment equipment = new Equipment(items);
 
         player = new Player(gameObject, stats, equipment);
-    }
-    private void Start()
-    {
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

@@ -29,7 +29,7 @@ public class Item : ScriptableObject
     [Header("Info")]
     public string itemName;
     public string description;
-    public Mesh mesh;
+    public List<Mesh> meshes;
     public Material material;
     public Sprite sprite;
     public EquipSlot equipSlot;

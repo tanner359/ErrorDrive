@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EquipmentLink : MonoBehaviour
 {
-    public Dictionary<Item.EquipSlot, List<GameObject>> bodyLinks;
-    public Dictionary<Item.EquipSlot, List<GameObject>> ignoreLinks;
-    public Dictionary<Item.EquipSlot, List<Mesh>> originalMeshes;
-    public Dictionary<Item.EquipSlot, List<Material>> originalMaterials;
+    public Dictionary<Item.EquipSlot, List<GameObject>> bodyLinks = new Dictionary<Item.EquipSlot, List<GameObject>>();
+    public Dictionary<Item.EquipSlot, List<GameObject>> ignoreLinks = new Dictionary<Item.EquipSlot, List<GameObject>>();
+    public Dictionary<Item.EquipSlot, List<Mesh>> originalMeshes = new Dictionary<Item.EquipSlot, List<Mesh>>();
+    public Dictionary<Item.EquipSlot, List<Material>> originalMaterials = new Dictionary<Item.EquipSlot, List<Material>>();
 
     [Header("Main Hand")]
     public List<GameObject> MainHand_meshes;
@@ -63,98 +63,30 @@ public class EquipmentLink : MonoBehaviour
     }
     void Start() // sets the material and mesh defaults for each equip slot, could be simplified more
     {
-        List<Mesh> meshes = new List<Mesh>();
-        List<Material> materials = new List<Material>();
-        
-        for (int i = 0; i < MainHand_meshes.Count-1; i++)
-        {
-            meshes.Add(MainHand_meshes[i].GetComponent<MeshFilter>().mesh);
-            materials.Add(MainHand_meshes[i].GetComponent<MeshRenderer>().material);
-        }
-        if (meshes.Count > 0)
-        {
-            originalMeshes.Add(Item.EquipSlot.Main_Hand, meshes);
-            originalMaterials.Add(Item.EquipSlot.Main_Hand, materials);
-            bodyLinks.Add(Item.EquipSlot.Main_Hand, MainHand_meshes);
-            ignoreLinks.Add(Item.EquipSlot.Main_Hand, MainHand_ignores);
-        }
-        meshes = new List<Mesh>();
-        materials = new List<Material>();
+        List<GameObject>[] MeshLists = { MainHand_meshes, OffHand_meshes, Torso_meshes, Head_meshes, R_Leg_meshes, L_Leg_meshes };
+        List<GameObject>[] IgnoreLists = { MainHand_ignores, OffHand_ignores, Torso_ignores, Head_ignores, R_Leg_ignores, L_Leg_ignores };
 
-        for (int i = 0; i < OffHand_meshes.Count-1; i++)
-        {
-            meshes.Add(OffHand_meshes[i].GetComponent<MeshFilter>().mesh);
-            materials.Add(OffHand_meshes[i].GetComponent<MeshRenderer>().material);
+        for (int k = 0; k < MeshLists.Length; k++)
+        {         
+            List<Mesh> meshes = new List<Mesh>();
+            List<Material> materials = new List<Material>();
+          
+            for (int i = 0; i < MeshLists[k].Count; i++)
+            {
+                meshes.Add(MeshLists[k][i].GetComponent<MeshFilter>().mesh);
+                materials.Add(MeshLists[k][i].GetComponent<MeshRenderer>().material);
+            }
+            Item.EquipSlot equipSlot = Item.EquipSlot.Main_Hand + k;
+            if (meshes.Count > 0)
+            {
+                originalMeshes.Add(equipSlot, meshes);
+            }
+            if (materials.Count > 0)
+            {
+                originalMaterials.Add(equipSlot, materials);
+            }
+            bodyLinks.Add(equipSlot, MeshLists[k]);
+            ignoreLinks.Add(equipSlot, IgnoreLists[k]);
         }
-        if (meshes.Count > 0)
-        {
-            originalMeshes.Add(Item.EquipSlot.Off_Hand, meshes);
-            originalMaterials.Add(Item.EquipSlot.Off_Hand, materials);
-            bodyLinks.Add(Item.EquipSlot.Off_Hand, OffHand_meshes);
-            ignoreLinks.Add(Item.EquipSlot.Off_Hand, OffHand_ignores);
-        }
-        meshes = new List<Mesh>();
-        materials = new List<Material>();
-
-        for (int i = 0; i < Torso_meshes.Count-1; i++)
-        {
-            meshes.Add(Torso_meshes[i].GetComponent<MeshFilter>().mesh);
-            materials.Add(Torso_meshes[i].GetComponent<MeshRenderer>().material);
-        }
-        if (meshes.Count > 0)
-        {
-            originalMeshes.Add(Item.EquipSlot.Torso, meshes);
-            originalMaterials.Add(Item.EquipSlot.Torso, materials);
-            bodyLinks.Add(Item.EquipSlot.Torso, Torso_meshes);
-            ignoreLinks.Add(Item.EquipSlot.Torso, Torso_ignores);
-        }
-        meshes = new List<Mesh>();
-        materials = new List<Material>();
-
-        for (int i = 0; i < Head_meshes.Count-1; i++)
-        {
-            meshes.Add(Head_meshes[i].GetComponent<MeshFilter>().mesh);
-            materials.Add(Head_meshes[i].GetComponent<MeshRenderer>().material);
-        }
-        if (meshes.Count > 0)
-        {
-            originalMeshes.Add(Item.EquipSlot.Head, meshes);
-            originalMaterials.Add(Item.EquipSlot.Head, materials);
-            bodyLinks.Add(Item.EquipSlot.Head, Head_meshes);
-            ignoreLinks.Add(Item.EquipSlot.Head, Head_ignores);
-        }
-        meshes = new List<Mesh>();
-        materials = new List<Material>();
-
-        for (int i = 0; i <= L_Leg_meshes.Count-1; i++)
-        {
-            meshes.Add(L_Leg_meshes[i].GetComponent<MeshFilter>().mesh);
-            materials.Add(L_Leg_meshes[i].GetComponent<MeshRenderer>().material);
-        }
-        if (meshes.Count > 0)
-        {
-            Debug.Log(meshes.Count);
-            originalMeshes.Add(Item.EquipSlot.L_Leg, meshes);
-            originalMaterials.Add(Item.EquipSlot.L_Leg, materials);
-            bodyLinks.Add(Item.EquipSlot.L_Leg, L_Leg_meshes);
-            ignoreLinks.Add(Item.EquipSlot.L_Leg, L_Leg_ignores);
-        }
-        meshes = new List<Mesh>();
-        materials = new List<Material>();
-
-        for (int i = 0; i <= R_Leg_meshes.Count-1; i++)
-        {
-            meshes.Add(R_Leg_meshes[i].GetComponent<MeshFilter>().mesh);
-            materials.Add(R_Leg_meshes[i].GetComponent<MeshRenderer>().material);
-        }
-        if (meshes.Count > 0)
-        {
-            originalMeshes.Add(Item.EquipSlot.R_Leg, meshes);
-            originalMaterials.Add(Item.EquipSlot.R_Leg, materials);
-            bodyLinks.Add(Item.EquipSlot.R_Leg, R_Leg_meshes);
-            ignoreLinks.Add(Item.EquipSlot.R_Leg, R_Leg_ignores);
-        }
-        meshes = new List<Mesh>();
-        materials = new List<Material>();
-    } 
+    }
 }

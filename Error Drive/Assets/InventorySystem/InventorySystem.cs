@@ -5,16 +5,16 @@ public static class InventorySystem
     public static LayerMask slotMask = LayerMask.GetMask("Inventory Slot");
     public static void TransferItem(Item item, Slot slot)
     {
-        if (slot.gameObject.layer == LayerMask.GetMask("Equip Slot"))
+        if (slot.gameObject.layer == 15)
         {          
             if (slot.tag == item.equipSlot.ToString())
             {
                 EquipmentLink link = Combat.player.GetComponent<EquipmentLink>();
                 link.bodyLinks.TryGetValue(item.equipSlot, out List<GameObject> links);
-                for (int i = 0; i < links.Count; i++)
+                for (int i = 0; i < item.meshes.Count; i++)
                 {
-                    links[i].GetComponent<MeshFilter>().mesh = item.mesh;
-                    links[i].GetComponent<MeshRenderer>().material = item.material;
+                    links[(links.Count - 1) - i].GetComponent<MeshFilter>().mesh = item.meshes[i];
+                    links[(links.Count - 1) - i].GetComponent<MeshRenderer>().material = item.material;
                     link.IgnorePartsSetActive(item.equipSlot, false);
                     Combat.player.AddStats(item);
                 }
@@ -22,7 +22,7 @@ public static class InventorySystem
                 {
                     MeshCollider meshCol = links[0].GetComponent<MeshCollider>();
                     meshCol.enabled = true;
-                    meshCol.sharedMesh = item.mesh;
+                    meshCol.sharedMesh = item.meshes[0];
                 }
                 if (item.itemClass == Item.ItemClass.Ranged)
                 {
@@ -79,7 +79,7 @@ public static class InventorySystem
         slot.image.enabled = false;
         slot.slotImage.color = Color.white;
 
-        if (slot.gameObject.layer == LayerMask.GetMask("Equip Slot"))
+        if (slot.gameObject.layer == 15)
         {
             slot.label.text = slot.tag.ToString().Replace('_', ' ');
             slot.label.color = Color.white;
@@ -88,10 +88,10 @@ public static class InventorySystem
             EquipmentLink link = Combat.player.GetComponent<EquipmentLink>();
             link.bodyLinks.TryGetValue(slot.item.equipSlot, out List<GameObject> links);
 
-            for (int i = 0; i < links.Count; i++)
+            for (int i = 0; i < slot.item.meshes.Count; i++)
             {
-                links[i].GetComponent<MeshFilter>().mesh = link.GetOriginalMeshes(slot.item.equipSlot, i);
-                links[i].GetComponent<MeshRenderer>().material = link.GetOriginalMaterials(slot.item.equipSlot, i);
+                links[(links.Count - 1) - i].GetComponent<MeshFilter>().mesh = link.GetOriginalMeshes(slot.item.equipSlot, i);
+                links[(links.Count - 1) - i].GetComponent<MeshRenderer>().material = link.GetOriginalMaterials(slot.item.equipSlot, i);
                 link.IgnorePartsSetActive(slot.item.equipSlot, true);
                 Combat.player.RemoveStats(slot.item);
             }
@@ -121,6 +121,7 @@ public static class InventorySystem
 
     public static Slot GetEquipSlot(Item.EquipSlot equipTag)
     {
+        Debug.Log(CanvasDisplay.instance.equipSlotsContent);
         Transform equipSlots = CanvasDisplay.instance.equipSlotsContent;
         for (int i = 0; i < equipSlots.childCount; i++)
         {
@@ -135,7 +136,7 @@ public static class InventorySystem
 
     public static Item[] GetItemsEquipped()
     {
-        Item[] items = new Item[5];
+        Item[] items = new Item[6];
 
         for(int i = 0; i < 5; i++)
         {

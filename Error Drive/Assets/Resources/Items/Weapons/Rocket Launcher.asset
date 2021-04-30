@@ -23,10 +23,11 @@ MonoBehaviour:
   knockback: 200
   itemName: Rocket Launcher
   description: BOOM! BOOM! BOOM!
-  mesh: {fileID: -7988769573586701425, guid: 8aafccacd4391d244842cbedc23ecd13, type: 3}
+  meshes:
+  - {fileID: -7988769573586701425, guid: 8aafccacd4391d244842cbedc23ecd13, type: 3}
   material: {fileID: 2100000, guid: 1a52e10ffb9287d4b81f285c6db8a526, type: 2}
   sprite: {fileID: 21300000, guid: 7389d952bfccf4d4db4207028b9ae741, type: 3}
-  equipSlot: 3
+  equipSlot: 0
   rarity: 4
   itemClass: 0
   bullet: {fileID: 761949688513548944, guid: fb682e4af2f49a24b81b4ce6a458d5e9, type: 3}

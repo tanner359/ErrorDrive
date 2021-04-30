@@ -7990,7 +7990,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19444
+  m_Name: pb_Mesh19434
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16029,7 +16029,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17790
+  m_Name: pb_Mesh17788
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23225,7 +23225,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19252
+  m_Name: pb_Mesh19244
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -48143,6 +48143,10 @@ PrefabInstance:
       propertyPath: inventoryContainer
       value: 
       objectReference: {fileID: 1209408114}
+    - target: {fileID: 8978467346439625930, guid: b69fc47a43021a942ac16fbbea82aa6a, type: 3}
+      propertyPath: interactionFilter.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 8978467346439625934, guid: b69fc47a43021a942ac16fbbea82aa6a, type: 3}
       propertyPath: m_RootOrder
       value: 5

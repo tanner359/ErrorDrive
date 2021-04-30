@@ -13,18 +13,24 @@ MonoBehaviour:
   m_Name: Sniper Head
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  health: 10
+  baseDamage: 0
   power: 50
   pen: 40
   crit: 20
+  health: 10
   defense: 2
   speed: 0
   knockback: 0
   itemName: Sniper Head
   description: One Shot KILL!
-  mesh: {fileID: 5394818818436597403, guid: ab49dc2511e2f654bad147a98f3ce8c9, type: 3}
+  meshes:
+  - {fileID: 5394818818436597403, guid: ab49dc2511e2f654bad147a98f3ce8c9, type: 3}
   material: {fileID: 2100000, guid: e8abd99daa8c6854c9fd40be8183fade, type: 2}
   sprite: {fileID: 21300000, guid: 72acff191a92e824db854ffcc39e9f06, type: 3}
-  equipSlot: 2
+  equipSlot: 3
   rarity: 2
   itemClass: 2
+  bullet: {fileID: 0}
+  firingMode: 0
+  fireRate: 0
+  shotSound: {fileID: 0}

@@ -23,10 +23,11 @@ MonoBehaviour:
   knockback: 200
   itemName: Energy Sword
   description: Bam! Bam!
-  mesh: {fileID: -3417637348199415853, guid: b82afc4c2daa1fe4cbc08cde43a81eac, type: 3}
+  meshes:
+  - {fileID: -3417637348199415853, guid: b82afc4c2daa1fe4cbc08cde43a81eac, type: 3}
   material: {fileID: 2100000, guid: 0ceae8731a1fe70448fb2dc1f5d8cee5, type: 2}
   sprite: {fileID: 21300000, guid: 8f10e848a3ece7c44acbc52e4057b9a3, type: 3}
-  equipSlot: 3
+  equipSlot: 0
   rarity: 3
   itemClass: 1
   bullet: {fileID: 0}
