@@ -62,9 +62,8 @@ public class Player_Controller : MonoBehaviour
     }
     private void Awake()
     {
-        BodyPartsPackage bodyParts = new BodyPartsPackage(R_ForeArm, L_ForeArm, Torso, Head, R_UpperLeg, R_LowerLeg, L_UpperLeg, L_LowerLeg);
         ItemPackage items = new ItemPackage(InventorySystem.GetItemsEquipped());
-        Equipment equipment = new Equipment(items, bodyParts);
+        Equipment equipment = new Equipment(items);
 
         player = new Player(gameObject, stats, equipment);
     }
@@ -174,7 +173,7 @@ public class Player_Controller : MonoBehaviour
         if (!isControlling){return;}
 
         R_ClickValue = value.Get<float>();
-        Slot slot = InventorySystem.GetEquipSlot(Equip.EquipSlot.Main_Hand).GetComponent<Slot>();
+        Slot slot = InventorySystem.GetEquipSlot(Item.EquipSlot.Main_Hand).GetComponent<Slot>();
 
         if (R_ClickValue == 1 && slot.item != null)
         {
@@ -198,7 +197,7 @@ public class Player_Controller : MonoBehaviour
         if (!isControlling) { return; }
 
         L_ClickValue = value.Get<float>();
-        Slot slot = InventorySystem.GetEquipSlot(Equip.EquipSlot.Off_Hand).GetComponent<Slot>();
+        Slot slot = InventorySystem.GetEquipSlot(Item.EquipSlot.Off_Hand).GetComponent<Slot>();
 
         if (L_ClickValue == 1 && slot.item != null)
         {

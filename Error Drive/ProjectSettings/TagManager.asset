@@ -21,6 +21,8 @@ TagManager:
   - Hostile
   - Torso
   - Projectile
+  - R_Leg
+  - L_Leg
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
 public class Item : ScriptableObject
 {
-    public enum EquipType { Torso, R_Leg, L_Leg, Head, Main_Hand, Off_Hand }
+    public enum EquipSlot { Main_Hand, Off_Hand, Torso, Head, R_Leg, L_Leg }
     public enum RarityType { Common, Uncommon, Rare, Epic, Legendary }
     public enum ItemClass { Ranged, Melee, Armor }
     public enum FiringMode { auto, semi, burst, single }
@@ -32,7 +32,7 @@ public class Item : ScriptableObject
     public Mesh mesh;
     public Material material;
     public Sprite sprite;
-    public EquipType equipSlot;
+    public EquipSlot equipSlot;
     public RarityType rarity;
     public ItemClass itemClass;
     [Header("RANGED ONLY!")]

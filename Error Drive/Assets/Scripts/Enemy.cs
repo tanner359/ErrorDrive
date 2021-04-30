@@ -57,8 +57,7 @@ public class Enemy : MonoBehaviour
     public void Awake()
     {
         ItemPackage items = new ItemPackage(MainHand, OffHand, null, null, null, null);
-        BodyPartsPackage bodyLinks = new BodyPartsPackage(MainHandMesh, OffHandMesh, null, null, null, null, null, null);
-        Equipment equipment = new Equipment(items, bodyLinks);
+        Equipment equipment = new Equipment(items);
         player = new Player(gameObject, stats, equipment);
     }
 
