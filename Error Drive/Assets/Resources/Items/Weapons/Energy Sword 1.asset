@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Energy Sword 1
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  baseDamage: 0
+  baseDamage: 10
   power: 100
   pen: 20
   crit: 20
   health: 25
   defense: 0
   speed: 0
-  knockback: 20
+  knockback: 1000
   itemName: Energy Sword 2
   description: Bam! Bam!
   meshes:

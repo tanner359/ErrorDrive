@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Update()
-    {
+    {     
         AnimationControls();
     }
 
@@ -209,7 +209,6 @@ public class Enemy : MonoBehaviour
         }
         else if (disabledTime <= 0 && rb.velocity == Vector3.zero && !agent.enabled)
         {
-            Debug.Log("Re-Enable Agent");
             EnableAgent();
         }
         #endregion
@@ -278,16 +277,15 @@ public class Enemy : MonoBehaviour
     public GameObject FindTarget()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, aggroDistance, playerMask);
-
+        GameObject player = null;
         for (int i = 0; i < colliders.Length; i++)
         {
-            GameObject player = colliders[i].gameObject;
+            player = colliders[i].gameObject;
             Physics.Raycast(head.transform.position, player.transform.position - transform.position, out RaycastHit hit, aggroDistance);
             Debug.DrawRay(head.transform.position, player.transform.position - transform.position, Color.green);
-            if(!hit.collider.gameObject.CompareTag("Player")){return null; }
-            return player;            
+            if(!hit.collider.gameObject.CompareTag("Player")){return null; }                        
         }
-        return null;
+        return player;
     }
 
     bool isShootingRight;

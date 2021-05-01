@@ -31,12 +31,17 @@ public class HealthBar : MonoBehaviour
         transform.position = target.transform.position + Vector3.up * 4;
 
         if (target.health != currentHealth)
-        {
+        {        
             currentHealth = target.health;
             healthbar.fillAmount = currentHealth / maxHealth;
             if (!flash.enabled)
             {
                 StartCoroutine(DamageFlash());
+            }
+            if(target.health <= 0)
+            {
+                Destroy(target.gameObject);
+                Destroy(gameObject);
             }
         }
     }

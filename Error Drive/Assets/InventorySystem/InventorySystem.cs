@@ -20,7 +20,7 @@ public static class InventorySystem
                 }
                 if (item.itemClass == Item.ItemClass.Melee)
                 {
-                    MeshCollider meshCol = links[0].GetComponent<MeshCollider>();
+                    MeshCollider meshCol = links[links.Count - 1].GetComponent<MeshCollider>();
                     meshCol.enabled = true;
                     meshCol.sharedMesh = item.meshes[0];
                 }
@@ -97,7 +97,7 @@ public static class InventorySystem
             }
             if (slot.item.itemClass == Item.ItemClass.Melee)
             {
-                MeshCollider meshCol = links[0].GetComponent<MeshCollider>();
+                MeshCollider meshCol = links[links.Count - 1].GetComponent<MeshCollider>();
                 meshCol.enabled = false;
                 meshCol.sharedMesh = null;
             }
@@ -121,7 +121,6 @@ public static class InventorySystem
 
     public static Slot GetEquipSlot(Item.EquipSlot equipTag)
     {
-        Debug.Log(CanvasDisplay.instance.equipSlotsContent);
         Transform equipSlots = CanvasDisplay.instance.equipSlotsContent;
         for (int i = 0; i < equipSlots.childCount; i++)
         {

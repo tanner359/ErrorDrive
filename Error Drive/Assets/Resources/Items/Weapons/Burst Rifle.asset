@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Burst Rifle
   m_EditorClassIdentifier: 
   levelRequirement: 1
-  baseDamage: 0
+  baseDamage: 10
   power: 30
   pen: 10
   crit: 30
