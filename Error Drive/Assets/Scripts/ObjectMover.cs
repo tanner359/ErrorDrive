@@ -6,10 +6,27 @@ public class ObjectMover : MonoBehaviour
 {
     public int secondsOfMovement;
     public float speed;
+    public bool turnAround = true;
+    public bool destroy;
+
+    private Vector3 startPos;
 
     void Start()
     {
-        StartCoroutine("ReverseDirection", secondsOfMovement);
+        startPos = transform.position;
+
+        if (turnAround)
+        {
+            StartCoroutine("ReverseDirection", secondsOfMovement);
+        }
+        else if(!destroy)
+        {
+            StartCoroutine("TeleportBack", secondsOfMovement);
+        }
+        else
+        {
+            StartCoroutine("Kill", secondsOfMovement);
+        }
     }
 
     void Update()
@@ -24,6 +41,28 @@ public class ObjectMover : MonoBehaviour
             yield return new WaitForSeconds(seconds);
 
             speed *= -1;
+        }
+
+    }
+
+    private IEnumerator TeleportBack(int seconds)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(seconds);
+
+            transform.position = startPos;
+        }
+
+    }
+
+    private IEnumerator Kill(int seconds)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(seconds);
+
+            Destroy(gameObject);
         }
 
     }
