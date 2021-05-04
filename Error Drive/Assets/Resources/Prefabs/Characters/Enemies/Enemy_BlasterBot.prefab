@@ -3750,13 +3750,18 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   wanderDistance: 10
   aggroDistance: 20
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
   animator: {fileID: 916674643479529775}
   currentState: 0
   aggroType: 0
   MainHand: {fileID: 0}
   OffHand: {fileID: 11400000, guid: 81b02138c462b774ba0eb3ed3400d579, type: 2}
-  MainHandMesh: {fileID: 1367286230299164100}
-  OffHandMesh: {fileID: 1367286230575537344}
+  Torso: {fileID: 0}
+  Head: {fileID: 0}
+  R_Leg: {fileID: 0}
+  L_Leg: {fileID: 0}
   aimRight: 0
   aimLeft: 0
   rightArmCTRL: {fileID: 1367286231092682818}

@@ -9,7 +9,7 @@ public static class Combat
     public static GameObject combatText_Prefab = Resources.Load<GameObject>(Path.Combine("Prefabs", "CombatText"));
     public static GameObject sparks_Prefab = Resources.Load<GameObject>(Path.Combine("Particles", "Sparks"));
     public static Transform worldCanvas = GameObject.Find("World_Canvas").transform;
-    public static Stats player = GameObject.FindGameObjectWithTag("Player").GetComponent<Stats>();
+    public static Stats player = GameObject.Find("Player").GetComponent<Stats>();
 
     public static void DamageTarget(Item item, Stats targetStats, Stats myStats)
     {

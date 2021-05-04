@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5279365182042670712}
   m_Layer: 0
   m_Name: Spine
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 7443839079088070993}
   m_Layer: 0
   m_Name: HeadMesh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: -6127097656842564205}
   m_Layer: 11
   m_Name: Enemy_SniperBot
-  m_TagString: Untagged
+  m_TagString: Hostile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,13 +369,18 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   wanderDistance: 10
   aggroDistance: 10
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
   animator: {fileID: 7544339338965722059}
   currentState: 0
   aggroType: 0
   MainHand: {fileID: 0}
   OffHand: {fileID: 0}
-  MainHandMesh: {fileID: 0}
-  OffHandMesh: {fileID: 0}
+  Torso: {fileID: 0}
+  Head: {fileID: 0}
+  R_Leg: {fileID: 0}
+  L_Leg: {fileID: 0}
   aimRight: 0
   aimLeft: 0
   rightArmCTRL: {fileID: 0}
@@ -432,7 +437,7 @@ GameObject:
   - component: {fileID: 1522335291906447882}
   m_Layer: 0
   m_Name: LHand
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +522,7 @@ GameObject:
   - component: {fileID: 8571438083474588826}
   m_Layer: 0
   m_Name: RShoulder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -699,7 +704,7 @@ GameObject:
   - component: {fileID: 8571438083477066574}
   m_Layer: 0
   m_Name: RFoot CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -793,7 +798,7 @@ GameObject:
   - component: {fileID: 8571438083837082868}
   m_Layer: 0
   m_Name: LFoot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,7 +883,7 @@ GameObject:
   - component: {fileID: 8571438083913421787}
   m_Layer: 0
   m_Name: LShoulder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1059,7 +1064,7 @@ GameObject:
   - component: {fileID: 8571438083921418186}
   m_Layer: 0
   m_Name: LCalf
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1140,7 +1145,7 @@ GameObject:
   - component: {fileID: 8571438083967876035}
   m_Layer: 0
   m_Name: RHand
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1221,7 +1226,7 @@ GameObject:
   - component: {fileID: 8571438084041947718}
   m_Layer: 0
   m_Name: RElbowCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1302,7 +1307,7 @@ GameObject:
   - component: {fileID: 8571438084173204835}
   m_Layer: 0
   m_Name: RThigh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1386,7 +1391,7 @@ GameObject:
   - component: {fileID: 8571438084316036123}
   m_Layer: 0
   m_Name: LElbow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1545,7 +1550,7 @@ GameObject:
   - component: {fileID: 8571438084370647333}
   m_Layer: 0
   m_Name: LKneeCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1629,7 +1634,7 @@ GameObject:
   - component: {fileID: 8571438084485208335}
   m_Layer: 0
   m_Name: LKnee
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1789,7 +1794,7 @@ GameObject:
   - component: {fileID: 8571438084513974951}
   m_Layer: 0
   m_Name: RHand CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1887,7 +1892,7 @@ GameObject:
   - component: {fileID: 8571438084652696497}
   m_Layer: 0
   m_Name: LHip
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2067,7 +2072,7 @@ GameObject:
   - component: {fileID: 7544339338965722059}
   m_Layer: 0
   m_Name: SniperBot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2123,7 +2128,7 @@ GameObject:
   - component: {fileID: 8571438084718946748}
   m_Layer: 0
   m_Name: LElbowCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2204,7 +2209,7 @@ GameObject:
   - component: {fileID: 8571438084780937145}
   m_Layer: 0
   m_Name: RUpperArm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2288,7 +2293,7 @@ GameObject:
   - component: {fileID: 8571438084819513695}
   m_Layer: 0
   m_Name: RKnee
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2450,7 +2455,7 @@ GameObject:
   - component: {fileID: 8571438084916678184}
   m_Layer: 0
   m_Name: RElbow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2609,7 +2614,7 @@ GameObject:
   - component: {fileID: 8571438085010655853}
   m_Layer: 0
   m_Name: LThigh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2690,7 +2695,7 @@ GameObject:
   - component: {fileID: 8571438085030999589}
   m_Layer: 0
   m_Name: LForearm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2775,7 +2780,7 @@ GameObject:
   - component: {fileID: 8571438085171993617}
   m_Layer: 0
   m_Name: RHip
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2956,7 +2961,7 @@ GameObject:
   - component: {fileID: 8571438085194996165}
   m_Layer: 0
   m_Name: LUpperArm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3037,7 +3042,7 @@ GameObject:
   - component: {fileID: 8571438085298558753}
   m_Layer: 0
   m_Name: RForearm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3118,7 +3123,7 @@ GameObject:
   - component: {fileID: 8571438085437293966}
   m_Layer: 0
   m_Name: RCalf
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3200,7 +3205,7 @@ GameObject:
   - component: {fileID: 8571438085437870047}
   m_Layer: 0
   m_Name: LHand CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3294,7 +3299,7 @@ GameObject:
   - component: {fileID: 8571438085439547100}
   m_Layer: 0
   m_Name: RKneeCTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3376,7 +3381,7 @@ GameObject:
   - component: {fileID: 8571438085471605564}
   m_Layer: 0
   m_Name: LFoot CTRL
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3470,7 +3475,7 @@ GameObject:
   - component: {fileID: 8571438085486958857}
   m_Layer: 0
   m_Name: RFoot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3552,7 +3557,7 @@ GameObject:
   - component: {fileID: 8805298510806189865}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3660,7 +3665,7 @@ GameObject:
   - component: {fileID: 8805298511482741499}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3731,7 +3736,7 @@ GameObject:
   - component: {fileID: 6719048960373577268}
   m_Layer: 0
   m_Name: BodyMesh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

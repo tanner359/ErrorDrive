@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6555330722639674862}
   - component: {fileID: 3317482557414746403}
   - component: {fileID: 3791096344646549114}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RKnee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2987213633907770355}
   - component: {fileID: 8642604442262009440}
   - component: {fileID: 3419023218005039302}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 174503622731077180}
   - component: {fileID: 1623035255187269963}
   - component: {fileID: 9104501876522454969}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 1010555098878020246}
   - component: {fileID: 7434121817975562804}
   - component: {fileID: 6802593494852721373}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RCalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 568761757231782684}
   - component: {fileID: 6900463829699765826}
   - component: {fileID: 6397264367678566003}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RThigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
 
     public float aggroDistance = 10;
 
-    private LayerMask playerMask;
+    public LayerMask targetMask;
 
     public Animator animator;
 
@@ -63,8 +63,7 @@ public class Enemy : MonoBehaviour
 
     public void Start()
     {
-        currentState = AIState.Wander;
-        playerMask = LayerMask.GetMask("Player");
+        currentState = AIState.Wander;       
         RefreshIK();
     }
 
@@ -193,7 +192,6 @@ public class Enemy : MonoBehaviour
                         break;
                     case AggroType.wander:
                         float angle = Vector3.SignedAngle(transform.forward, agent.pathEndPosition - transform.position, Vector3.up);
-                        Debug.Log(angle);
                         if(angle > 30f && angle < 150f)
                         {
                             animator.SetBool("StrafeRight", true);
@@ -309,14 +307,13 @@ public class Enemy : MonoBehaviour
     }
     public GameObject FindTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, aggroDistance, playerMask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, aggroDistance, targetMask);
         GameObject player = null;
         for (int i = 0; i < colliders.Length; i++)
         {
             player = colliders[i].gameObject;
             Physics.Raycast(head.transform.position, player.transform.position - transform.position, out RaycastHit hit, aggroDistance);
-            Debug.DrawRay(head.transform.position, player.transform.position - transform.position, Color.green);
-            if(!hit.collider.gameObject.CompareTag("Player")){return null; }                        
+            if(hit.collider.gameObject.name != "Player"){ return null; }                        
         }
         return player;
     }

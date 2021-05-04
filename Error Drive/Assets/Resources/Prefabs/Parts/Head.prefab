@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2281705860184322272}
   - component: {fileID: 4310162827988211026}
   - component: {fileID: 3480109210832851898}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HeadMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 123733767625744150}
   - component: {fileID: 4170898353011720560}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

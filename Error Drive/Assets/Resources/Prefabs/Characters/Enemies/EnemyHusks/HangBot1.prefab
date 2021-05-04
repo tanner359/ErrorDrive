@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440413086999391774}
-  m_LocalRotation: {x: -0, y: -0.72217035, z: -0, w: 0.69171524}
+  m_LocalRotation: {x: 0, y: -0.7221708, z: 0, w: 0.6917148}
   m_LocalPosition: {x: 12.124013, y: -4.554, z: -76.764}
-  m_LocalScale: {x: 0.266489, y: 0.266489, z: 0.266489}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4703855675186152889}
   - {fileID: 7668439066542735407}
@@ -2435,7 +2435,7 @@ GameObject:
   - component: {fileID: 7677077402053745779}
   m_Layer: 0
   m_Name: BodyMesh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2579,7 +2579,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.10312566, y: 0.6246029, z: 0.73996}
+  m_ConnectedAnchor: {x: 0.103138894, y: 0.6246029, z: 0.74039704}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2624,7 +2624,7 @@ GameObject:
   - component: {fileID: 5101956800171078393}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2859,7 +2859,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 12.209788, y: -3.8248858, z: -76.76137}
+  m_ConnectedAnchor: {x: 594.5503, y: 9.004561, z: -295.20703}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
