@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
-        if (other.gameObject.CompareTag("Hostile"))
+        if (other.gameObject.CompareTag("Hostile") || other.gameObject.CompareTag("Player"))
         {
             Combat.DamageTarget(weapon, other.gameObject.GetComponent<Stats>(), sharedStats);
             other.gameObject.GetComponent<Enemy>().DisableAgent();

@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class EquipmentLink : MonoBehaviour
 {
+    #region DICTIONARIES
+
     public Dictionary<Item.EquipSlot, List<GameObject>> bodyLinks = new Dictionary<Item.EquipSlot, List<GameObject>>();
     public Dictionary<Item.EquipSlot, List<GameObject>> ignoreLinks = new Dictionary<Item.EquipSlot, List<GameObject>>();
     public Dictionary<Item.EquipSlot, List<Mesh>> originalMeshes = new Dictionary<Item.EquipSlot, List<Mesh>>();
     public Dictionary<Item.EquipSlot, List<Material>> originalMaterials = new Dictionary<Item.EquipSlot, List<Material>>();
+
+    #endregion
+
+    #region MESHES
 
     [Header("Main Hand")]
     public List<GameObject> MainHand_meshes;
@@ -33,22 +39,25 @@ public class EquipmentLink : MonoBehaviour
     public List<GameObject> R_Leg_meshes;
     public List<GameObject> R_Leg_ignores;
 
-    public Mesh GetOriginalMeshes(Item.EquipSlot equipSlot, int index)
+    #endregion
+
+    #region FUNCTIONS
+    public Mesh GetOriginalMeshes(Item.EquipSlot equipSlot, int index) // returns the original mesh of the given equipSlot;
     {
         originalMeshes.TryGetValue(equipSlot, out List<Mesh> meshes);
         return meshes[index];
     }
-    public Material GetOriginalMaterials(Item.EquipSlot equipSlot, int index)
+    public Material GetOriginalMaterials(Item.EquipSlot equipSlot, int index) // returns the original material of the given equipSlot;
     {
         originalMaterials.TryGetValue(equipSlot, out List<Material> materials);
         return materials[index];
     }  
-    public List<GameObject> GetEquipLinks(Item.EquipSlot equipSlot)
+    public List<GameObject> GetEquipLinks(Item.EquipSlot equipSlot) //returns a list of the available body links that a given equip slot can use;
     {
         bodyLinks.TryGetValue(equipSlot, out List<GameObject> links);
         return links;
     }
-    public void IgnorePartsSetActive(Item.EquipSlot equipSlot, bool state)
+    public void IgnorePartsSetActive(Item.EquipSlot equipSlot, bool state) // when called will set the desired ignore parts to be disabled or enabled
     {
         ignoreLinks.TryGetValue(equipSlot, out List<GameObject> ignoreParts);
 
@@ -61,7 +70,9 @@ public class EquipmentLink : MonoBehaviour
         }
         return;
     }
-    void Start() // sets the material and mesh defaults for each equip slot, could be simplified more
+    #endregion
+
+    void Start() // sets the material and mesh defaults for each equip slot
     {
         List<GameObject>[] MeshLists = { MainHand_meshes, OffHand_meshes, Torso_meshes, Head_meshes, R_Leg_meshes, L_Leg_meshes };
         List<GameObject>[] IgnoreLists = { MainHand_ignores, OffHand_ignores, Torso_ignores, Head_ignores, R_Leg_ignores, L_Leg_ignores };

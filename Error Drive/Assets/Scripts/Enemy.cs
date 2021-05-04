@@ -40,10 +40,10 @@ public class Enemy : MonoBehaviour
     [Header("Items Equipped")]
     public Item MainHand;
     public Item OffHand;
-
-    [Header("Body Parts")]
-    public Transform MainHandMesh;
-    public Transform OffHandMesh;
+    public Item Torso;
+    public Item Head;
+    public Item R_Leg;
+    public Item L_Leg;
 
     [Header("Aiming")]
     public bool aimRight;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
 
     public void Awake()
     {
-        ItemPackage items = new ItemPackage(MainHand, OffHand, null, null, null, null);
+        ItemPackage items = new ItemPackage(MainHand, OffHand, Torso, Head, R_Leg, L_Leg);
         Equipment equipment = new Equipment(items);
         player = new Player(gameObject, stats, equipment);
     }
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Timers();  
+        if(disabledTime > 0 || pathTime > 0) { Timers(); }  
     }
 
     public void Update()
@@ -134,12 +134,12 @@ public class Enemy : MonoBehaviour
             if (MainHand && !isShootingRight && R_ClickValue == 0)
             {
                 StartCoroutine(RandomRightClick());
-                StartCoroutine(ShootRight(MainHand, MainHandMesh));
+                StartCoroutine(ShootRight(player, MainHand));
             }
             if (OffHand && !isShootingLeft && L_ClickValue == 0)
             {
                 StartCoroutine(RandomLeftClick());
-                StartCoroutine(ShootLeft(OffHand, OffHandMesh));
+                StartCoroutine(ShootLeft(player, OffHand));
             }
         }
     }
@@ -152,7 +152,6 @@ public class Enemy : MonoBehaviour
         if (FindTarget() == null) { currentState = AIState.Wander; currentTarget = null; }
         losingAggro = false;
     }
-
     public IEnumerator RandomLeftClick()
     {
         L_ClickValue = 1;
@@ -173,6 +172,9 @@ public class Enemy : MonoBehaviour
             {
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", false);
+                animator.SetBool("StrafeRight", false);
+                animator.SetBool("StrafeLeft", false);
+                animator.SetBool("WalkBackwards", false);
                 return;
             }
         }       
@@ -190,7 +192,36 @@ public class Enemy : MonoBehaviour
                         animator.SetBool("Run", true);
                         break;
                     case AggroType.wander:
+                        float angle = Vector3.SignedAngle(transform.forward, agent.pathEndPosition - transform.position, Vector3.up);
+                        Debug.Log(angle);
+                        if(angle > 30f && angle < 150f)
+                        {
+                            animator.SetBool("StrafeRight", true);
+                            animator.SetBool("StrafeLeft", false);
+                            animator.SetBool("WalkBackwards", false);
+                            break;
+                        }
+                        else if( angle < -30f && angle > -150f)
+                        {
+                            animator.SetBool("StrafeLeft", true);
+                            animator.SetBool("WalkBackwards", false);
+                            animator.SetBool("StrafeRight", false);
+
+                            break;
+                        }
+                        else if(angle < -150f || angle > 150f)
+                        {
+                            animator.SetBool("WalkBackwards", true);
+                            animator.SetBool("StrafeLeft", false);
+                            animator.SetBool("StrafeRight", false);
+
+
+                            break;
+                        }
                         animator.SetBool("Walk", true);
+                        animator.SetBool("WalkBackwards", false);
+                        animator.SetBool("StrafeLeft", false);
+                        animator.SetBool("StrafeRight", false);
                         break;
                 }
                 break;
@@ -225,6 +256,8 @@ public class Enemy : MonoBehaviour
     #region UTILITY
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(agent.pathEndPosition, 0.5f);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, aggroDistance);
     }
@@ -290,7 +323,7 @@ public class Enemy : MonoBehaviour
 
     bool isShootingRight;
     bool isShootingLeft;
-    private IEnumerator ShootRight(Item weapon, Transform equipPoint)
+    private IEnumerator ShootRight(Player player, Item weapon)
     {
         float fireRate = weapon.fireRate;
         switch (weapon.firingMode)
@@ -300,7 +333,7 @@ public class Enemy : MonoBehaviour
                 Combat.FireBullet(player, weapon);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
-                if (R_ClickValue == 1) { StartCoroutine(ShootRight(weapon, equipPoint)); }
+                if (R_ClickValue == 1) { StartCoroutine(ShootRight(player, weapon)); }
                 else { isShootingRight = false; }
                 break;
 
@@ -313,7 +346,7 @@ public class Enemy : MonoBehaviour
                 Combat.FireBullet(player, weapon);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
-                if (R_ClickValue == 1) { StartCoroutine(ShootRight(weapon, equipPoint)); }
+                if (R_ClickValue == 1) { StartCoroutine(ShootRight(player, weapon)); }
                 else { isShootingRight = false; }
                 break;
 
@@ -332,7 +365,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator ShootLeft(Item weapon, Transform equipPoint)
+    private IEnumerator ShootLeft(Player player, Item weapon)
     {
         float fireRate = weapon.fireRate;
         switch (weapon.firingMode)
@@ -342,7 +375,7 @@ public class Enemy : MonoBehaviour
                 Combat.FireBullet(player, weapon);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
-                if (L_ClickValue == 1) { StartCoroutine(ShootLeft(weapon, equipPoint)); }
+                if (L_ClickValue == 1) { StartCoroutine(ShootLeft(player, weapon)); }
                 else { isShootingLeft = false; }
                 break;
 
@@ -355,7 +388,7 @@ public class Enemy : MonoBehaviour
                 Combat.FireBullet(player, weapon);
                 yield return new WaitForSeconds(1 / fireRate);
                 yield return new WaitForSeconds(0.01f);
-                if (L_ClickValue == 1) { StartCoroutine(ShootLeft(weapon, equipPoint)); }
+                if (L_ClickValue == 1) { StartCoroutine(ShootLeft(player, weapon)); }
                 else { isShootingLeft = false; }
                 break;
 

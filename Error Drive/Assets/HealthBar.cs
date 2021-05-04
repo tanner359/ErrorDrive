@@ -19,30 +19,58 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        nameTag.text = target.gameObject.name;
+        if (!target.gameObject.CompareTag("Player"))
+        {
+            nameTag.text = target.gameObject.name;
+            transform.SetParent(GameObject.Find("Screen_Canvas").transform);
+            transform.localScale = new Vector3(1, 1, 1);
+        }       
         maxHealth = target.health;
-        currentHealth = target.health;
-        transform.SetParent(GameObject.Find("Screen_Canvas").transform);
-        transform.localScale = new Vector3(1, 1, 1);
+        currentHealth = target.health;     
     }
 
     private void Update()
     {
-        transform.position = target.transform.position + Vector3.up * 4;
+        if (!target.gameObject.CompareTag("Player"))
+        {
+            transform.position = target.transform.position + Vector3.up * 4;
+        }
 
         if (target.health != currentHealth)
-        {        
+        {
+            recoveryTime = 15f;
             currentHealth = target.health;
             healthbar.fillAmount = currentHealth / maxHealth;
-            if (!flash.enabled)
+            if (!target.gameObject.CompareTag("Player"))
             {
-                StartCoroutine(DamageFlash());
+                if (!flash.enabled)
+                {
+                    StartCoroutine(DamageFlash());
+                }
+                if (target.health <= 0)
+                {
+                    Destroy(target.gameObject);
+                    Destroy(gameObject);
+                }
             }
-            if(target.health <= 0)
-            {
-                Destroy(target.gameObject);
-                Destroy(gameObject);
-            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        Timer();
+    }
+
+    public float recoveryTime;
+    public void Timer()
+    {
+        if(recoveryTime >= 0)
+        {
+            recoveryTime -= Time.deltaTime;
+        }
+        else if(recoveryTime <= 0 && currentHealth < maxHealth)
+        {
+            target.health = (int)Mathf.Lerp(target.health, target.health + (target.health * 0.02f), 0.05f);
         }
     }
 

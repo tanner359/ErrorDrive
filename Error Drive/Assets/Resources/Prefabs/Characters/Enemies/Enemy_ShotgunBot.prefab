@@ -3635,6 +3635,7 @@ GameObject:
   - component: {fileID: 8606123326215720244}
   - component: {fileID: 8001928945185583931}
   - component: {fileID: -4525741593938221306}
+  - component: {fileID: 3936959208285452100}
   m_Layer: 11
   m_Name: Enemy_ShotgunBot
   m_TagString: Untagged
@@ -3674,8 +3675,8 @@ MonoBehaviour:
   power: 0
   armorPen: 0
   critChance: 0
-  health: 0
-  defense: 0
+  health: 100
+  defense: 100
   speed: 1
   knockback: 0
 --- !u!136 &3947166917777541798
@@ -3742,14 +3743,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac861d6c31d5e841a97913805822fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 0}
   agent: {fileID: 8001928945185583931}
   rb: {fileID: 8606123326215720244}
-  wanderRange: 10
-  aggroRange: 10
-  origin: {x: 0, y: 0, z: 0}
+  head: {fileID: 0}
+  currentTarget: {fileID: 0}
+  wanderDistance: 10
+  aggroDistance: 10
   animator: {fileID: 1112134363567569492}
-  wander: 0
+  currentState: 0
+  aggroType: 0
+  MainHand: {fileID: 0}
+  OffHand: {fileID: 0}
+  MainHandMesh: {fileID: 0}
+  OffHandMesh: {fileID: 0}
+  aimRight: 0
+  aimLeft: 0
+  rightArmCTRL: {fileID: 0}
+  leftArmCTRL: {fileID: 0}
+  rightArmIK: {fileID: 0}
+  leftArmIK: {fileID: 0}
   disabledTime: 0
+--- !u!114 &3936959208285452100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3947166917777541785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e10ab7842bd8b4c9cbede6ff8a1991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainHand_meshes:
+  - {fileID: 1367286230299164103, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  MainHand_ignores:
+  - {fileID: 1367286231621357865, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  OffHand_meshes:
+  - {fileID: 1367286230575537347, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  OffHand_ignores:
+  - {fileID: 1168419656279065523, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  Torso_meshes:
+  - {fileID: 1955598023767527650, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  Torso_ignores: []
+  Head_meshes:
+  - {fileID: 3391878212129353488, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  Head_ignores: []
+  L_Leg_meshes:
+  - {fileID: 1367286230586925195, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  - {fileID: 1367286231676632400, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  L_Leg_ignores:
+  - {fileID: 1367286231761098258, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  R_Leg_meshes:
+  - {fileID: 1367286231424837513, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  - {fileID: 1367286230169202540, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
+  R_Leg_ignores:
+  - {fileID: 1367286230119511023, guid: 49b167e5904b3894b8346379ee33a78f, type: 3}
 --- !u!1001 &7631384045289695167
 PrefabInstance:
   m_ObjectHideFlags: 0
