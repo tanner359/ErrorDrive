@@ -33,11 +33,17 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
-        if (other.gameObject.CompareTag("Hostile") || other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Hostile"))
         {
             Combat.DamageTarget(weapon, other.gameObject.GetComponent<Stats>(), sharedStats);
             other.gameObject.GetComponent<Enemy>().DisableAgent();
             other.gameObject.GetComponent<Rigidbody>().AddForce(((transform.position - other.transform.position) * weapon.knockback) + Vector3.up * 2, ForceMode.Impulse);          
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            Combat.DamageTarget(weapon, other.gameObject.GetComponent<Stats>(), sharedStats);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(((transform.position - other.transform.position) * weapon.knockback) + Vector3.up * 2, ForceMode.Impulse);
             Destroy(gameObject);
         }
         Destroy(gameObject);

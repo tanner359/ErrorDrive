@@ -123,12 +123,12 @@ public class Enemy : MonoBehaviour
                 break;
 
             case AggroType.wander:
-                transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+                transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
                 if(pathTime <= 0) { Wander(); agent.autoBraking = true; }              
                 break;
         }
 
-        if (FindTarget() != null)
+        if (currentTarget != null)
         {
             if (MainHand && !isShootingRight && R_ClickValue == 0)
             {
@@ -313,7 +313,7 @@ public class Enemy : MonoBehaviour
         {
             player = colliders[i].gameObject;
             Physics.Raycast(head.transform.position, player.transform.position - transform.position, out RaycastHit hit, aggroDistance);
-            if(hit.collider.gameObject.name != "Player"){ return null; }                        
+            if(hit.transform.gameObject.layer != 6){ return null; }                        
         }
         return player;
     }

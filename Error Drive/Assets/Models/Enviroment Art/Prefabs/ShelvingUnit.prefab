@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3141371329993072011}
   - component: {fileID: 2033303771854557742}
   - component: {fileID: 4310868742864807652}
-  - component: {fileID: 4175028426826465507}
+  - component: {fileID: 3040549796505186077}
   m_Layer: 7
   m_Name: ShelvingUnit
   m_TagString: Untagged
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4175028426826465507
+--- !u!65 &3040549796505186077
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,4 +94,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.10425503, y: 0.16454901, z: 0.20419104}
-  m_Center: {x: -0.04963051, y: 0.082274504, z: -0.10209552}
+  m_Center: {x: -0.04963051, y: 0.08227456, z: -0.10209552}

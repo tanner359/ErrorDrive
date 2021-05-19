@@ -6,7 +6,12 @@ using System.IO;
 public static class ItemSystem
 {
     public static GameObject baseItem = Resources.Load<GameObject>(Path.Combine("Prefabs", "BaseItem"));
-    public static Item[] AllItems = Resources.LoadAll<Item>("Items");   
+    public static Item[] AllItems = Resources.LoadAll<Item>("Items");
+    public static Item[] CommonItems = Resources.LoadAll<Item>(Path.Combine("Items", "Common"));
+    public static Item[] UnCommonItems = Resources.LoadAll<Item>(Path.Combine("Items", "UnCommon"));
+    public static Item[] RareItems = Resources.LoadAll<Item>(Path.Combine("Items", "Rare"));
+    public static Item[] EpicItems = Resources.LoadAll<Item>(Path.Combine("Items", "Epic"));
+    public static Item[] LegendaryItems = Resources.LoadAll<Item>(Path.Combine("Items", "Legendary"));
     public static GameObject rarityParticle = Resources.Load<GameObject>(Path.Combine("Particles", "Rarity_Beam"));
  
     public static void Spawn(Item item, Vector3 position)
@@ -33,10 +38,47 @@ public static class ItemSystem
     {      
         Item item = AllItems[Random.Range(0, AllItems.Length)];
         if(item == null){
-            Debug.Log("Not Items Available to Spawn");
+            Debug.Log("No Items Available to Spawn");
             return;
         }
         Spawn(item, position);
+    }
+
+    public static void CalculateDrops(Vector3 position)
+    {
+        float i = Random.Range(0.0f, 100.0f);
+
+        if (i <= 1.5f)
+        {
+            Item item = LegendaryItems[Random.Range(0, LegendaryItems.Length)];
+            Spawn(item, position);
+            return;
+        }
+        else if (i <= 3.0f)
+        {
+            Item item = EpicItems[Random.Range(0, EpicItems.Length)];
+            Spawn(item, position);
+            return;
+        }
+        else if (i <= 6.25f)
+        {
+            Item item = RareItems[Random.Range(0, RareItems.Length)];
+            Spawn(item, position);
+            return;
+        }
+        else if (i <= 12.5f)
+        {
+            Item item = UnCommonItems[Random.Range(0, UnCommonItems.Length)];
+            Spawn(item, position);
+            return;
+        }
+        else if (i <= 25f)
+        {
+            Item item = CommonItems[Random.Range(0, CommonItems.Length)];
+            Spawn(item, position);
+            return;
+        }
+        return;
     }
 
     public static Color GetRarityColor(object rarity)

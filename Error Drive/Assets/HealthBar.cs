@@ -49,6 +49,7 @@ public class HealthBar : MonoBehaviour
                 }
                 if (target.health <= 0)
                 {
+                    ItemSystem.CalculateDrops(gameObject.transform.position);
                     Destroy(target.gameObject);
                     Destroy(gameObject);
                 }

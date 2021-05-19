@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440413086999391779}
   - component: {fileID: 846441835224203581}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HangBot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2961,6 +2961,10 @@ PrefabInstance:
       value: Claw
       objectReference: {fileID: 0}
     - target: {fileID: 4176439517262932315, guid: b3a73e492c840744ea4f4c98858087df, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176439517262932315, guid: b3a73e492c840744ea4f4c98858087df, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -2985,6 +2989,10 @@ PrefabInstance:
     - target: {fileID: 4584778754998945386, guid: a6bf0e959f9b3434da41f0494d6fde93, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584778754998945386, guid: a6bf0e959f9b3434da41f0494d6fde93, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4584778754998945386, guid: a6bf0e959f9b3434da41f0494d6fde93, type: 3}
       propertyPath: m_IsActive
@@ -3072,6 +3080,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584778754998945387, guid: a6bf0e959f9b3434da41f0494d6fde93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584778755704932206, guid: a6bf0e959f9b3434da41f0494d6fde93, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584778756789143829, guid: a6bf0e959f9b3434da41f0494d6fde93, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
