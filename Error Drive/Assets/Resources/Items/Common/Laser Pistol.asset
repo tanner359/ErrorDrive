@@ -1,36 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1a21221a8a6ad43b9c87c236e4fa18, type: 3}
-  m_Name: Laser Pistol
-  m_EditorClassIdentifier: 
-  levelRequirement: 1
-  baseDamage: 5
-  power: 30
-  pen: 10
-  crit: 30
-  health: 10
-  defense: 0
-  speed: 0
-  knockback: 2
-  itemName: Laser Pistol
-  description: Pew Pew!
-  meshes:
-  - {fileID: -1816560082258613788, guid: f1923893cd65ae94b85412dca441399e, type: 3}
-  material: {fileID: 2100000, guid: e067b6b49e8ff604a9faea2a378243dd, type: 2}
-  sprite: {fileID: 21300000, guid: 75b087f566f2ad343b8ea40b281e5eb0, type: 3}
-  equipSlot: 1
-  rarity: 0
-  itemClass: 0
-  bullet: {fileID: 761949688513548944, guid: 1b388f6e7994acb4d90e3f8e0860728b, type: 3}
-  firingMode: 1
-  fireRate: 1
-  shotSound: {fileID: 8300000, guid: 66832bc317e868d45843585f279b67d8, type: 3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d7166047425b179a4dd48ddf1c0e7290f3e4ef4301f492d6490cb7faf3a858b0
+size 1064

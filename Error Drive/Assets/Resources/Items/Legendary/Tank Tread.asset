@@ -1,36 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1a21221a8a6ad43b9c87c236e4fa18, type: 3}
-  m_Name: Tank Tread
-  m_EditorClassIdentifier: 
-  levelRequirement: 1
-  baseDamage: 0
-  power: 65
-  pen: 5
-  crit: 5
-  health: 100
-  defense: 80
-  speed: 2
-  knockback: 2
-  itemName: Tank Tread
-  description: I am Speed!
-  meshes:
-  - {fileID: -152397805181763545, guid: 225d51637799ed843a792383a6b1e0e7, type: 3}
-  material: {fileID: 2100000, guid: 63392efc969ac6b449e8450733b24cb2, type: 2}
-  sprite: {fileID: 21300000, guid: f423cf3728d7ef44db32719bfbb14517, type: 3}
-  equipSlot: 4
-  rarity: 4
-  itemClass: 2
-  bullet: {fileID: 0}
-  firingMode: 0
-  fireRate: 0
-  shotSound: {fileID: 0}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c0b3a8c099ab91fc750887baa8de734a4076abe6908ada3ccd2d88cd586570b4
+size 941

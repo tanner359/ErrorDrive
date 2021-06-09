@@ -1,36 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1a21221a8a6ad43b9c87c236e4fa18, type: 3}
-  m_Name: Sniper Rifle
-  m_EditorClassIdentifier: 
-  levelRequirement: 1
-  baseDamage: 50
-  power: 100
-  pen: 100
-  crit: 0
-  health: 10
-  defense: 0
-  speed: 0
-  knockback: 2
-  itemName: Burst Rifle
-  description: Shoots really fast!
-  meshes:
-  - {fileID: -2014612650894186015, guid: 2b7210f9b4485fa40bc7bd7e80b95621, type: 3}
-  material: {fileID: 2100000, guid: 43591e38854b44043814fa00bcd0ea68, type: 2}
-  sprite: {fileID: 21300000, guid: 91695eb6c7694b04894771e22ab9f7e2, type: 3}
-  equipSlot: 0
-  rarity: 4
-  itemClass: 0
-  bullet: {fileID: 761949688513548944, guid: 1b388f6e7994acb4d90e3f8e0860728b, type: 3}
-  firingMode: 3
-  fireRate: 3
-  shotSound: {fileID: 8300000, guid: f2edb48a9d9da46458bb4eb2c3ef8c0b, type: 3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:72c0cbb326b015c4f08dc73e67f1496fb7753dbb9b42097d86435167b56c89c6
+size 1076
