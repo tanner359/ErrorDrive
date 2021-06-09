@@ -427,12 +427,10 @@ public class Player_Controller : MonoBehaviour
     {
         if (Physics.Raycast(centerPoint.position, Vector3.down, capCollider.height/2 + 0.2f, rayMask))
         {
-            Debug.Log("Grounded");
             return true;
         }       
         else
         {
-            Debug.Log("Not Grounded");
             return false;
         }
     }

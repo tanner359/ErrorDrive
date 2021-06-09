@@ -11,19 +11,21 @@ public class Stats : MonoBehaviour
 
     [Header("Defense")]
     public int health;
+    public int maxHealth;
     public int defense;
 
     [Header("Utility")]
     public float speed = 1f;
     public int knockback;
 
-    public void SetStats(int _power, int _pen, int _crit, int _health, int _defense, float _speed, int _knockback)
+    public void SetStats(int _power, int _pen, int _crit, int _health, int _maxHealth, int _defense, float _speed, int _knockback)
     {
         power = _power;
         armorPen = _pen;
         critChance = _crit;
 
         health = _health;
+        maxHealth = _maxHealth;
         defense = _defense;
 
         speed = _speed;
@@ -35,7 +37,7 @@ public class Stats : MonoBehaviour
         power = item.power;
         armorPen = item.pen;
         critChance = item.crit;
-        health = item.health;
+        maxHealth = item.health;
         defense = item.defense;
         speed = item.speed;
         source = item;
@@ -46,7 +48,7 @@ public class Stats : MonoBehaviour
         power += item.power;
         armorPen += item.pen;
         critChance += item.crit;
-        health += item.health;
+        maxHealth += item.health;
         defense += item.defense;
         speed += item.speed;
     }
@@ -56,7 +58,7 @@ public class Stats : MonoBehaviour
         power -= item.power;
         armorPen -= item.pen;
         critChance -= item.crit;
-        health -= item.health;
+        maxHealth -= item.health;
         defense -= item.defense;
         speed -= item.speed;
     }

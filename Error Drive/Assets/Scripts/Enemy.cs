@@ -309,7 +309,7 @@ public class Enemy : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, aggroDistance, targetMask);
         GameObject player = null;
-        for (int i = 0; i < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length-1; i++)
         {
             player = colliders[i].gameObject;
             Physics.Raycast(head.transform.position, player.transform.position - transform.position, out RaycastHit hit, aggroDistance);

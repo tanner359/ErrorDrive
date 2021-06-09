@@ -3997,6 +3997,7 @@ MonoBehaviour:
   armorPen: 5
   critChance: 5
   health: 500
+  maxHealth: 500
   defense: 100
   speed: 4
   knockback: 1
