@@ -10,7 +10,7 @@ Material:
   m_Name: Lava
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _GLOSSYREFLECTIONS_OFF _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -75,5 +75,5 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 0.21404596, b: 0, a: 0.8509804}
-    - _EmissionColor: {r: 1, g: 0.0625, b: 0, a: 1}
+    - _EmissionColor: {r: 2.297397, g: 0.1441504, b: 0, a: 1}
   m_BuildTextureStacks: []
