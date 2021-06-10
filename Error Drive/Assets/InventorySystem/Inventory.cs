@@ -188,23 +188,32 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void PickUp() // pick up closest item
+    public void PickUp() // interact with closest interactable object
     { 
         if (inventoryCount != 20)
         {
-            Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;
             GameObject itemObj = GetClosestItem(transform.position, interactableItems);
-            for(int i = 0; i < inventorySlotsContainer.transform.childCount; i++)
+
+            if(itemObj.layer == 17)
             {
-                Slot slot = inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>();
-                if (slot.item == null)
-                {
-                    InventorySystem.TransferItem(item, slot);              
-                    Destroy(itemObj);                 
-                    inventoryCount++;
-                    i = 9999;
-                }
+                itemObj.GetComponent<lootContainer>().OpenContainer();
+                return;
             }
+            else
+            {
+                Item item = GetClosestItem(transform.position, interactableItems).GetComponent<Stats>().source;
+                for (int i = 0; i < inventorySlotsContainer.transform.childCount; i++)
+                {
+                    Slot slot = inventorySlotsContainer.transform.GetChild(i).GetComponent<Slot>();
+                    if (slot.item == null)
+                    {
+                        InventorySystem.TransferItem(item, slot);
+                        Destroy(itemObj);
+                        inventoryCount++;
+                        i = 9999;
+                    }
+                }
+            }         
         }
         else{Debug.Log("Inventory Full");}
     }
@@ -214,7 +223,14 @@ public class Inventory : MonoBehaviour
         if (interactableItems.Length > 0)
         {
             GameObject item = GetClosestItem(transform.position, interactableItems);
-            CanvasDisplay.DisplayInteractText(item.transform.position, "E");
+            if(item.layer == 17)
+            {
+                CanvasDisplay.DisplayInteractText(item.transform.position + item.transform.right * 1.5f + item.transform.forward * -2f, "[E] Open");
+            }
+            else
+            {
+                CanvasDisplay.DisplayInteractText(item.transform.position, "[E] Pickup");
+            }           
         }
         else{CanvasDisplay.HideText();}
     }
