@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1553961605000222707}
   - component: {fileID: -7749905201203865454}
   m_Layer: 0
-  m_Name: Rarity_Particle
+  m_Name: Rarity_Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4765,15 +4765,15 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 0
+  m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8979aac6628328e4ca3d7f6452400ce2, type: 2}
+  - {fileID: 2100000, guid: 213efe6e564fc214c896b7e186682d5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
